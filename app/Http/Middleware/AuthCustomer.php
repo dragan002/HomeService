@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class AuthAdmin
+class AuthCustomer
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,7 @@ class AuthAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::user()->utype==='ADM') {
+        if(Auth::user()->utype==='CST') {
             return $next($request);
         } else {
             session()->flush();
