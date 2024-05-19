@@ -114,6 +114,26 @@
                                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required="">
                                     </div>
                                 </div>
+
+                                <div class="form-group row">
+                                    <label for="registeras" class="col-md-4 col-form-label text-md-right">Register as</label>
+                                    <div class="col-md-6">
+                                        <select name="registeras" class="form-controll" id="registeras">
+                                            <option value="CSV">Customer</option>
+                                            <option value="SVP">Service Provider</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="email" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
+                                    <div class="col-md-6">
+                                        <input id="email" type="email" class="form-control" name="email" value="" required="">
+                                    </div>
+                                </div>
+
+
+
                                 <div class="form-group row mb-0">
                                     <div class="col-md-10">
                                         <span style="font-size: 14px;">If you have already registered <a
