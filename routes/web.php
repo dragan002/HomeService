@@ -5,12 +5,14 @@ use App\Http\Middleware\AuthAdmin;
 use App\Http\Middleware\AuthCustomer;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\AuthSprovider;
+use App\Livewire\ServiceCategoriesComponent;
 use App\Livewire\Admin\AdminDashboardComponent;
 use App\Livewire\Customer\CustomerDashboardComponent;
 use App\Livewire\Sprovider\SproviderDashboardComponent;
 
 
 Route::get('/', HomeComponent::class)->name('home');
+Route::get('/service-categories', ServiceCategoriesComponent::class)->name('home.service_categories');
 
 Route::middleware([
     'auth:sanctum',
