@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\AuthSprovider;
 use App\Livewire\ServiceCategoriesComponent;
 use App\Livewire\Admin\AdminDashboardComponent;
+use App\Livewire\Admin\AdminServiceCategoryComponent;
 use App\Livewire\Customer\CustomerDashboardComponent;
 use App\Livewire\Sprovider\SproviderDashboardComponent;
 
@@ -42,4 +43,5 @@ Route::middleware([
     'authadmin' => AuthAdmin::class
 ])->group(function () {
     Route::get('/admin/dashboard', AdminDashboardComponent::class)->name('admin.dashboard');
+    Route::get('/admin/service-categories', AdminServiceCategoryComponent::class)->name('admin.service_categories');
     });
