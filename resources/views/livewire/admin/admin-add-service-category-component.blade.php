@@ -34,19 +34,19 @@
                                         <div class="form-group">
                                             <label for="name" class="control-label col-sm-3">Category Name:</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" name="name">
+                                                <input type="text" class="form-control" name="name" wire:model="name" wire:keyup="generateSlug">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="name" class="control-label col-sm-3">Category Slug:</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" name="slug">
+                                                <input type="text" class="form-control" name="slug" wire:model="slug">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="name" class="control-label col-sm-3">Category Image:</label>
                                             <div class="col-sm-9">
-                                                <input type="file" class="form-control-file" name="image">
+                                                <input type="file" class="form-control-file" name="image" wire:model="image">
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-success pull-right">Add Category</button>
