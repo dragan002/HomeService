@@ -7,10 +7,12 @@ use Livewire\Component;
 use illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 use App\Models\ServiceCategory;
+use Livewire\WithFileUploads;
 
 
 class AdminAddServiceCategoryComponent extends Component
 {
+    use WithFileUploads; 
     public $name;
     public $slug;
     public $image;
@@ -23,7 +25,7 @@ class AdminAddServiceCategoryComponent extends Component
         $this->validateOnly([
             'name' => 'required',
             'slug' => 'required',
-            'image' => 'required|mimes:jpeg, png'
+            'image' => 'required|mimes:jpeg,png'
          ]);
     }
 
@@ -31,7 +33,7 @@ class AdminAddServiceCategoryComponent extends Component
         $this->validate([ 
             'name' => 'required',
             'slug' => 'required',
-            'image' => 'required|mimes:jpeg, png'
+            'image' => 'required|mimes:jpeg,png'
         ]);
 
         $scategory = new ServiceCategory();
