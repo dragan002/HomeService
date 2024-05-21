@@ -19,8 +19,8 @@
             <div class="paddings-mini">
                 <div class="container">
                     <div class="row portfolioContainer">
-                        <div class="col-md-8 col-md-offest-2 profile1">
-                            <div class="panel-default">
+                        <div class="col-md-12 col-md-offest-2 profile1">
+                            <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <div class="col-md-6">
                                         Add New Service Category
@@ -34,13 +34,19 @@
                                         <div class="form-group">
                                             <label for="name" class="control-label col-sm-3">Category Name:</label>
                                             <div class="col-sm-9">
+                                                <input type="text" class="form-control" name="name">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name" class="control-label col-sm-3">Category Slug:</label>
+                                            <div class="col-sm-9">
                                                 <input type="text" class="form-control" name="slug">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="name" class="control-label col-sm-3">Category Image:</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control-file" name="image">
+                                                <input type="file" class="form-control-file" name="image">
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-success pull-right">Add Category</button>

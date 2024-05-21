@@ -10,6 +10,7 @@ use App\Livewire\Admin\AdminDashboardComponent;
 use App\Livewire\Admin\AdminServiceCategoryComponent;
 use App\Livewire\Customer\CustomerDashboardComponent;
 use App\Livewire\Sprovider\SproviderDashboardComponent;
+use App\Livewire\Admin\AdminAddServiceCategoryComponent;
 
 
 Route::get('/', HomeComponent::class)->name('home');
@@ -44,5 +45,5 @@ Route::middleware([
 ])->group(function () {
     Route::get('/admin/dashboard', AdminDashboardComponent::class)->name('admin.dashboard');
     Route::get('/admin/service-categories', AdminServiceCategoryComponent::class)->name('admin.service_categories');
-    Route::get('/admin/service-categories/add', AdminServiceCategoryComponent::class)->name('admin.add_service_category');
+    Route::get('/admin/service-category/add', AdminAddServiceCategoryComponent::class)->name('admin.add_service_category');
     }); 
