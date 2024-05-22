@@ -25,7 +25,30 @@ class AdminEditServiceCategoryComponent extends Component
     public function generateSlug() {
         $this->slug = Str::slug($this->name, '-');
     }
-    
+
+    public function update($fields) {
+        $this->validateOnly($fields,[
+            'name' => 'required',
+            'slug' => 'required'
+        ]);
+
+        if($this->newImage) {
+            $this->validateOnly($fields, [
+                'newImage' => 'required|mimes:jpeg,png'
+            ]);
+        }
+    }
+    public function updateServiceCategory() {
+        $this->validate([
+            'name' => 'required',
+            'slug' => 'required',
+        ]);
+        if($this->newImage) {
+            $this->validate([
+                'newImage' => 'required|mimes:jpeg,png'
+            ]);
+        }
+    }
     public function render()
     {
         return view('livewire.admin.admin-edit-service-category-component')->layout('layout.base');
