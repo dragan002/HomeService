@@ -18,12 +18,12 @@
         <div class="content_info">
             <div class="paddings-mini">
                 <div class="container">
-                    <div class="row portfolioContainer">
-                        <div class="col-md-12 col-md-offest-2 profile1">
+                    <div class="row">
+                        <div class="col-md-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <div class="col-md-6">
-                                        Add New Service Category
+                                        Edit Service Category
                                     </div>
                                     <div class="col-md-6">
                                         <a href="{{ route('admin.service_categories') }}" class="btn btn-info pull-right">All Categories</a>
@@ -33,7 +33,7 @@
                                     @if(Session::has('message'))
                                         <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
                                     @endif
-                                    <form class="form-horizontal" wire:submit.prevent="createNewCategory">
+                                    <form class="form-horizontal" wire:submit.prevent="updateServiceCategory">
                                         @csrf
                                         <div class="form-group">
                                             <label for="name" class="control-label col-sm-3">Category Name:</label>
@@ -47,7 +47,6 @@
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" name="slug" wire:model="slug">
                                                 @error('slug') <p class="text-danger">{{ $message }}</p> @enderror
-
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -56,13 +55,13 @@
                                                 <input type="file" class="form-control-file" name="image" wire:model="newImage">
                                                 @error('newImage') <p class="text-danger">{{ $message }}</p> @enderror
                                                 @if($newImage)
-                                                    <img src="{{ $image->temporaryUrl() }}" alt="" width="60">
+                                                    <img src="{{ $newImage->temporaryUrl() }}" alt="" width="60">
                                                 @else
-                                                    <img src="{{ asset('images/categories') }}/{{ $image }}" alt="">
+                                                    <img src="{{ asset('images/categories') }}/{{$image}}" alt="">
                                                 @endif
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-success pull-right">Add Category</button>
+                                        <button type="submit" class="btn btn-success pull-right">Edit Category</button>
                                     </form>
                                 </div>
                             </div>
