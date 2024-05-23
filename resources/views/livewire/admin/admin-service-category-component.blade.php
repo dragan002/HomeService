@@ -57,7 +57,10 @@
                                                     <td><img src="{{ asset('images/categories') }}/{{ $scategory->image }}" alt="" width="60"></td>
                                                     <td>{{ $scategory->name }}</td>
                                                     <td>{{ $scategory->slug }}</td>
-                                                    <td><a href="{{ route('admin.edit_service_category', ['category_id' => $scategory->id]) }}"><i class="fa fa-edit fa-2x text-info"></i></a></td>
+                                                    <td>
+                                                        <a href="{{ route('admin.edit_service_category', ['category_id' => $scategory->id]) }}"><i class="fa fa-edit fa-2x text-info"></i></a>
+                                                        <a href="" onclick="confirm('Are you sure you want to delete this category?') || event.stopImmediatePropagation()" wire:click.prevent="deleteServiceCategory({{ $scategory->id }})"><i class="fa fa-times fa-2x text-danger"></i></a>
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
