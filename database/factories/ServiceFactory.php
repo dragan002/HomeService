@@ -19,12 +19,12 @@ class ServiceFactory extends Factory
     {
         $service_name = $this->faker->unique()->words($nb=4, $asText=true);
         $slug = Str::slug($service_name, '-');
-        $imageName = 'service_' . $this->faker->unique()->numberBetween(1,20);
+        $imageName = 'service_' . $this->faker->unique()->numberBetween(1,20) . '.jpg';
         return [
             'name' => $service_name,
             'slug' => $slug,
             'tagline' => $this->faker->text(20),
-            'service_category_id' => $this->faker->numberBetween(100,20),
+            'service_category_id' => $this->faker->numberBetween(1,20),
             'price' => $this->faker->numberBetween(100,500),
             'image' => $imageName,
             'thumbnail' => $imageName,
