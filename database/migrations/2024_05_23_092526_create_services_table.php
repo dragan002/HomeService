@@ -27,7 +27,7 @@ return new class extends Migration
             $table->longText('exclusion')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();
-            $table->foreing('service_category_id')->references('id')->on('service_categories')->onDelete('cascade');
+            $table->foreign('service_category_id')->references('id')->on('service_categories')->onDelete('cascade');
         });
     }
 
