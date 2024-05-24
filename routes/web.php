@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Admin\AdminServicesByCategoryComponent;
 use App\Livewire\Admin\AdminServicesComponent;
 use App\Livewire\HomeComponent;
 use App\Http\Middleware\AuthAdmin;
@@ -52,4 +53,5 @@ Route::middleware([
     Route::get('/admin/service-category/add', AdminAddServiceCategoryComponent::class)->name('admin.add_service_category');
     Route::get('/admin/service-category/edit/{category_id}', AdminEditServiceCategoryComponent::class)->name('admin.edit_service_category');
     Route::get('/admin/all-services', AdminServicesComponent::class)->name('admin.all_services');
+    Route::get('/admin/{category_slug}/services', AdminServicesByCategoryComponent::class)->name('admin.services_by_category');
     }); 
