@@ -61,7 +61,8 @@ class AdminAddServiceComponent extends Component
             'inclusion'=> 'required',
             'exclusion'=> 'required',
         ]);
-        $service = new Service;
+    
+        $service = new Service();
         $service->name = $this->name;
         $service->slug = $this->slug;
         $service->tagline = $this->tagline;
@@ -73,20 +74,18 @@ class AdminAddServiceComponent extends Component
         $service->inclusion = str_replace('\n', '|', trim($this->inclusion));
         $service->exclusion = str_replace('\n', '|', trim($this->exclusion));
         
-        $imageName = Carbon::now()->timestamp . '.' . $this->thumbnail->extension;
+        $imageName = Carbon::now()->timestamp . '.' . $this->thumbnail->getClientOriginalExtension();
         $this->thumbnail->storeAs('services/thumbnails', $imageName);
-        $service->thumbnail = $this->imageName;
-
-        $imageName2 = Carbon::now()->timestamp . '.' . $this->thumbnail->extension;
+        $service->thumbnail = $imageName;
+    
+        $imageName2 = Carbon::now()->timestamp . '.' . $this->image->getClientOriginalExtension();
         $this->image->storeAs('services', $imageName2);
-        $service->image = $this->imageName2;
-
+        $service->image = $imageName2;
+    
         $service->save();
         session()->flash('message', 'Service has been created!');
-
-
-
     }
+    
     public function render()
     {
         $categories = ServiceCategory::all();
