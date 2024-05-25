@@ -43,23 +43,91 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="name" class="control-label col-sm-3">Slug:</label>
+                                            <label for="slug" class="control-label col-sm-3">Slug:</label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" name="slug" wire:model="slug">
                                                 @error('slug') <p class="text-danger">{{ $message }}</p> @enderror
-
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="name" class="control-label col-sm-3">Thumbnail</label>
+                                            {{-- check it --}}
+                                            <label for="name" class="control-label col-sm-3">Service Category:</label> 
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" name="Thumbnail" wire:model="slug">
+                                                <select class="form-control">
+                                                    <option value="">Select Service Category</option>
+                                                    @foreach($categories as $category)
+                                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                    @endforeach
+                                                </select>
                                                 @error('slug') <p class="text-danger">{{ $message }}</p> @enderror
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="tagline" class="control-label col-sm-3">Tagline:</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" name="tagline" wire:model="tagline">
+                                                @error('tagline') <p class="text-danger">{{ $message }}</p> @enderror
 
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="name" class="control-label col-sm-3">Image:</label>
+                                            <label for="price" class="control-label col-sm-3">Price:</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" name="price" wire:model="price">
+                                                @error('price') <p class="text-danger">{{ $message }}</p> @enderror
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="discount" class="control-label col-sm-3">Discount:</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" name="discount" wire:model="discount">
+                                                @error('discount') <p class="text-danger">{{ $message }}</p> @enderror
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="discount_type" class="control-label col-sm-3">Discount Type:</label>
+                                            <div class="col-sm-9">
+                                                <select name="" id="" class="form-control">
+                                                    <option value="">Select Discount Type</option>
+                                                    <option value="fixed">Fixed</option>
+                                                    <option value="percent">Percent</option>
+                                                </select>
+                                                @error('discount_type') <p class="text-danger">{{ $message }}</p> @enderror
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="description" class="control-label col-sm-3">Description:</label>
+                                            <div class="col-sm-9">
+                                                <textarea class="form-control" wire:model="description"></textarea>
+                                                @error('description') <p class="text-danger">{{ $message }}</p> @enderror
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inclusion" class="control-label col-sm-3">Inclusion:</label>
+                                            <div class="col-sm-9">
+                                                <textare class="form-control" wire:model="inclusion"></textare>
+                                                @error('inclusion') <p class="text-danger">{{ $message }}</p> @enderror
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exclusion" class="control-label col-sm-3">Exclusive:</label>
+                                            <div class="col-sm-9">
+                                                <textare class="form-control" wire:model="exclusion"></textare>
+                                                @error('exclusion') <p class="text-danger">{{ $message }}</p> @enderror
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="thumbnail" class="control-label col-sm-3">Thumbnail</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" name="Thumbnail" wire:model="thumbnail">
+                                                @if($thumbnail)
+                                                    <img src="{{ $thumbnail->temporaryUrl() }}" alt="" width="60">
+                                                @endif
+                                                @error('thumbnail') <p class="text-danger">{{ $message }}</p> @enderror
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="image" class="control-label col-sm-3">Image:</label>
                                             <div class="col-sm-9">
                                                 <input type="file" class="form-control-file" name="image" wire:model="image">
                                                 @error('image') <p class="text-danger">{{ $message }}</p> @enderror
@@ -68,7 +136,7 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-success pull-right">Add Category</button>
+                                        <button type="submit" class="btn btn-success pull-right">Add Service</button>
                                     </form>
                                 </div>
                             </div>
