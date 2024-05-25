@@ -29,20 +29,20 @@ class AdminEditServiceComponent extends Component
     public $exclusion;
 
     public function mount($service_category_id) {
-        $scategory = Service::find($service_category_id);
+        $service = Service::find($service_category_id);
 
-        $this->name = $scategory->name;
-        $this->slug = $scategory->slug;
-        $this->tagline = $scategory->tagline;
-        $this->service_category_id = $scategory->service_category_id;
-        $this->price = $scategory->price;
-        $this->discount = $scategory->discount;
-        $this->discount_type = $scategory->discount_type;
-        $this->image = $scategory->image;
-        $this->thumbnail = $scategory->thumbnail;
-        $this->description = $scategory->description;
-        $this->inclusion = $scategory->inclusion;
-        $this->exclusion = $scategory->exclusion;
+        $this->name = $service->name;
+        $this->slug = $service->slug;
+        $this->tagline = $service->tagline;
+        $this->service_category_id = $service->service_category_id;
+        $this->price = $service->price;
+        $this->discount = $service->discount;
+        $this->discount_type = $service->discount_type;
+        $this->image = $service->image;
+        $this->thumbnail = $service->thumbnail;
+        $this->description = $service->description;
+        $this->inclusion = $service->inclusion;
+        $this->exclusion = $service->exclusion;
     }
 
     public function generateSlug() {
@@ -101,31 +101,32 @@ class AdminEditServiceComponent extends Component
                 'newThumbnail' => 'required|mimes:jpeg,png'
              ]);
         }
-        $scategory = Service::find($this->service_categoru_id);
-        $scategory->name = $this->name;
-        $scategory->slug = $this->slug;
-        $scategory->tagline = $this->tagline;
-        $scategory->price = $this->price;
-        $scategory->discount = $this->discount;
-        $scategory->discount_type = $this->discount_type;
-        $scategory->description = $this->description;
-        $scategory->inclusion = $this->inclusion;
-        $scategory->exclusion = $this->exclusion;
+        $service = Service::find($this->service_category_id);
+        $service->name = $this->name;
+        $service->slug = $this->slug;
+        $service->tagline = $this->tagline;
+        $service->price = $this->price;
+        $service->discount = $this->discount;
+        $service->discount_type = $this->discount_type;
+        $service->description = $this->description;
+        $service->inclusion = $this->inclusion;
+        $service->exclusion = $this->exclusion;
         if($this->newImage) {
             $imageName = Carbon::now()->timestamp . "." . $this->newImage->extension();
             $this->newImage->storeAs('services', $imageName);
-            $scategory->image = $imageName;
+            $service->image = $imageName;
         }
         if($this->newThumbnail) {
             $thumbnailName = Carbon::now()->timestamp . "." . $this->newThumbnail->extension();
             $this->newThumbnail->storeAs('services', $thumbnailName);
-            $scategory->thumbnail = $thumbnailName;
+            $service->thumbnail = $thumbnailName;
         }
-        $scategory->save();
+        $service->save();
         session()->flash('message', 'Category has beed updated successfully');
     }
     public function render()
     {
-        return view('livewire.admin.admin-edit-service-component')->layout('layout.base');
+        $service = Service::all();
+        return view('livewire.admin.admin-edit-service-component', ['service' => $service])->layout('layout.base');
     }
 }
