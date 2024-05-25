@@ -57,5 +57,5 @@ Route::middleware([
     Route::get('/admin/all-services', AdminServicesComponent::class)->name('admin.all_services');
     Route::get('/admin/{category_slug}/services', AdminServicesByCategoryComponent::class)->name('admin.services_by_category');
     Route::get('/admin/service/add', AdminAddServiceComponent::class)->name('admin.add_service');
-    Route::get('/admin/service/edit/{service_category_id}', AdminEditServiceComponent::class)->name('admin.edit_service');
+    Route::get('/admin/service/edit/{id}', AdminEditServiceComponent::class)->name('admin.edit_service');
     }); 

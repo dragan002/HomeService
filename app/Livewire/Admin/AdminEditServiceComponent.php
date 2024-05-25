@@ -10,11 +10,11 @@ use Illuminate\Support\Carbon;
 class AdminEditServiceComponent extends Component
 {
     use WithFileUploads;
-
+    public $id;
     public $name;
     public $slug;
     public $tagline;
-    public $service_category_id;
+    // public $service_category_id;
     public $price;
     public $discount;
     public $discount_type;
@@ -27,13 +27,13 @@ class AdminEditServiceComponent extends Component
     public $inclusion;
     public $exclusion;
 
-    public function mount($service_category_id) {
-        $service = Service::find($service_category_id);
-
+    public function mount($id) {
+        $service = Service::find($id);
+        $this->id = $service->id;
         $this->name = $service->name;
         $this->slug = $service->slug;
         $this->tagline = $service->tagline;
-        $this->service_category_id = $service->service_category_id;
+        // $this->service_category_id = $service->service_category_id;
         $this->price = $service->price;
         $this->discount = $service->discount;
         $this->discount_type = $service->discount_type;
@@ -53,7 +53,7 @@ class AdminEditServiceComponent extends Component
             'name' => 'required',
             'slug' => 'required',
             'tagline' => 'required',
-            'service_category_id' => 'required',
+            // 'service_category_id' => 'required',
             'price' => 'required',
             'discount' => 'required',
             'discount_type' => 'required|in:fixed,percent',
@@ -78,7 +78,7 @@ class AdminEditServiceComponent extends Component
             'name' => 'required',
             'slug' => 'required',
             'tagline' => 'required',
-            'service_category_id' => 'required',
+            // 'service_category_id' => 'required',
             'price' => 'required',
             'discount' => 'required',
             'discount_type' => 'required|in:fixed,percent',
@@ -96,7 +96,7 @@ class AdminEditServiceComponent extends Component
                 'newThumbnail' => 'required|mimes:jpeg,png'
              ]);
         }
-        $service = Service::find($this->service_category_id);
+        $service = Service::find($this->id);
         $service->name = $this->name;
         $service->slug = $this->slug;
         $service->tagline = $this->tagline;
