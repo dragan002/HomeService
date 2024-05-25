@@ -26,14 +26,14 @@
                                         Add New Service Category
                                     </div>
                                     <div class="col-md-6">
-                                        <a href="{{ route('admin.service_categories') }}" class="btn btn-info pull-right">All Categories</a>
+                                        <a href="{{ route('admin.add_service') }}" class="btn btn-info pull-right">All Services</a>
                                     </div>
                                 </div>
                                 <div class="panel-body">
                                     @if(Session::has('message'))
                                         <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
                                     @endif
-                                    <form class="form-horizontal" wire:submit.prevent="createNewCategory">
+                                    <form class="form-horizontal" wire:submit.prevent="createService">
                                         @csrf
                                         <div class="form-group">
                                             <label for="name" class="control-label col-sm-3">Name:</label>

@@ -7,9 +7,11 @@ use Livewire\Component;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 use App\Models\ServiceCategory;
+use Livewire\WithFileUploads;
 
 class AdminAddServiceComponent extends Component
 {
+    use WithFileUploads;
     public $name;
     public $slug;
     public $tagline;
@@ -27,8 +29,8 @@ class AdminAddServiceComponent extends Component
         $this->slug = Str::slug($this->name, '-');
     }
 
-    public function updated($field) {
-        $this->validateOnly([
+    public function updated($fields) {
+        $this->validateOnly($fields, [
             'name'=> 'required',
             'slug'=> 'required',
             'tagline'=> 'required',
@@ -68,8 +70,8 @@ class AdminAddServiceComponent extends Component
         $service->discount = $this->discount;
         $service->discount_type = $this->discount_type;
         $service->description = $this->description;
-        $service->inclusion = $this->inclusion;
-        $service->exclusion = $this->exclusion;
+        $service->inclusion = str_replace('\n', '|', trim($this->inclusion));
+        $service->exclusion = str_replace('\n', '|', trim($this->exclusion));
         
         $imageName = Carbon::now()->timestamp . '.' . $this->thumbnail->extension;
         $this->thumbnail->storeAs('services/thumbnails', $imageName);
