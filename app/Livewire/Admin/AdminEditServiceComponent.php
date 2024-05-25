@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Livewire\Admin;
 
 use App\Models\Service;
@@ -57,9 +56,7 @@ class AdminEditServiceComponent extends Component
             'service_category_id' => 'required',
             'price' => 'required',
             'discount' => 'required',
-            'discount_type' => 'required',
-            // 'image' => 'required',
-            // 'thumbnail' => 'required',
+            'discount_type' => 'required|in:fixed,percent',
             'description' => 'required',
             'inclusion' => 'required',
             'exclusion' => 'required'
@@ -84,9 +81,7 @@ class AdminEditServiceComponent extends Component
             'service_category_id' => 'required',
             'price' => 'required',
             'discount' => 'required',
-            'discount_type' => 'required',
-            // 'image' => 'required',
-            // 'thumbnail' => 'required',
+            'discount_type' => 'required|in:fixed,percent',
             'description' => 'required',
             'inclusion' => 'required',
             'exclusion' => 'required'
@@ -122,11 +117,11 @@ class AdminEditServiceComponent extends Component
             $service->thumbnail = $thumbnailName;
         }
         $service->save();
-        session()->flash('message', 'Category has beed updated successfully');
+        session()->flash('message', 'Service has been updated successfully');
     }
-    public function render()
-    {
-        $service = Service::all();
-        return view('livewire.admin.admin-edit-service-component', ['service' => $service])->layout('layout.base');
+
+    public function render() {
+        $categories = Service::all();
+        return view('livewire.admin.admin-edit-service-component', ['categories' => $categories])->layout('layout.base');
     }
 }

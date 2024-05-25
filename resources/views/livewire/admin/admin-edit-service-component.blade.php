@@ -3,7 +3,7 @@
         <div class="bg_parallax image_02_parallax"></div>
         <div class="opacy_bg_02">
             <div class="container">
-                <h1>Edit Service</h1>
+                <h1>Edit Service </h1>
                 <div class="crumbs">
                     <ul>
                         <li><a href="/">Home</a></li>
@@ -55,8 +55,8 @@
                                             <div class="col-sm-9">
                                                 <select class="form-control" wire:model="service_category_id">>
                                                     <option value="">Select Service Category</option>
-                                                    @foreach($service as $servis)
-                                                        <option value="{{ $servis->id }}">{{ $servis->name }}</option>
+                                                    @foreach($categories as $category)
+                                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
                                                     @endforeach
                                                 </select>
                                                 @error('slug') <p class="text-danger">{{ $message }}</p> @enderror
@@ -119,21 +119,25 @@
                                         <div class="form-group">
                                             <label for="thumbnail" class="control-label col-sm-3">Thumbnail</label>
                                             <div class="col-sm-9">
-                                                <input type="file" class="form-control-file" name="Thumbnail" wire:model="thumbnail">
-                                                {{-- @if($thumbnail)
-                                                    <img src="{{ $thumbnail->temporaryUrl() }}" alt="" width="60">
-                                                @endif --}}
-                                                @error('thumbnail') <p class="text-danger">{{ $message }}</p> @enderror
+                                                <input type="file" class="form-control-file" name="thumbnail" wire:model="newThumbnail">
+                                                @if($newThumbnail)
+                                                    <img src="{{ $newThumbnail->temporaryUrl() }}" alt="" width="60">
+                                                @else
+                                                    <img src="{{ asset('images/services/thumbnails') }}/{{ $thumbnail }}" alt="" width="60">
+                                                @endif
+                                                @error('newThumbnail') <p class="text-danger">{{ $message }}</p> @enderror
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="image" class="control-label col-sm-3">Image:</label>
                                             <div class="col-sm-9">
-                                                <input type="file" class="form-control-file" name="image" wire:model="image">
-                                                @error('image') <p class="text-danger">{{ $message }}</p> @enderror
-                                                {{-- @if($image)
-                                                    <img src="{{ $image->temporaryUrl() }}" alt="" width="60">
-                                                @endif --}}
+                                                <input type="file" class="form-control-file" name="newImage" wire:model="newImage">
+                                                @if($newImage)
+                                                    <img src="{{ $newImage->temporaryUrl() }}" alt="" width="60">
+                                                @else
+                                                    <img src="{{ asset('images/services') }}/{{ $image }}" alt="" width="60">
+                                                @endif
+                                                @error('newImage') <p class="text-danger">{{ $message }}</p> @enderror
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-success pull-right">Update Service</button>
