@@ -9,6 +9,18 @@ use Livewire\WithPagination;
 class AdminServicesComponent extends Component
 {
     use WithPagination;
+
+    public function deleteService($id){
+        $service = Service::find($id);
+        if($service->image) {
+            unlink('images/services' . '/' . $service->image);
+        }
+        if($service->thumbnail) {
+            unlink('images/services/thumbnails' . '/' . $service->thumbnail);
+        }
+        $service->delete();
+        session()->flash('message', 'Service has been deleted successfully');
+    }
     public function render()
     {
         $services = Service::paginate(10);
