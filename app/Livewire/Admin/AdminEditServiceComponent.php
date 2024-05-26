@@ -40,8 +40,8 @@ class AdminEditServiceComponent extends Component
         $this->image = $service->image;
         $this->thumbnail = $service->thumbnail;
         $this->description = $service->description;
-        $this->inclusion = $service->inclusion;
-        $this->exclusion = $service->exclusion;
+        $this->inclusion = str_replace('|', '\n', $service->inclusion);
+        $this->exclusion = str_replace('|', '\n' ,$service->exclusion);
     }
 
     public function generateSlug() {
@@ -106,14 +106,17 @@ class AdminEditServiceComponent extends Component
         $service->description = $this->description;
         $service->inclusion = $this->inclusion;
         $service->exclusion = $this->exclusion;
+
         if($this->newImage) {
+            unlink('images/services' . '/' . $service->image);
             $imageName = Carbon::now()->timestamp . "." . $this->newImage->extension();
-            $this->newImage->storeAs('services', $imageName);
+            $this->newImage->storeAs('services/', $imageName);
             $service->image = $imageName;
         }
         if($this->newThumbnail) {
+            unlink('images/services/thumbnails' . '/' . $service->thumbnail);
             $thumbnailName = Carbon::now()->timestamp . "." . $this->newThumbnail->extension();
-            $this->newThumbnail->storeAs('services', $thumbnailName);
+            $this->newThumbnail->storeAs('services/thumbnails', $thumbnailName);
             $service->thumbnail = $thumbnailName;
         }
         $service->save();
