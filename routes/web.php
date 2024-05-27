@@ -4,6 +4,7 @@ use App\Livewire\Admin\AdminEditServiceComponent;
 use App\Livewire\HomeComponent;
 use App\Http\Middleware\AuthAdmin;
 use App\Http\Middleware\AuthCustomer;
+use App\Livewire\ServiceDetailsComponent;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\AuthSprovider;
 use App\Livewire\ServiceCategoriesComponent;
@@ -22,6 +23,7 @@ use App\Livewire\Admin\AdminEditServiceCategoryComponent;
 Route::get('/', HomeComponent::class)->name('home');
 Route::get('/service-categories', ServiceCategoriesComponent::class)->name('home.service_categories');
 Route::get('/{category_slug}/services', ServicesByCategoryComponent::class)->name('home.services_by_category');
+Route::get('/service/{service_slug}', ServiceDetailsComponent::class)->name('home.service_details');
 
 Route::middleware([
     'auth:sanctum',
