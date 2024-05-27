@@ -7,7 +7,7 @@
                 <h1>{{ $service->name }}</h1>
                 <div class="crumbs">
                     <ul>
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="/">Home</a></li>
                         <li>/</li>
                         <li>{{ $service->name }}</li>
                     </ul>
@@ -43,7 +43,7 @@
                                     <div class="col-md-12">
                                         <div id="single-carousel">
                                             <div class="img-hover">
-                                                <img src="images/services/service.jpg" alt=""
+                                                <img src="{{ asset('images/services') }}/{{ $service->image }}" alt="{{ $service->image }}"
                                                     class="img-responsive">
                                             </div>
                                         </div>
@@ -51,51 +51,18 @@
                                     <div class="col-md-12">
                                         <div class="post-content">
                                             <h3>{{ $service->name }}</h3>
-                                            <p>It is a long established fact that a reader will be distracted by the
-                                                readable content of a page when looking at its layout. The point of
-                                                using Lorem Ipsum is that it has a more-or-less normal distribution
-                                                of letters, as opposed to using &#039;Content here, content
-                                                here&#039;, making it look like readable English. Many desktop
-                                                publishing packages and web page editors now use Lorem Ipsum as
-                                                their default model text, and a search for &#039;lorem ipsum&#039;
-                                                will uncover many web sites still in their infancy. Various versions
-                                                have evolved over the years, sometimes by accident, sometimes on
-                                                purpose (injected humour and the like).</p>
+                                            <p>{{ $service->description }}</p>
                                             <h4>Inclusion</h4>
                                             <ul class="list-styles">
-                                                <li><i class="fa fa-plus"></i>Etiam pulvinar eros eu felis varius,
-                                                    nec eleifend risus faucibus.</li>
-                                                <li><i class="fa fa-plus"></i>Donec gravida sem vel nibh feugiat
-                                                    tincidunt.</li>
-                                                <li><i class="fa fa-plus"></i>Ut at dui id turpis gravida ultricies
-                                                    id interdum enim.</li>
-                                                <li><i class="fa fa-plus"></i>Donec posuere velit non sem viverra
-                                                    rutrum.</li>
-                                                <li><i class="fa fa-plus"></i>In sodales risus ac felis aliquam
-                                                    finibus.</li>
-                                                <li><i class="fa fa-plus"></i>Fusce sed lorem non massa tristique
-                                                    commodo.</li>
-                                                <li><i class="fa fa-plus"></i>Cras efficitur dolor commodo urna
-                                                    pulvinar aliquam.</li>
+                                                @foreach(explode("|", $service->inclusion) as $inclusion)
+                                                    <li><i class="fa fa-plus">{{ $service->inclusion }}</i></li>
+                                                @endforeach
                                             </ul>
                                             <h4>Exclusion</h4>
                                             <ul class="list-styles">
-                                                <li><i class="fa fa-minus"></i>Suspendisse mattis erat non erat
-                                                    blandit luctus id vitae ligula.</li>
-                                                <li><i class="fa fa-minus"></i>Quisque vestibulum arcu non odio
-                                                    aliquet, sed laoreet turpis fringilla.</li>
-                                                <li><i class="fa fa-minus"></i>Vestibulum ac velit vel lectus
-                                                    blandit pulvinar sed convallis odio.</li>
-                                                <li><i class="fa fa-minus"></i>Aenean non ante feugiat nisi tempus
-                                                    facilisis.</li>
-                                                <li><i class="fa fa-minus"></i>Sed ac eros non nulla pharetra
-                                                    consequat.</li>
-                                                <li><i class="fa fa-minus"></i>Nulla maximus nibh in facilisis
-                                                    placerat.</li>
-                                                <li><i class="fa fa-minus"></i>Morbi id velit id libero blandit
-                                                    luctus.</li>
-                                                <li><i class="fa fa-minus"></i>Sed hendrerit ex non lacus ultricies
-                                                    porttitor.</li>
+                                                @foreach(explode('|', $service->exclusion) as $exclusion)
+                                                    <li><i class="fa fa-minus">{{ $service->exclusion }}</i></li>
+                                                @endforeach
                                             </ul>
                                         </div>
                                     </div>
@@ -110,19 +77,37 @@
                                         <table class="table">
                                             <tr>
                                                 <td style="border-top: none;">Price</td>
-                                                <td style="border-top: none;"><span>&#36;</span> 300</td>
+                                                <td style="border-top: none;"><span>&#36;</span> {{ $service->price }}</td>
                                             </tr>
                                             <tr>
                                                 <td>Quntity</td>
                                                 <td>1</td>
                                             </tr>
-                                            <tr>
-                                                <td>Discount</td>
-                                                <td>0</td>
-                                            </tr>
+                                            @php
+                                                $total = $service->price;
+                                            @endphp
+                                            @if($service->discount)
+                                                @if($service->discount == 'fixed')
+                                                    <tr>
+                                                        <td>Discount</td>
+                                                        <td>${{ $service->discount }}</td>
+                                                    </tr>
+                                                    @php
+                                                        $total = $total - $service->discount;
+                                                    @endphp
+                                                @elseif($service->discount == 'percentage')
+                                                    <tr>
+                                                        <td>Discount</td>
+                                                        <td>{{ $service->discount }}%</td>
+                                                    </tr>
+                                                    @php
+                                                        $total = $total - ($total * $service->discount / 100);
+                                                    @endphp
+                                                @endif
+                                            @endif
                                             <tr>
                                                 <td>Total</td>
-                                                <td><span>&#36;</span> 300</td>
+                                                <td><span>&#36;</span> {{ $total }}</td>
                                             </tr>
                                         </table>
                                     </div>
