@@ -27,6 +27,8 @@ class AdminEditServiceComponent extends Component
     public $inclusion;
     public $exclusion;
 
+    public $featured;
+
     public function mount($id) {
         $service = Service::find($id);
         $this->id = $service->id;
@@ -53,7 +55,6 @@ class AdminEditServiceComponent extends Component
             'name' => 'required',
             'slug' => 'required',
             'tagline' => 'required',
-            // 'service_category_id' => 'required',
             'price' => 'required',
             'discount' => 'required',
             'discount_type' => 'required|in:fixed,percent',
@@ -78,7 +79,6 @@ class AdminEditServiceComponent extends Component
             'name' => 'required',
             'slug' => 'required',
             'tagline' => 'required',
-            // 'service_category_id' => 'required',
             'price' => 'required',
             'discount' => 'required',
             'discount_type' => 'required|in:fixed,percent',
@@ -103,6 +103,7 @@ class AdminEditServiceComponent extends Component
         $service->price = $this->price;
         $service->discount = $this->discount;
         $service->discount_type = $this->discount_type;
+        $service->featured = $this->featured;
         $service->description = $this->description;
         $service->inclusion = $this->inclusion;
         $service->exclusion = $this->exclusion;
