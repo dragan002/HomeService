@@ -24,6 +24,7 @@ class AdminEditServiceCategoryComponent extends Component
         $this->name = $scategory->name;
         $this->slug = $scategory->slug;
         $this->image = $scategory->image;
+        $this->featured = $scategory->featured;
     }
 
     public function generateSlug() {

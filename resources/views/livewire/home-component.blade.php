@@ -107,15 +107,17 @@
                         </div>
                         <div class="col-md-8">
                             <ul class="services-lines">
-                                <li>
-                                    <a href="servicesbycategory/1.html">
-                                        <div class="item-service-line">
-                                            <i class="fa"><img class="icon-img"
-                                                    src="{{ asset('images/sercat/service-icon.png') }}"></i>
-                                            <h5>AC</h5>
-                                        </div>
-                                    </a>
-                                </li>
+                                @foreach($fscategories as $fscategory)
+                                    <li>
+                                        <a href={{ route('home.services_by_category', ['category_slug' => $fscategory->slug]) }}>
+                                            <div class="item-service-line">
+                                                <i class="fa"><img class="icon-img"
+                                                        src="{{ asset('images/categories') }}/{{ $fscategory->image }}"></i>
+                                                <h5>{{ $fscategory->name }}</h5>
+                                            </div>
+                                        </a>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
