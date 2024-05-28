@@ -55,7 +55,7 @@
 
                 <ul class="collapse">
                     <li class="title">
-                        <a href="index.php.html"><img src="images/logo.png"></a>
+                        <a href="/"><img src="images/logo.png"></a>
                     </li>
 
                     <li> <a href="{{ route('home.service_categories') }}">Service Categories</a>
