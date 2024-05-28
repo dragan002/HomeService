@@ -15,6 +15,7 @@ class AdminEditServiceCategoryComponent extends Component
     public $name;
     public $slug;
     public $image;
+    public $featured;
     public $newImage;
 
     public function mount($category_id) {
@@ -32,7 +33,8 @@ class AdminEditServiceCategoryComponent extends Component
     public function update($fields) {
         $this->validateOnly($fields,[
             'name' => 'required',
-            'slug' => 'required'
+            'slug' => 'required',
+            'featured' => 'required'
         ]);
 
         if($this->newImage) {
@@ -55,6 +57,7 @@ class AdminEditServiceCategoryComponent extends Component
         $scategory = ServiceCategory::find($this->category_id);
         $scategory->name = $this->name;
         $scategory->slug = $this->slug;
+        $scategory->featured = $this->featured;
         if($this->newImage) {
             $imageName = Carbon::now()->timestamp . '.' . $this->newImage->extension();
             $this->newImage->storeAs('categories', $imageName);
