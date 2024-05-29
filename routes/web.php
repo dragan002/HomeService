@@ -1,17 +1,20 @@
 <?php
 
-use App\Livewire\Admin\AdminEditServiceComponent;
 use App\Livewire\HomeComponent;
 use App\Http\Middleware\AuthAdmin;
 use App\Http\Middleware\AuthCustomer;
-use App\Livewire\ServiceDetailsComponent;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\AuthSprovider;
+use App\Livewire\ServiceDetailsComponent;
+use App\Livewire\Admin\AdminSliderComponent;
 use App\Livewire\ServiceCategoriesComponent;
 use App\Livewire\ServicesByCategoryComponent;
+use App\Livewire\Admin\AdminAddSlideComponent;
 use App\Livewire\Admin\AdminServicesComponent;
 use App\Livewire\Admin\AdminDashboardComponent;
+use App\Livewire\Admin\AdminEditSlideComponent;
 use App\Livewire\Admin\AdminAddServiceComponent;
+use App\Livewire\Admin\AdminEditServiceComponent;
 use App\Livewire\Admin\AdminServiceCategoryComponent;
 use App\Livewire\Customer\CustomerDashboardComponent;
 use App\Livewire\Sprovider\SproviderDashboardComponent;
@@ -60,4 +63,9 @@ Route::middleware([
     Route::get('/admin/{category_slug}/services', AdminServicesByCategoryComponent::class)->name('admin.services_by_category');
     Route::get('/admin/service/add', AdminAddServiceComponent::class)->name('admin.add_service');
     Route::get('/admin/service/edit/{id}', AdminEditServiceComponent::class)->name('admin.edit_service');
+
+    //slider Route
+    Route::get('/admin/slider', AdminSliderComponent::class)->name('admin.slider');
+    Route::get('/admin/slider/add', AdminAddSlideComponent::class)->name('admin.add_slide');
+    Route::get('/admin/slider/edit/{slide_id}', AdminEditSlideComponent::class)->name('admin.edit_slide');
     }); 
