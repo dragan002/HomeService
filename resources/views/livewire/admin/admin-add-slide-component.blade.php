@@ -26,14 +26,14 @@
                                         Add New slide
                                     </div>
                                     <div class="col-md-6">
-                                        <a href="{{ route('admin.service_categories') }}" class="btn btn-info pull-right">All Categories</a>
+                                        <a href="{{ route('admin.slider') }}" class="btn btn-info pull-right">All Slides</a>
                                     </div>
                                 </div>
                                 <div class="panel-body">
                                     @if(Session::has('message'))
                                         <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
                                     @endif
-                                    <form class="form-horizontal" wire:submit.prevent="createNewCategory">
+                                    <form class="form-horizontal" wire:submit.prevent="addNewSlide">
                                         @csrf
                                         <div class="form-group">
                                             <label for="title" class="control-label col-sm-3">Title</label>

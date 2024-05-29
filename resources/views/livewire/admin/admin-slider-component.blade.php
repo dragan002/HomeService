@@ -58,8 +58,8 @@
                                             @foreach($slides as $slide)
                                                 <tr>
                                                     <td>{{ $slide->id }}</td>
+                                                    <td>{{ $slide->title }}</td>
                                                     <td><img src="{{ asset('images/slider') }}/{{ $slide->image }}" alt="" width="60"></td>
-                                                    <td>{{ $slide->name }}</td>
                                                     <td>
                                                         @if($slide->status)
                                                                 Active
