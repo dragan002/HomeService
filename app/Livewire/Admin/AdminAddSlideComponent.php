@@ -11,7 +11,7 @@ class AdminAddSlideComponent extends Component
     use WithFileUploads;
     public $title;
     public $image;
-    public $status;
+    public $status = 0;
 
     public function updated($fields) {
         $this->validateOnly($fields, [
