@@ -71,7 +71,9 @@
 
                                                     <td>
                                                         <a href="{{ route('admin.edit_slide', ['slide_id' => $slide->id])}}"><i class="fa fa-edit fa-2x text-info"></i></a>
-                                                        <a href="#" style="margin-left: 10px;" onclick="confirm('Are you sure you want to delete this slide?') || event.stopImmidiatePropagation()" wire:click.prevent="deleteSlide({{ $slide->id }})"><i class="fa fa-times fa-2x text-danger"></i>
+                                                        <a href="#" style="margin-left: 10px;" onclick="if (!confirm('Are you sure you want to delete this slide?')) { event.preventDefault(); event.stopPropagation(); } else { @this.deleteSlide({{ $slide->id }}) }">
+                                                            <i class="fa fa-times fa-2x text-danger"></i>
+                                                        </a>
                                                         </a>
                                                     </td>
                                                 </tr>
