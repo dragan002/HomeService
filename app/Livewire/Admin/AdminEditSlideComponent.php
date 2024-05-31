@@ -13,16 +13,16 @@ class AdminEditSlideComponent extends Component
 
     public $slide_id;
     public $title;
-    public $image;
+    public $image;  
     public $status;
     public $newImage;
 
     public function mount($slide_id) {
-        $sliders = Slider::find($slide_id);
-        $this->slide_id = $sliders->id;
-        $this->title = $sliders->title;
-        $this->image = $sliders->image;
-        $this->status = $sliders->status;
+        $slide = Slider::find($slide_id);
+        $this->slide_id = $slide->id;
+        $this->title = $slide->title;
+        $this->image = $slide->image;
+        $this->status = $slide->status;
     }
 
     public function update($fields) {
@@ -47,18 +47,21 @@ class AdminEditSlideComponent extends Component
                 'newImage' => 'required|mimes:jpg,png,jpeg'
             ]);
         }
-        $slider = Slider::find( $this->slide_id);
-        $slider->title = $this->title;
-        $slider->status = $this->status;
+
+        $slide = Slider::find($this->slide_id);
+        $slide->title = $this->title;
+        $slide->status = $this->status;
 
         if($this->newImage) {
-            unlink('images/slider' . '/' . $slider->image);
+            if (file_exists(public_path('images/slider/' . $slide->image))) {
+                unlink(public_path('images/slider/' . $slide->image));
+            }
             $imageName = Carbon::now()->timestamp . "." . $this->newImage->extension();
-            $this->newImage->storeAs('slider/', $imageName);
-            $this->image = $imageName;
+            $this->newImage->storeAs('slider', $imageName);
+            $slide->image = $imageName;
         }
-        $slider->save();
-        session()->flash('message', 'Slider has been updated successfully');
+        $slide->save();
+        session()->flash('message', 'Slide has been updated successfully');
     }
 
     public function render()
