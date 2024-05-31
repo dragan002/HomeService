@@ -14,6 +14,7 @@
             </div>
         </div>
     </div>
+    
     <section class="content-central">
         <div class="content_info">
             <div class="paddings-mini">
