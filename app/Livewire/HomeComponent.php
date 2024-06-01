@@ -25,5 +25,4 @@ class HomeComponent extends Component
                                                 'slides'=>$slides])
                                                 ->layout('layout.base');
     }
-    
 }
