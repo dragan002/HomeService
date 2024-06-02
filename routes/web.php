@@ -30,6 +30,7 @@ Route::get('/{category_slug}/services', ServicesByCategoryComponent::class)->nam
 Route::get('/service/{service_slug}', ServiceDetailsComponent::class)->name('home.service_details');
 
 Route::get('/autocomplete', [SearchController::class,'autocomplete'])->name('autocomplete');
+Route::post('/search', [SearchController::class, 'searchService'])->name('searchService');
 
 Route::middleware([
     'auth:sanctum',
