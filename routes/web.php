@@ -1,6 +1,5 @@
 <?php
 
-use App\Livewire\Sprovider\EditSproviderProfileComponent;
 use App\Livewire\HomeComponent;
 use App\Http\Middleware\AuthAdmin;
 use App\Http\Middleware\AuthCustomer;
@@ -25,8 +24,7 @@ use App\Livewire\Sprovider\SproviderDashboardComponent;
 use App\Livewire\Admin\AdminAddServiceCategoryComponent;
 use App\Livewire\Admin\AdminServicesByCategoryComponent;
 use App\Livewire\Admin\AdminEditServiceCategoryComponent;
-
-
+use App\Livewire\Sprovider\EditSproviderProfileComponent;
 
 Route::get('/', HomeComponent::class)->name('home');
 Route::get('/service-categories', ServiceCategoriesComponent::class)->name('home.service_categories');
@@ -47,7 +45,6 @@ Route::middleware([
     Route::get('/customer/dashboard', CustomerDashboardComponent::class)->name('customer.dashboard');
 });
 
-
 // For Service Provider
 Route::middleware([
     'auth:sanctum',
@@ -57,9 +54,9 @@ Route::middleware([
 ])->group(function () {
     Route::get('/sprovider/dashboard', SproviderDashboardComponent::class)->name('sprovider.dashboard');
     Route::get('/sprovider/profile', SproviderProfileComponent::class)->name('sprovider.profile');
-    Route::get('/sprovider/profile/edit', EditSproviderProfileComponent::class)->name('sprovider.edit_profile');
+    // Route::get('/sprovider/profile/edit', EditSproviderProfileComponent::class)->name('sprovider.edit_profile');
+    Route::get('sprovider/profile/edit', EditSproviderProfileComponent::class)->name('sprovider.edit_profile');
 });
-
 
 Route::middleware([
     'auth:sanctum',
@@ -80,4 +77,4 @@ Route::middleware([
     Route::get('/admin/slider', AdminSliderComponent::class)->name('admin.slider');
     Route::get('/admin/slider/add', AdminAddSlideComponent::class)->name('admin.add_slide');
     Route::get('/admin/slider/edit/{slide_id}', AdminEditSlideComponent::class)->name('admin.edit_slide');
-    }); 
+});

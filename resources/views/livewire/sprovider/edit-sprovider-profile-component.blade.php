@@ -30,10 +30,10 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             @if(Session::has('message'))
-                                                <div class="alert alert-succcess" role="alert">{{ Session::get('message') }}</div>
+                                                <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
                                             @endif
-                                            <div class="form-horizontal">
-                                                <div class="form-group" wire:submit.prevent="updateProfile">
+                                            <form class="form-horizontal" wire:submit.prevent="updateProfile">
+                                                <div class="form-group">
                                                     <label for="newImage" class="control-label col-md-3">Profile Image:</label>
                                                     <input type="file" class="form-control-file" name="newImage" wire:model="newImage" >
                                                     @if($newImage)
@@ -65,7 +65,7 @@
                                                     <input type="text" class="form-control-file" name="service_locations" wire:model="service_locations" >
                                                 </div>
                                                 <button type="submit" class="btn btn-success">Update Profile</button>
-                                            </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Sprovider;
+namespace App\Livewire\Sprovider;
 
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -64,12 +64,8 @@ class EditSproviderProfileComponent extends Component
         $sprovider->service_locations = $this->service_locations;
         
         if($this->newImage) {
-            // if ($sprovider->image) {
-            //     unlink(storage_path('app/public/sproviders/' . $sprovider->image));
-            // }
-
             $imageName = Carbon::now()->timestamp . '.' . $this->newImage->extension();
-            $this->newImage->storeAs('public/sproviders', $imageName);
+            $this->newImage->storeAs('sproviders', $imageName);
             $sprovider->image = $imageName;          
         }
 
