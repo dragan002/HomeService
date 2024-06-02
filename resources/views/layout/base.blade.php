@@ -38,13 +38,7 @@
                                         class="fa fa-map-marker"></i> Faridabad, Haryana</a></li>
                         </ul>
                     </div>
-                    <div class="col-md-6">
-                        <ul class="visible-md visible-lg text-right">
-                            <li><i class="fa fa-comment"></i> Live Chat</li>
-                            <li><a href="index.php/changelocation.html"><i class="fa fa-map-marker"></i> Faridabad,
-                                    Haryana</a></li>
-                        </ul>
-                    </div>
+                    @livewire('location-component')
                 </div>
             </div>
         </div>

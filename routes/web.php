@@ -33,7 +33,7 @@ Route::get('/service/{service_slug}', ServiceDetailsComponent::class)->name('hom
 Route::get('/autocomplete', [SearchController::class,'autocomplete'])->name('autocomplete');
 Route::post('/search', [SearchController::class, 'searchService'])->name('searchService');
 
-Route::get('/change-location', ChangeLocationComponent::class)->home('home.change_location');
+Route::get('/change-location', ChangeLocationComponent::class)->name('home.change_location');
 
 Route::middleware([
     'auth:sanctum',
