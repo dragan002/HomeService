@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\ChangeLocationComponent;
 use App\Livewire\HomeComponent;
 use App\Http\Middleware\AuthAdmin;
 use App\Http\Middleware\AuthCustomer;
@@ -31,6 +32,8 @@ Route::get('/service/{service_slug}', ServiceDetailsComponent::class)->name('hom
 
 Route::get('/autocomplete', [SearchController::class,'autocomplete'])->name('autocomplete');
 Route::post('/search', [SearchController::class, 'searchService'])->name('searchService');
+
+Route::get('/change-location', ChangeLocationComponent::class)->home('home.change_location');
 
 Route::middleware([
     'auth:sanctum',
