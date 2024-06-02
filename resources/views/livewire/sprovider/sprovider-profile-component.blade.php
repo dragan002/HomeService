@@ -50,6 +50,7 @@
                                                 @endif
                                             </p>
                                             <p><b>Service Location: </b> {{ $sprovider->service_locations }}</p>
+                                            <div class="content-btn"><a href="{{ route('sprovider.edit_profile') }}" class="btn btn-primary">Edit Profile</a></div>
                                         </div>
                                     </div>
                                 </div>

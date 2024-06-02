@@ -4,6 +4,7 @@ use App\Livewire\ChangeLocationComponent;
 use App\Livewire\HomeComponent;
 use App\Http\Middleware\AuthAdmin;
 use App\Http\Middleware\AuthCustomer;
+use App\Livewire\Sprovider\EditSproviderProfileComponent;
 use App\Livewire\Sprovider\SproviderProfileComponent;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\AuthSprovider;
@@ -54,7 +55,8 @@ Route::middleware([
     'authsprovider' => AuthSprovider::class,
 ])->group(function () {
     Route::get('/sprovider/dashboard', SproviderDashboardComponent::class)->name('sprovider.dashboard');
-    Route::get('sprovider/profile', SproviderProfileComponent::class)->name('sprovider.profile');
+    Route::get('/sprovider/profile', SproviderProfileComponent::class)->name('sprovider.profile');
+    Route::get('/sprovider/profile/edit', EditSproviderProfileComponent::class)->name('sprovider.edit_profile');
     });
 
 
