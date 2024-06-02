@@ -29,26 +29,40 @@
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-md-12">
+                                            @if(Session::has('message'))
+                                                <div class="alert alert-succcess" role="alert">{{ Session::get('message') }}</div>
+                                            @endif
                                             <div class="form-horizontal">
-                                                <div class="form-group">
+                                                <div class="form-group" wire:submit.prevent="updateProfile">
                                                     <label for="newImage" class="control-label col-md-3">Profile Image:</label>
-                                                    <input type="file" class="form-control-file" name="newImage" >
+                                                    <input type="file" class="form-control-file" name="newImage" wire:model="newImage" >
+                                                    @if($newImage)
+                                                        <img src="{{ $newImage->temporaryUrl() }}" alt="" width="220">
+                                                    @elseif($image)
+                                                        <img src="{{ asset('images/sproviders') }}/{{ $image }}" alt="" width="220">
+                                                    @else
+                                                        <img src="{{ asset('images/sproviders/default.jpg') }}" alt="" width="220">
+                                                    @endif
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="about" class="control-label col-md-3">About:</label>
-                                                    <textarea name="about" cols="30" rows="10"></textarea>
+                                                    <textarea name="about" cols="30" rows="10" wire:model="about"></textarea>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="city" class="control-label col-md-3">City:</label>
-                                                    <input type="text" class="form-control-file" name="city" >
+                                                    <input type="text" class="form-control-file" name="city" wire:model="city">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="service_category_id" class="control-label col-md-3">Service Category:</label>
-                                                    <input type="text" class="form-control-file" name="service_category_id" >
+                                                    <select type="text" class="form-control-file" name="service_category_id" wire:model="service_category_id">
+                                                        @foreach($scategories as $scategory)
+                                                            <option value="{{ $scategory->id }}">{{ $scategory->name }}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="service_locations" class="control-label col-md-3">Service Location Zipcode</label>
-                                                    <input type="text" class="form-control-file" name="service_locations" >
+                                                    <input type="text" class="form-control-file" name="service_locations" wire:model="service_locations" >
                                                 </div>
                                                 <button type="submit" class="btn btn-success">Update Profile</button>
                                             </div>

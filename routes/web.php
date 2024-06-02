@@ -1,13 +1,11 @@
 <?php
 
-use App\Livewire\ChangeLocationComponent;
 use App\Livewire\HomeComponent;
 use App\Http\Middleware\AuthAdmin;
 use App\Http\Middleware\AuthCustomer;
-use App\Livewire\Sprovider\EditSproviderProfileComponent;
-use App\Livewire\Sprovider\SproviderProfileComponent;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\AuthSprovider;
+use App\Livewire\ChangeLocationComponent;
 use App\Livewire\ServiceDetailsComponent;
 use App\Http\Controllers\SearchController;
 use App\Livewire\Admin\AdminSliderComponent;
@@ -21,10 +19,12 @@ use App\Livewire\Admin\AdminAddServiceComponent;
 use App\Livewire\Admin\AdminEditServiceComponent;
 use App\Livewire\Admin\AdminServiceCategoryComponent;
 use App\Livewire\Customer\CustomerDashboardComponent;
+use App\Livewire\Sprovider\SproviderProfileComponent;
 use App\Livewire\Sprovider\SproviderDashboardComponent;
 use App\Livewire\Admin\AdminAddServiceCategoryComponent;
 use App\Livewire\Admin\AdminServicesByCategoryComponent;
 use App\Livewire\Admin\AdminEditServiceCategoryComponent;
+use App\Http\Livewire\Sprovider\EditSproviderProfileComponent;
 
 
 Route::get('/', HomeComponent::class)->name('home');
