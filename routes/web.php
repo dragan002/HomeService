@@ -6,6 +6,7 @@ use App\Http\Middleware\AuthCustomer;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\AuthSprovider;
 use App\Livewire\ServiceDetailsComponent;
+use App\Http\Controllers\SearchController;
 use App\Livewire\Admin\AdminSliderComponent;
 use App\Livewire\ServiceCategoriesComponent;
 use App\Livewire\ServicesByCategoryComponent;
@@ -27,6 +28,8 @@ Route::get('/', HomeComponent::class)->name('home');
 Route::get('/service-categories', ServiceCategoriesComponent::class)->name('home.service_categories');
 Route::get('/{category_slug}/services', ServicesByCategoryComponent::class)->name('home.services_by_category');
 Route::get('/service/{service_slug}', ServiceDetailsComponent::class)->name('home.service_details');
+
+Route::get('/autocomplete', [SearchController::class,'autocomplete'])->name('autocomplete');
 
 Route::middleware([
     'auth:sanctum',
