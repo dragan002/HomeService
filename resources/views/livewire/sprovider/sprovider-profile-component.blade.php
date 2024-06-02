@@ -43,10 +43,13 @@
                                             <p>{{ $sprovider->about }}</p>
                                             <p><b>Email:</b>{{ Auth::user()->email }}</p>
                                             <p><b>Phone:</b>{{ Auth::user()->phone }}</p>
-                                            <p><b>City: {{ $sprovider->city }}</b></p>
-                                            <p><b>Service Category: {{ $sprovider->category->name }}</b></p>
-                                            <p><b>Service Location: {{ $sprovider->service_locations }}</b></p>
-
+                                            <p><b>City:</b> {{ $sprovider->city }}</p>
+                                            <p><b>Service Category:</b> 
+                                                @if($sprovider->service_category_id)
+                                                    {{ $sprovider->category->name }}
+                                                @endif
+                                            </p>
+                                            <p><b>Service Location: </b> {{ $sprovider->service_locations }}</p>
                                         </div>
                                     </div>
                                 </div>
