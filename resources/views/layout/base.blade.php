@@ -128,6 +128,7 @@
                                     <li><a href="{{ route('admin.all_services') }}">All Services</a></li>
                                     <li><a href="{{ route('admin.slider') }}">Manage Slider</a></li>
                                     <li><a href="{{ route('admin.contacts') }}">All Contacts</a></li>
+                                    <li><a href="{{ route('admin.service_providers') }}">All Service Providers</a></li>
                                     <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
                                 </ul>
                             </li>

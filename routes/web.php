@@ -22,6 +22,7 @@ use App\Livewire\Admin\AdminEditServiceComponent;
 use App\Livewire\Admin\AdminServiceCategoryComponent;
 use App\Livewire\Customer\CustomerDashboardComponent;
 use App\Livewire\Sprovider\SproviderProfileComponent;
+use App\Livewire\Admin\AdminServiceProvidersComponent;
 use App\Livewire\Sprovider\SproviderDashboardComponent;
 use App\Livewire\Admin\AdminAddServiceCategoryComponent;
 use App\Livewire\Admin\AdminServicesByCategoryComponent;
@@ -57,10 +58,10 @@ Route::middleware([
 ])->group(function () {
     Route::get('/sprovider/dashboard', SproviderDashboardComponent::class)->name('sprovider.dashboard');
     Route::get('/sprovider/profile', SproviderProfileComponent::class)->name('sprovider.profile');
-    // Route::get('/sprovider/profile/edit', EditSproviderProfileComponent::class)->name('sprovider.edit_profile');
     Route::get('sprovider/profile/edit', EditSproviderProfileComponent::class)->name('sprovider.edit_profile');
 });
 
+//For Admin
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -81,4 +82,5 @@ Route::middleware([
     Route::get('/admin/slider/add', AdminAddSlideComponent::class)->name('admin.add_slide');
     Route::get('/admin/slider/edit/{slide_id}', AdminEditSlideComponent::class)->name('admin.edit_slide');
     Route::get('/admin/contacts', AdminContactComponent::class)->name('admin.contacts');
+    Route::get('/admin/service-providers', AdminServiceProvidersComponent::class)->name('admin.service_providers');
 });
