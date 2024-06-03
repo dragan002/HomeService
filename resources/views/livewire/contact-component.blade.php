@@ -46,13 +46,18 @@
                             <h3>Contact Form</h3>
                             <p class="lead">
                             </p>
-                            <form id="contactform" class="form-theme"
-                                method="post">
+                            @if(Session::has('message'))
+                                <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
+                            @endif
+                            <form id="contactform" class="form-theme" method="post" wire:submit.prevent = 'sendMessage'>
                                 <input type="text" placeholder="Name" name="name" id="name" wire:model="name" required="">
+                                    @error('name') <p class="text-danger">{{ $message }}</p> @enderror
                                 <input type="email" placeholder="Email" name="email" id="email" wire:model="email" required="">
+                                    @error('email') <p class="text-danger">{{ $message }}</p> @enderror
                                 <input type="text" placeholder="Phone" name="phone" id="phone" wire:model="phone"  required="">
-                                <textarea placeholder="Your Message" name="message" id="message" wire:model="message" 
-                                    required=""></textarea>
+                                    @error('phone') <p class="text-danger">{{ $message }}</p> @enderror
+                                <textarea placeholder="Your Message" name="message" id="message" wire:model="message" required=""></textarea>
+                                    @error('message') <p class="text-danger">{{ $message }}</p> @enderror
                                 <input type="submit" name="Submit" value="Send Message" class="btn btn-primary">
                             </form>
                             <div id="result"></div>
