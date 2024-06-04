@@ -73,14 +73,15 @@ return [
     |
     */
     
-    'home' => function(){
-        $roles = [
-          'ADM' => 'admin',
-          'CST' => 'customer',
-          'SVP' => 'sprovider'
-         ];
-         return route($roles[Auth::user()->utype] . '.dashboard');
-},
+//     'home' => function(){
+//         $roles = [
+//           'ADM' => 'admin',
+//           'CST' => 'customer',
+//           'SVP' => 'sprovider'
+//          ];
+//          return route($roles[Auth::user()->utype] . '.dashboard');
+// },
+    'home' => '/',
 
 
     /*

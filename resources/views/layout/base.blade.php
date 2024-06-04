@@ -27,9 +27,9 @@
                 <div class="row">
                     <div class="col-md-6">
                         <ul class="visible-md visible-lg text-left">
-                            <li><a href="tel:+911234567890"><i class="fa fa-phone"></i> +91-1234567890</a></li>
+                            <li><a href="tel:+911234567890"><i class="fa fa-phone"></i> 064 444 111 9</a></li>
                             <li><a href="mailto:contact@surfsidemedia.in"><i class="fa fa-envelope"></i>
-                                    contact@surfsidemedia.in</a></li>
+                                    draganvujic@gmail.com</a></li>
                         </ul>
                         <ul class="visible-xs visible-sm">
                             <li class="text-left"><a href="tel:+911234567890"><i class="fa fa-phone"></i>
@@ -137,6 +137,7 @@
                                 <ul class="drop-down one-column hover-fade">
                                     <li><a href="{{ route('sprovider.dashboard') }}">Dashboard</a></li>
                                     <li><a href="{{ route('sprovider.profile') }}">Profile</a></li>
+                                    <li><a href="{{ route('sprovider.add_service') }}">Add Service</a></li>
                                     <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>    
                                 </ul>
                             </li>
@@ -262,7 +263,7 @@
                             </ul>
                         </div>
                         <div class="col-md-6">
-                            <p class="text-xs-center crtext">&copy; 2021 SurfsideMedia. All Rights Reserved.</p>
+                            <p class="text-xs-center crtext">&copy; 2024 SurfsideMedia. All Rights Reserved.</p>
                         </div>
                     </div>
                 </div>                
