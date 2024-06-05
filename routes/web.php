@@ -4,7 +4,6 @@ use App\Livewire\HomeComponent;
 use App\Http\Middleware\AuthAdmin;
 use App\Livewire\ContactComponent;
 use App\Http\Middleware\AuthCustomer;
-use App\Livewire\Sprovider\AddSproviderServiceComponent;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\AuthSprovider;
 use App\Livewire\ChangeLocationComponent;
@@ -20,6 +19,7 @@ use App\Livewire\Admin\AdminDashboardComponent;
 use App\Livewire\Admin\AdminEditSlideComponent;
 use App\Livewire\Admin\AdminAddServiceComponent;
 use App\Livewire\Admin\AdminEditServiceComponent;
+use App\Livewire\Admin\AdminServiceStatusComponent;
 use App\Livewire\Admin\AdminServiceCategoryComponent;
 use App\Livewire\Customer\CustomerDashboardComponent;
 use App\Livewire\Sprovider\SproviderProfileComponent;
@@ -27,9 +27,10 @@ use App\Livewire\Admin\AdminServiceProvidersComponent;
 use App\Livewire\Sprovider\SproviderDashboardComponent;
 use App\Livewire\Admin\AdminAddServiceCategoryComponent;
 use App\Livewire\Admin\AdminServicesByCategoryComponent;
+use App\Livewire\Sprovider\AddSproviderServiceComponent;
 use App\Livewire\Admin\AdminEditServiceCategoryComponent;
 use App\Livewire\Sprovider\EditSproviderProfileComponent;
-use App\Livewire\Admin\AdminServiceStatusComponent;
+use App\Livewire\Sprovider\SproviderServicesListComponent;
 
 
 
@@ -64,6 +65,7 @@ Route::middleware([
     Route::get('/sprovider/profile', SproviderProfileComponent::class)->name('sprovider.profile');
     Route::get('/sprovider/profile/edit', EditSproviderProfileComponent::class)->name('sprovider.edit_profile');
     Route::get('/sprovider/service/add', AddSproviderServiceComponent::class)->name('sprovider.add_service');
+    Route::get('/sprovider/service/list', SproviderServicesListComponent::class)->name('sprovider.list');
 });
 
 //For Admin
