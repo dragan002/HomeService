@@ -29,6 +29,9 @@ use App\Livewire\Admin\AdminAddServiceCategoryComponent;
 use App\Livewire\Admin\AdminServicesByCategoryComponent;
 use App\Livewire\Admin\AdminEditServiceCategoryComponent;
 use App\Livewire\Sprovider\EditSproviderProfileComponent;
+use App\Livewire\Admin\AdminServiceStatusComponent;
+
+
 
 Route::get('/', HomeComponent::class)->name('home');
 Route::get('/service-categories', ServiceCategoriesComponent::class)->name('home.service_categories');
@@ -78,6 +81,7 @@ Route::middleware([
     Route::get('/admin/{category_slug}/services', AdminServicesByCategoryComponent::class)->name('admin.services_by_category');
     Route::get('/admin/service/add', AdminAddServiceComponent::class)->name('admin.add_service');
     Route::get('/admin/service/edit/{id}', AdminEditServiceComponent::class)->name('admin.edit_service');
+    Route::get('/admin/service/service_status', AdminServiceStatusComponent::class)->name('admin.service_status');
 
     //slider Route
     Route::get('/admin/slider', AdminSliderComponent::class)->name('admin.slider');

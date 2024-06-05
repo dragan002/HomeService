@@ -11,12 +11,12 @@
         <div class="bg_parallax image_02_parallax"></div>
         <div class="opacy_bg_02">
             <div class="container">
-                <h1>All Services</h1>
+                <h1>Services Status</h1>
                 <div class="crumbs">
                     <ul>
                         <li><a href="/">Home</a></li>
                         <li>/</li>
-                        <li>Service Categories</li>
+                        <li>Services Status</li>
                     </ul>
                 </div>
             </div>
@@ -31,14 +31,11 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <div class="row">
-                                        <div class="col-md-4">
-                                            All Services
+                                        <div class="col-md-6">
+                                            Pending Services Status
                                         </div>
-                                        <div class="col-md-4">
-                                            <a href="{{ route('admin.service_status') }}" class="btn btn-info pull-right">Services Status</a>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <a href="{{ route('admin.add_service') }}" class="btn btn-info pull-right">Add New</a>
+                                        <div class="col-md-6">
+                                            <a href="{{ route('admin.all_services') }}" class="btn btn-info pull-right">All Services</a>
                                         </div>
                                     </div>
                                 </div>
@@ -49,40 +46,35 @@
                                     <table class="table table-stripped">
                                         <thead>
                                             <tr>
-                                                <th>#</th>
+                                                <th>Provider Name</th>
                                                 <th>Image</th>
                                                 <th>Name</th>
                                                 <th>Price</th>
-                                                <th>Status</th>
-                                                <th>Featured</th>
                                                 <th>Category</th>
-                                                <th>Created at</th>
-                                                <th>Action</th>
+                                                <th>Service Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach($services as $service)
                                                 <tr>
+                                                    <td>{{ $service->name }}</td>
                                                     <td>{{ $service->id }}</td>
                                                     <td><img src="{{ asset('images/services/thumbnails') }}/{{ $service->thumbnail }}" alt="" width="60"></td>
                                                     <td>{{ $service->name }}</td>
                                                     <td>{{ $service->price }}</td>
-                                                    <td>
-                                                        @if($service->status)
-                                                                Active
-                                                        @else
-                                                                Inactive
-                                                        @endif
-                                                    </td>
+{{-- 
                                                     <td>
                                                         @if($service->featured)
                                                             Yes
                                                         @else
                                                             No
                                                         @endif
-                                                    </td>
+                                                    </td> --}}
                                                     <td>{{ $service->category->name }}</td>
-                                                    <td>{{ $service->created_at }}</td>
+                                                    <td>{{ $service->service_status }}</td>
+                                                    
+
+     
 
                                                     <td>
                                                         <a href="{{ route('admin.edit_service', ['id' => $service->id])}}"><i class="fa fa-edit fa-2x text-info"></i></a>
@@ -93,7 +85,7 @@
                                             @endforeach
                                         </tbody>
                                     </table>
-                                    {{ $services->links() }}
+                                    {{-- {{ $services->links() }} --}}
                                 </div>
                             </div>
                         </div>
