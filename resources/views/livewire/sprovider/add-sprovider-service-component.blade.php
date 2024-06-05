@@ -136,8 +136,13 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-success pull-right">Add Service</button>
-                                    </form>
+                                        <button type="submit" class="btn btn-success pull-right" wire:loading.attr="disabled">
+                                            <span wire:loading wire:target="createService">
+                                                <i class="fa fa-spinner fa-spin"></i>
+                                            </span>
+                                            Add Service
+                                        </button> 
+                                  </form>
                                 </div>
                             </div>
                         </div>
