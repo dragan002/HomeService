@@ -57,39 +57,43 @@
                                                 <th>Featured</th>
                                                 <th>Category</th>
                                                 <th>Created at</th>
+                                                <th>Service Status</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach($services as $service)
-                                                <tr>
-                                                    <td>{{ $service->id }}</td>
-                                                    <td><img src="{{ asset('images/services/thumbnails') }}/{{ $service->thumbnail }}" alt="" width="60"></td>
-                                                    <td>{{ $service->name }}</td>
-                                                    <td>{{ $service->price }}</td>
-                                                    <td>
-                                                        @if($service->status)
-                                                                Active
-                                                        @else
-                                                                Inactive
-                                                        @endif
-                                                    </td>
-                                                    <td>
-                                                        @if($service->featured)
-                                                            Yes
-                                                        @else
-                                                            No
-                                                        @endif
-                                                    </td>
-                                                    <td>{{ $service->category->name }}</td>
-                                                    <td>{{ $service->created_at }}</td>
+                                                @if($service->service_status === 'approved')
+                                                    <tr>
+                                                        <td>{{ $service->id }}</td>
+                                                        <td><img src="{{ asset('images/services/thumbnails') }}/{{ $service->thumbnail }}" alt="" width="60"></td>
+                                                        <td>{{ $service->name }}</td>
+                                                        <td>{{ $service->price }}</td>
+                                                        <td>
+                                                            @if($service->status)
+                                                                    Active
+                                                            @else
+                                                                    Inactive
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            @if($service->featured)
+                                                                Yes
+                                                            @else
+                                                                No
+                                                            @endif
+                                                        </td>
+                                                        <td>{{ $service->category->name }}</td>
+                                                        <td>{{ $service->created_at }}</td>
+                                                        <td>{{ $service->service_status }}</td>
 
-                                                    <td>
-                                                        <a href="{{ route('admin.edit_service', ['id' => $service->id])}}"><i class="fa fa-edit fa-2x text-info"></i></a>
-                                                        <a href="#" style="margin-left: 10px;" onclick="confirm('Are you sure you want to delete this services?') || event.stopImmidiatePropagation()" wire:click.prevent="deleteService({{ $service->id }})"><i class="fa fa-times fa-2x text-danger"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
+                                                        <td>
+                                                            <a href="{{ route('admin.edit_service', ['id' => $service->id])}}"><i class="fa fa-edit fa-2x text-info"></i></a>
+                                                            <a href="#" style="margin-left: 10px;" onclick="confirm('Are you sure you want to delete this services?') || event.stopImmidiatePropagation()" wire:click.prevent="deleteService({{ $service->id }})"><i class="fa fa-times fa-2x text-danger"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                @endif
                                             @endforeach
                                         </tbody>
                                     </table>

@@ -57,30 +57,19 @@
                                         <tbody>
                                             @foreach($services as $service)
                                                 <tr>
-                                                    <td>{{ $service->name }}</td>
-                                                    <td>{{ $service->id }}</td>
-                                                    <td><img src="{{ asset('images/services/thumbnails') }}/{{ $service->thumbnail }}" alt="" width="60"></td>
-                                                    <td>{{ $service->name }}</td>
-                                                    <td>{{ $service->price }}</td>
-{{-- 
-                                                    <td>
-                                                        @if($service->featured)
-                                                            Yes
-                                                        @else
-                                                            No
-                                                        @endif
-                                                    </td> --}}
-                                                    <td>{{ $service->category->name }}</td>
-                                                    <td>{{ $service->service_status }}</td>
-                                                    
-
-     
-
-                                                    <td>
-                                                        <a href="{{ route('admin.edit_service', ['id' => $service->id])}}"><i class="fa fa-edit fa-2x text-info"></i></a>
-                                                        <a href="#" style="margin-left: 10px;" onclick="confirm('Are you sure you want to delete this services?') || event.stopImmidiatePropagation()" wire:click.prevent="deleteService({{ $service->id }})"><i class="fa fa-times fa-2x text-danger"></i>
-                                                        </a>
-                                                    </td>
+                                                    @if($service->service_status === 'pending')
+                                                        <td>{{ $service->name }}</td>
+                                                        <td><img src="{{ asset('images/services/thumbnails') }}/{{ $service->thumbnail }}" alt="" width="60"></td>
+                                                        <td>{{ $service->name }}</td>
+                                                        <td>{{ $service->price }}</td>
+                                                        <td>{{ $service->category->name }}</td>
+                                                        <td>{{ $service->service_status }}</td>
+                                                        <td>
+                                                            <a href="{{ route('admin.edit_service', ['id' => $service->id])}}"><i class="fa fa-edit fa-2x text-info"></i></a>
+                                                            <a href="#" style="margin-left: 10px;" onclick="confirm('Are you sure you want to delete this services?') || event.stopImmidiatePropagation()" wire:click.prevent="deleteService({{ $service->id }})"><i class="fa fa-times fa-2x text-danger"></i>
+                                                            </a>
+                                                        </td>
+                                                    @endif
                                                 </tr>
                                             @endforeach
                                         </tbody>

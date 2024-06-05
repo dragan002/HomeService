@@ -141,7 +141,8 @@
                                                 <i class="fa fa-spinner fa-spin"></i>
                                             </span>
                                             Add Service
-                                        </button>                                    </form>
+                                        </button> 
+                                    </form>
                                 </div>
                             </div>
                         </div>

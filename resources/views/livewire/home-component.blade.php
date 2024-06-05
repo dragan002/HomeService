@@ -71,23 +71,25 @@
                     </div>
                     <div class="portfolioContainer" style="margin-top: -50px;">
                         @foreach($fservices as $service)
-                            <div class="col-xs-6 col-sm-4 col-md-3 hsgrids"
-                                style="padding-right: 5px;padding-left: 5px;">
-                                <a class="g-list" href="{{ route('home.service_details', ['service_slug'=>$service->slug]) }}">
-                                    <div class="img-hover">
-                                        <img src="{{ asset('images/services/thumbnails') }}/{{ $service->thumbnail }}" alt="{{ $service->name }}"
-                                            class="img-responsive">
-                                    </div>
-                                    <div class="info-gallery">
-                                        <h3>{{ $service->name }}</h3>
-                                        <hr class="separator">
-                                        <p>{{ $service->tagline }}</p>
-                                        <div class="content-btn"><a href="{{ route('home.service_details', ['service_slug'=>$service->slug]) }}"
-                                                class="btn btn-primary">Book Now</a></div>
-                                        <div class="price"><span>&#36;</span><b>From</b>{{ $service->price }}</div>
-                                    </div>
-                                </a>
-                            </div>
+                            @if($service->service_status === 'approved')
+                                <div class="col-xs-6 col-sm-4 col-md-3 hsgrids"
+                                    style="padding-right: 5px;padding-left: 5px;">
+                                    <a class="g-list" href="{{ route('home.service_details', ['service_slug'=>$service->slug]) }}">
+                                        <div class="img-hover">
+                                            <img src="{{ asset('images/services/thumbnails') }}/{{ $service->thumbnail }}" alt="{{ $service->name }}"
+                                                class="img-responsive">
+                                        </div>
+                                        <div class="info-gallery">
+                                            <h3>{{ $service->name }}</h3>
+                                            <hr class="separator">
+                                            <p>{{ $service->tagline }}</p>
+                                            <div class="content-btn"><a href="{{ route('home.service_details', ['service_slug'=>$service->slug]) }}"
+                                                    class="btn btn-primary">Book Now</a></div>
+                                            <div class="price"><span>&#36;</span><b>From</b>{{ $service->price }}</div>
+                                        </div>
+                                    </a>
+                                </div>
+                            @endif
                         @endforeach
                     </div>
                 </div>

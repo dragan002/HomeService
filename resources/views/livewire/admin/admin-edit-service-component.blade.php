@@ -22,10 +22,13 @@
                         <div class="col-md-12 col-md-offest-2 profile1">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         Edit Service Category
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
+                                        <a href="{{ route('admin.service_status') }}" class="btn btn-info pull-right">Services Status</a>
+                                    </div>
+                                    <div class="col-md-4">
                                         <a href="{{ route('admin.all_services') }}" class="btn btn-info pull-right">All Services</a>
                                     </div>
                                 </div>
@@ -83,7 +86,7 @@
                                                 <select class="form-control" wire:model="discount_type">
                                                     <option value="">Select Discount Type</option>
                                                     <option value="fixed">Fixed</option>
-                                                    <option value="percent">Percent</option>
+                                                    <option value="percentage">Percent</option>
                                                 </select>
                                                 @error('discount_type') <p class="text-danger">{{ $message }}</p> @enderror
                                             </div>
@@ -101,6 +104,16 @@
                                                 <select class="form-control" wire:model="featured">
                                                     <option value="0">No</option>
                                                     <option value="1">Yes</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="service_status" class="control-label col-sm-3">Service Status:</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" wire:model="service_status">
+                                                    <option value="pending">Pending</option>
+                                                    <option value="rejected">Rejected</option>
+                                                    <option value="approved">Approved</option>
                                                 </select>
                                             </div>
                                         </div>
