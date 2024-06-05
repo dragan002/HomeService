@@ -6,6 +6,7 @@ use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Carbon;
+use App\Models\ServiceCategory;
 
 class AdminEditServiceComponent extends Component
 {
@@ -14,7 +15,7 @@ class AdminEditServiceComponent extends Component
     public $name;
     public $slug;
     public $tagline;
-    // public $service_category_id;
+    public $service_category_id;
     public $price;
     public $discount;
     public $discount_type;
@@ -28,6 +29,7 @@ class AdminEditServiceComponent extends Component
     public $exclusion;
 
     public $featured;
+    public $service_status;
 
     public function mount($id) {
         $service = Service::find($id);
@@ -35,10 +37,12 @@ class AdminEditServiceComponent extends Component
         $this->name = $service->name;
         $this->slug = $service->slug;
         $this->tagline = $service->tagline;
-        // $this->service_category_id = $service->service_category_id;
+        $this->service_category_id = $service->service_category_id;
         $this->price = $service->price;
         $this->discount = $service->discount;
         $this->discount_type = $service->discount_type;
+        $this->featured = 0;
+        $this->service_status = $service->service_status; 
         $this->image = $service->image;
         $this->thumbnail = $service->thumbnail;
         $this->description = $service->description;
@@ -56,11 +60,11 @@ class AdminEditServiceComponent extends Component
             'slug' => 'required',
             'tagline' => 'required',
             'price' => 'required',
-            'discount' => 'required',
-            'discount_type' => 'required|in:fixed,percent',
             'description' => 'required',
+            'featured' => 'nullable|boolean',
             'inclusion' => 'required',
-            'exclusion' => 'required'
+            'exclusion' => 'required',
+            'service_status' => 'nullable'
         ]);
         if($this->newImage) {
             $this->validateOnly($fields, [
@@ -79,9 +83,8 @@ class AdminEditServiceComponent extends Component
             'name' => 'required',
             'slug' => 'required',
             'tagline' => 'required',
+            'service_category_id'=> 'required',
             'price' => 'required',
-            'discount' => 'required',
-            'discount_type' => 'required|in:fixed,percent',
             'description' => 'required',
             'inclusion' => 'required',
             'exclusion' => 'required'
@@ -104,6 +107,7 @@ class AdminEditServiceComponent extends Component
         $service->discount = $this->discount;
         $service->discount_type = $this->discount_type;
         $service->featured = $this->featured;
+        $service->service_status = $this->service_status;
         $service->description = $this->description;
         $service->inclusion = $this->inclusion;
         $service->exclusion = $this->exclusion;
@@ -125,7 +129,7 @@ class AdminEditServiceComponent extends Component
     }
 
     public function render() {
-        $categories = Service::all();
+        $categories = ServiceCategory::all();
         return view('livewire.admin.admin-edit-service-component', ['categories' => $categories])->layout('layout.base');
     }
 }
