@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Carbon;
 use App\Models\ServiceCategory;
+use Illuminate\Support\Facades\Auth;
 
 class AddSproviderServiceComponent extends Component
 {
@@ -79,6 +80,8 @@ class AddSproviderServiceComponent extends Component
         $this->image->storeAs('services', $imageName2);
         $service->image = $imageName2;
     
+        $service->user_id = Auth::id();
+        
         $service->save();
         session()->flash('message', 'Service has been created!');
     }
