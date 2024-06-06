@@ -12,7 +12,22 @@ class Service extends Model
 
     protected $table = "services";
 
+    protected $fillable = [
+        'name',
+        'slug',
+        'price',
+        'discount',
+        'service_status',
+        'user_id', // Add this line if you haven't already
+        // other columns...
+    ];
+
+
     public function category() {
         return $this->belongsTo(ServiceCategory::class, 'service_category_id');
+    }
+
+    public function user() {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

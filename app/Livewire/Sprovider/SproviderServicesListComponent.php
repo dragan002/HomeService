@@ -13,7 +13,7 @@ class SproviderServicesListComponent extends Component
 
     public function render()
     {
-        $sproviders = ServiceProvider::where('user_id', auth()->id())->paginate(10);
-        return view('livewire.sprovider.sprovider-services-list-component', ['sproviders'=>$sproviders])->layout('layout.base');
+        $services = Service::where('user_id', auth()->id())->paginate(10);
+        return view('livewire.sprovider.sprovider-services-list-component', ['services'=>$services])->layout('layout.base');
     }
 }

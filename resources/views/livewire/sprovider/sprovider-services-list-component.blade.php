@@ -59,7 +59,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($sproviders as $service)
+                                            @foreach($services as $service)
                                                     <tr>
                                                         <td>{{ $service->id }}</td>
                                                         <td><img src="{{ asset('images/services/thumbnails') }}/{{ $service->thumbnail }}" alt="" width="60"></td>
@@ -92,7 +92,7 @@
                                             @endforeach
                                         </tbody>
                                     </table>
-                                    {{ $sproviders->links() }}
+                                    {{ $services->links() }}
                                 </div>
                             </div>
                         </div>
