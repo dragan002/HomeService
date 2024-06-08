@@ -30,6 +30,7 @@ use App\Livewire\Admin\AdminServicesByCategoryComponent;
 use App\Livewire\Sprovider\AddSproviderServiceComponent;
 use App\Livewire\Admin\AdminEditServiceCategoryComponent;
 use App\Livewire\Sprovider\EditSproviderProfileComponent;
+use App\Livewire\Sprovider\EditSproviderServiceComponent;
 use App\Livewire\Sprovider\SproviderServicesListComponent;
 
 
@@ -65,7 +66,7 @@ Route::middleware([
     Route::get('/sprovider/profile', SproviderProfileComponent::class)->name('sprovider.profile');
     Route::get('/sprovider/profile/edit', EditSproviderProfileComponent::class)->name('sprovider.edit_profile');
     Route::get('/sprovider/service/add', AddSproviderServiceComponent::class)->name('sprovider.add_service');
-    Route::get('/sprovider/service/edit', EditSproviderServiceComponent::class)->name('sprovider.edit_service');
+    Route::get('/sprovider/service/edit/{service_id}', EditSproviderServiceComponent::class)->name('sprovider.edit_service');
     Route::get('/sprovider/service/list', SproviderServicesListComponent::class)->name('sprovider.list');
 });
 
