@@ -113,13 +113,17 @@ class AdminEditServiceComponent extends Component
         $service->exclusion = $this->exclusion;
 
         if($this->newImage) {
-            unlink('images/services' . '/' . $service->image);
+            if(file_exists('images/services' . '/' . $service->image)) {
+                unlink('images/services' . '/' . $service->image);
+            }
             $imageName = Carbon::now()->timestamp . "." . $this->newImage->extension();
             $this->newImage->storeAs('services/', $imageName);
             $service->image = $imageName;
         }
         if($this->newThumbnail) {
-            unlink('images/services/thumbnails' . '/' . $service->thumbnail);
+            if(file_exists('images/services/thumbnails' . '/' . $service->thumbnail)) {
+                unlink('images/services/thumbnails' . '/' . $service->thumbnail);
+            }
             $thumbnailName = Carbon::now()->timestamp . "." . $this->newThumbnail->extension();
             $this->newThumbnail->storeAs('services/thumbnails', $thumbnailName);
             $service->thumbnail = $thumbnailName;

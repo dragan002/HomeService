@@ -53,27 +53,10 @@ class EditSproviderServiceComponent extends Component
         $this->slug = Str::slug($this->name, '-');
     }
 
-    public function update($fields) {
-        $this->validateOnly($fields, [
-            'name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|',
-            'tagline' => 'nullable|string|max:255',
-            'service_category_id' => 'required|integer|exists:service_categories,id',
-            'price' => 'required|numeric',
-            'discount' => 'nullable|numeric',
-            'discount_type' => 'nullable|string|max:255',
-            'description' => 'required|string',
-            'inclusion' => 'required|string',
-            'exclusion' => 'required|string',
-            'newImage' => 'nullable|image|mimes:jpg,jpeg,png|max:1024',
-            'newThumbnail' => 'nullable|image|mimes:jpg,jpeg,png|max:1024',
-        ]);
-    }
-
     public function updateServiceProvider() {
         $this->validate([
             'name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|',
+            'slug' => 'required|string|max:255',
             'tagline' => 'nullable|string|max:255',
             'service_category_id' => 'required|integer|exists:service_categories,id',
             'price' => 'required|numeric',
@@ -99,14 +82,20 @@ class EditSproviderServiceComponent extends Component
         $service->exclusion = $this->exclusion;
 
         if ($this->newImage) {
+            if(file_exists('sproviders' . '/' . $image->name)) {
+                unlink('sproviders' . '/' . $image->name);
+            }
             $imageName = Carbon::now()->timestamp . '.' . $this->newImage->extension();
             $this->newImage->storeAs('sproviders', $imageName);
             $service->image = $imageName;
         }
 
         if ($this->newThumbnail) {
+            if(file_exists('sproviders/thumbnails' . '/' . $thumbnail->name)) {
+                unlink('sproviders/thumbnails' . '/' . $thumbnail->name);
+            }
             $thumbnailName = Carbon::now()->timestamp . '.' . $this->newThumbnail->extension();
-            $this->newThumbnail->storeAs('sproviders', $thumbnailName);
+            $this->newThumbnail->storeAs('sproviders/thumbnails', $thumbnailName);
             $service->thumbnail = $thumbnailName;
         }
 
@@ -115,8 +104,7 @@ class EditSproviderServiceComponent extends Component
         session()->flash('message', 'Service has been updated successfully');
     }
 
-    public function render()
-    {
+    public function render() {
         $categories = ServiceCategory::all();
         return view('livewire.sprovider.edit-sprovider-service-component', ['categories' => $categories])->layout('layout.base');
     }
