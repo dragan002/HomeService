@@ -131,27 +131,29 @@
                                         <div class="form-group">
                                             <label for="thumbnail" class="control-label col-sm-3">Thumbnail</label>
                                             <div class="col-sm-9">
-                                                <input type="file" class="form-control-file" name="thumbnail" wire:model="newThumbnail">
-                                                @if($newThumbnail)
-                                                    <img src="{{ $newThumbnail->temporaryUrl() }}" alt="" width="60">
+                                                <input type="file" class="form-control-file" id="thumbnail" wire:model="newThumbnail">
+                                                @if ($newThumbnail)
+                                                    <img src="{{ $newThumbnail->temporaryUrl() }}" alt="Thumbnail preview" width="60">
                                                 @else
-                                                    <img src="{{ asset('images/services/thumbnails') }}/{{ $thumbnail }}" alt="" width="60">
+                                                    <img src="{{ asset('images/sproviders/thumbnails/' . $thumbnail) }}" alt="Current thumbnail" width="60">
                                                 @endif
                                                 @error('newThumbnail') <p class="text-danger">{{ $message }}</p> @enderror
                                             </div>
                                         </div>
+                                        
                                         <div class="form-group">
-                                            <label for="image" class="control-label col-sm-3">Image:</label>
+                                            <label for="newImage" class="control-label col-sm-3">Image</label>
                                             <div class="col-sm-9">
-                                                <input type="file" class="form-control-file" name="newImage" wire:model="newImage">
-                                                @if($newImage)
-                                                    <img src="{{ $newImage->temporaryUrl() }}" alt="" width="60">
+                                                <input type="file" class="form-control-file" id="newImage" wire:model="newImage">
+                                                @if ($newImage)
+                                                    <img src="{{ $newImage->temporaryUrl() }}" alt="Image preview" width="60">
                                                 @else
-                                                    <img src="{{ asset('images/services') }}/{{ $image }}" alt="" width="60">
+                                                    <img src="{{ asset('images/sproviders/' . $image) }}" alt="Current image" width="60">
                                                 @endif
                                                 @error('newImage') <p class="text-danger">{{ $message }}</p> @enderror
                                             </div>
                                         </div>
+                                        
                                         <button type="submit" class="btn btn-success pull-right">Update Service</button>
                                     </form>
                                 </div>
