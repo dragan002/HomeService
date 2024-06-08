@@ -3,12 +3,12 @@
         <div class="bg_parallax image_02_parallax"></div>
         <div class="opacy_bg_02">
             <div class="container">
-                <h1>Add Service</h1>
+                <h1>Edit Service </h1>
                 <div class="crumbs">
                     <ul>
                         <li><a href="/">Home</a></li>
                         <li>/</li>
-                        <li>Add Service</li>
+                        <li>Edit Service</li>
                     </ul>
                 </div>
             </div>
@@ -23,8 +23,11 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <div class="col-md-6">
-                                        Add New Service Category
+                                        Edit Service Category
                                     </div>
+                                    {{-- <div class="col-md-4">
+                                        <a href="{{ route('sprovider.service_status') }}" class="btn btn-info pull-right">Services Status</a>
+                                    </div> --}}
                                     <div class="col-md-6">
                                         <a href="{{ route('sprovider.list') }}" class="btn btn-info pull-right">All Services</a>
                                     </div>
@@ -33,7 +36,7 @@
                                     @if(Session::has('message'))
                                         <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
                                     @endif
-                                    <form class="form-horizontal" wire:submit.prevent="createService">
+                                    <form class="form-horizontal" wire:submit.prevent="updateServiceProvider">
                                         @csrf
                                         <div class="form-group">
                                             <label for="name" class="control-label col-sm-3">Name:</label>
@@ -83,7 +86,7 @@
                                                 <select class="form-control" wire:model="discount_type">
                                                     <option value="">Select Discount Type</option>
                                                     <option value="fixed">Fixed</option>
-                                                    <option value="percent">Percent</option>
+                                                    <option value="percentage">Percent</option>
                                                 </select>
                                                 @error('discount_type') <p class="text-danger">{{ $message }}</p> @enderror
                                             </div>
@@ -93,6 +96,15 @@
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" name="discount" wire:model="discount">
                                                 @error('discount') <p class="text-danger">{{ $message }}</p> @enderror
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="featured" class="control-label col-sm-3">Featured:</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" wire:model="featured">
+                                                    <option value="0">No</option>
+                                                    <option value="1">Yes</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -119,30 +131,29 @@
                                         <div class="form-group">
                                             <label for="thumbnail" class="control-label col-sm-3">Thumbnail</label>
                                             <div class="col-sm-9">
-                                                <input type="file" class="form-control-file" name="Thumbnail" wire:model="thumbnail">
-                                                @if($thumbnail)
-                                                    <img src="{{ $thumbnail->temporaryUrl() }}" alt="" width="60">
+                                                <input type="file" class="form-control-file" name="thumbnail" wire:model="newThumbnail">
+                                                @if($newThumbnail)
+                                                    <img src="{{ $newThumbnail->temporaryUrl() }}" alt="" width="60">
+                                                @else
+                                                    <img src="{{ asset('images/services/thumbnails') }}/{{ $thumbnail }}" alt="" width="60">
                                                 @endif
-                                                @error('thumbnail') <p class="text-danger">{{ $message }}</p> @enderror
+                                                @error('newThumbnail') <p class="text-danger">{{ $message }}</p> @enderror
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="image" class="control-label col-sm-3">Image:</label>
                                             <div class="col-sm-9">
-                                                <input type="file" class="form-control-file" name="image" wire:model="image">
-                                                @error('image') <p class="text-danger">{{ $message }}</p> @enderror
-                                                @if($image)
-                                                    <img src="{{ $image->temporaryUrl() }}" alt="" width="60">
+                                                <input type="file" class="form-control-file" name="newImage" wire:model="newImage">
+                                                @if($newImage)
+                                                    <img src="{{ $newImage->temporaryUrl() }}" alt="" width="60">
+                                                @else
+                                                    <img src="{{ asset('images/services') }}/{{ $image }}" alt="" width="60">
                                                 @endif
+                                                @error('newImage') <p class="text-danger">{{ $message }}</p> @enderror
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-success pull-right" wire:loading.attr="disabled">
-                                            <span wire:loading wire:target="createService">
-                                                <i class="fa fa-spinner fa-spin"></i>
-                                            </span>
-                                            Add Service
-                                        </button> 
-                                  </form>
+                                        <button type="submit" class="btn btn-success pull-right">Update Service</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
