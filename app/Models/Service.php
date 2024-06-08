@@ -18,8 +18,7 @@ class Service extends Model
         'price',
         'discount',
         'service_status',
-        'user_id', // Add this line if you haven't already
-        // other columns...
+        'user_id', 
     ];
 
 

@@ -65,6 +65,7 @@ Route::middleware([
     Route::get('/sprovider/profile', SproviderProfileComponent::class)->name('sprovider.profile');
     Route::get('/sprovider/profile/edit', EditSproviderProfileComponent::class)->name('sprovider.edit_profile');
     Route::get('/sprovider/service/add', AddSproviderServiceComponent::class)->name('sprovider.add_service');
+    Route::get('/sprovider/service/edit', EditSproviderServiceComponent::class)->name('sprovider.edit_service');
     Route::get('/sprovider/service/list', SproviderServicesListComponent::class)->name('sprovider.list');
 });
 
