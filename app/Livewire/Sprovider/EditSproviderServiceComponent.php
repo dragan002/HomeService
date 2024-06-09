@@ -45,12 +45,37 @@ class EditSproviderServiceComponent extends Component
         $this->image = $service->image;
         $this->thumbnail = $service->thumbnail;
         $this->description = $service->description;
-        $this->inclusion = $service->inclusion;
-        $this->exclusion = $service->exclusion;
+        $this->inclusion = str_replace('|', '\n', $service->inclusion);
+        $this->exclusion = str_replace('|', '\n' ,$service->exclusion);
     }
 
     public function generateSlug() {
         $this->slug = Str::slug($this->name, '-');
+    }
+
+    public function update($fields) {
+        $this->validateOnly($fields, [
+            'name' => 'required|string|max:255',
+            'slug' => 'required|string|max:255',
+            'tagline' => 'required|string|max:255',
+            'service_category_id' => 'required|integer',
+            'price' => 'required|numeric',
+            'discount' => 'nullable|numeric',
+            'discount_type' => 'nullable|string|max:255',
+            'description' => 'required|string',
+            'inclusion' => 'required|string',
+            'exclusion' => 'required|string',            
+        ]);
+        if($this->newImage) {
+            $this->validateOnly($fields, [
+                'newImage' => 'required|mimes:jpg,jpeg,png',
+            ]);
+        }
+        if($this->newThumbnail) {
+            $this->validateOnly($fields, [
+                'newThumbnail' => 'required|mimes:jpg,png,jpeg',
+            ]);
+        }
     }
 
     public function updateServiceProvider() {
@@ -65,9 +90,17 @@ class EditSproviderServiceComponent extends Component
             'description' => 'required|string',
             'inclusion' => 'required|string',
             'exclusion' => 'required|string',
-            'newImage' => 'nullable|image|mimes:jpg,jpeg,png|max:1024',
-            'newThumbnail' => 'nullable|image|mimes:jpg,jpeg,png|max:1024',
         ]);
+        if($this->newImage) {
+            $this->validate([
+                'newImage' => 'required|mimes:jpg,jpeg,png',
+            ]);
+        }
+        if($this->newThumbnail) {
+            $this->validate([
+                'newThumbnail' => 'required|mimes:jpg,png,jpeg',
+            ]);
+        }
 
         $service = Service::find($this->service_id);
         $service->name = $this->name;
@@ -78,24 +111,26 @@ class EditSproviderServiceComponent extends Component
         $service->discount = $this->discount;
         $service->discount_type = $this->discount_type;
         $service->description = $this->description;
-        $service->inclusion = $this->inclusion;
-        $service->exclusion = $this->exclusion;
+        $service->inclusion = str_replace('\n', '|', $this->inclusion);  // Ensure inclusions are correctly formatted for saving
+        $service->exclusion = str_replace('\n', '|', $this->exclusion);  // Ensure exclusions are correctly formatted for saving
 
         if ($this->newImage) {
-            if(file_exists('sproviders' . '/' . $image->name)) {
-                unlink('sproviders' . '/' . $image->name);
+            // Remove old image if it exists
+            if(file_exists('images/services/' . $this->image)) {
+                unlink(('images/services/' . $this->image));
             }
             $imageName = Carbon::now()->timestamp . '.' . $this->newImage->extension();
-            $this->newImage->storeAs('sproviders', $imageName);
+            $this->newImage->storeAs('services/', $imageName);
             $service->image = $imageName;
         }
 
         if ($this->newThumbnail) {
-            if(file_exists('sproviders/thumbnails' . '/' . $thumbnail->name)) {
-                unlink('sproviders/thumbnails' . '/' . $thumbnail->name);
+            // Remove old thumbnail if it exists
+            if(file_exists('images/services/thumbnails' . '/' . $this->thumbnail)) {
+                unlink('images/services/thumbnails' . '/' . $this->thumbnail);
             }
             $thumbnailName = Carbon::now()->timestamp . '.' . $this->newThumbnail->extension();
-            $this->newThumbnail->storeAs('sproviders/thumbnails', $thumbnailName);
+            $this->newThumbnail->storeAs('services/thumbnails', $thumbnailName);
             $service->thumbnail = $thumbnailName;
         }
 
@@ -106,6 +141,8 @@ class EditSproviderServiceComponent extends Component
 
     public function render() {
         $categories = ServiceCategory::all();
-        return view('livewire.sprovider.edit-sprovider-service-component', ['categories' => $categories])->layout('layout.base');
+        $service = Service::all();
+        return view('livewire.sprovider.edit-sprovider-service-component', ['categories' => $categories, 
+        'service'=>$service])->layout('layout.base');
     }
 }

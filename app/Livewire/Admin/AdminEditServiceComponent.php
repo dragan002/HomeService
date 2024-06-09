@@ -20,7 +20,6 @@ class AdminEditServiceComponent extends Component
     public $discount;
     public $discount_type;
     public $image;
-
     public $newImage;
     public $thumbnail;
     public $newThumbnail;

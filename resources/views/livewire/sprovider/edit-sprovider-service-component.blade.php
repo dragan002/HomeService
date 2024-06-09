@@ -135,7 +135,7 @@
                                                 @if ($newThumbnail)
                                                     <img src="{{ $newThumbnail->temporaryUrl() }}" alt="Thumbnail preview" width="60">
                                                 @else
-                                                    <img src="{{ asset('images/sproviders/thumbnails/' . $thumbnail) }}" alt="Current thumbnail" width="60">
+                                                    <img src="{{ asset('images/sproviders/thumbnails') }}/{{ $thumbnail }}" alt="Current thumbnail" width="60">
                                                 @endif
                                                 @error('newThumbnail') <p class="text-danger">{{ $message }}</p> @enderror
                                             </div>
@@ -148,7 +148,7 @@
                                                 @if ($newImage)
                                                     <img src="{{ $newImage->temporaryUrl() }}" alt="Image preview" width="60">
                                                 @else
-                                                    <img src="{{ asset('images/sproviders/' . $image) }}" alt="Current image" width="60">
+                                                    <img src="{{ asset('images/sproviders')}}/{{ $image }}" alt="Current image" width="60">
                                                 @endif
                                                 @error('newImage') <p class="text-danger">{{ $message }}</p> @enderror
                                             </div>
