@@ -46,6 +46,7 @@ Route::post('/search', [SearchController::class, 'searchService'])->name('search
 Route::get('/change-location', ChangeLocationComponent::class)->name('home.change_location');
 Route::get('/contact-us', ContactComponent::class)->name('home.contact');
 
+//For Customers
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
