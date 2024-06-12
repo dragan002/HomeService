@@ -143,6 +143,23 @@
                                 @endif
                             </aside>
                         </div>
+                        <div class="col-md-4">
+                            <div class="col-md-12">
+                                @livewire('customer.customer-review-form-component', ['serviceId' => $service->id])
+                            </div>
+                            <div class="col-md-12">
+                                <h3>Reviews</h3>
+
+                                @forelse ($service->reviews as $review)
+                                    <div class="review">
+                                        <p><strong>{{ $review->user->name }}</strong> ({{ $review->rating }} stars)</p>
+                                        <p>{{ $review->comment }}</p>
+                                        <p><small>{{ $review->created_at->format('d M, Y') }}</small></p>
+                                    </div>
+                                @empty
+                                    <p>No reviews yet.</p>
+                                @endforelse   
+                           </div>
                     </div>
                 </div>
             </div>

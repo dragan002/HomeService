@@ -11,9 +11,9 @@ use App\Livewire\ServiceDetailsComponent;
 use App\Http\Controllers\SearchController;
 use App\Livewire\Admin\AdminSliderComponent;
 use App\Livewire\ServiceCategoriesComponent;
+use App\Livewire\ServicesByCategoryComponent;
 //admin
 use App\Livewire\Admin\AdminContactComponent;
-use App\Livewire\ServicesByCategoryComponent;
 use App\Livewire\Admin\AdminAddSlideComponent;
 use App\Livewire\Admin\AdminServicesComponent;
 use App\Livewire\Admin\AdminDashboardComponent;
@@ -22,12 +22,13 @@ use App\Livewire\Admin\AdminAddServiceComponent;
 use App\Livewire\Admin\AdminEditServiceComponent;
 use App\Livewire\Admin\AdminServiceStatusComponent;
 use App\Livewire\Admin\AdminServiceCategoryComponent;
-use App\Livewire\Customer\CustomerDashboardComponent;
 use App\Livewire\Sprovider\SproviderProfileComponent;
 use App\Livewire\Admin\AdminServiceProvidersComponent;
 //customers
-use App\Livewire\Sprovider\SproviderDashboardComponent;
+use App\Livewire\Customer\CustomerDashboardComponent;
+use App\Livewire\Customer\CustomerReviewFormComponent;
 //sprovider
+use App\Livewire\Sprovider\SproviderDashboardComponent;
 use App\Livewire\Admin\AdminAddServiceCategoryComponent;
 use App\Livewire\Admin\AdminServicesByCategoryComponent;
 use App\Livewire\Sprovider\AddSproviderServiceComponent;
@@ -57,6 +58,7 @@ Route::middleware([
     'authcustomer' => AuthCustomer::class, 
 ])->group(function () {
     Route::get('/customer/dashboard', CustomerDashboardComponent::class)->name('customer.dashboard');
+    Route::get('/customer/reviewform', CustomerReviewFormComponent::class)->name('customer.review');
 });
 
 // For Service Provider
