@@ -113,8 +113,7 @@
                                     </div>
                                     <div class="panel-footer">
                                         <form>                                                
-                                            <input type="submit" class="btn btn-primary" name="submit"
-                                                value=" Book Now">
+                                            <input type="submit" class="btn btn-primary" name="submit" value=" Book Now">
                                         </form>
                                     </div>
                                 </div>

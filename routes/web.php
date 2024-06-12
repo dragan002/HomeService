@@ -11,6 +11,7 @@ use App\Livewire\ServiceDetailsComponent;
 use App\Http\Controllers\SearchController;
 use App\Livewire\Admin\AdminSliderComponent;
 use App\Livewire\ServiceCategoriesComponent;
+//admin
 use App\Livewire\Admin\AdminContactComponent;
 use App\Livewire\ServicesByCategoryComponent;
 use App\Livewire\Admin\AdminAddSlideComponent;
@@ -24,7 +25,9 @@ use App\Livewire\Admin\AdminServiceCategoryComponent;
 use App\Livewire\Customer\CustomerDashboardComponent;
 use App\Livewire\Sprovider\SproviderProfileComponent;
 use App\Livewire\Admin\AdminServiceProvidersComponent;
+//customers
 use App\Livewire\Sprovider\SproviderDashboardComponent;
+//sprovider
 use App\Livewire\Admin\AdminAddServiceCategoryComponent;
 use App\Livewire\Admin\AdminServicesByCategoryComponent;
 use App\Livewire\Sprovider\AddSproviderServiceComponent;

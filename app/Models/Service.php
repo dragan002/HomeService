@@ -29,8 +29,4 @@ class Service extends Model
     public function user() {
         return $this->belongsTo(User::class, 'user_id');
     }
-    
-    public function bookings() {
-        return $this->hasMany(Booking::class);
-    }
 }
