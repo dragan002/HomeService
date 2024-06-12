@@ -20,6 +20,11 @@ class CustomerReviewFormComponent extends Component
 
     public function mount($serviceId) {
         $this->serviceId = $serviceId;
+
+
+        // $this->service = Service::with(['reviews' => function($query) {
+        //     $query->take(3);
+        // }])->findOrFail($serviceId);
     }
 
     public function submitReview() {

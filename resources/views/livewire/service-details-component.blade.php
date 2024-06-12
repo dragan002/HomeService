@@ -143,15 +143,14 @@
                                 @endif
                             </aside>
                         </div>
-                        <div class="col-md-4">
-                            <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="col-md-6">
                                 @livewire('customer.customer-review-form-component', ['serviceId' => $service->id])
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-12" style="margin-top: 30px;">
                                 <h3>Reviews</h3>
-
                                 @forelse ($service->reviews as $review)
-                                    <div class="review">
+                                    <div class="review col-md-3" style="padding: 15px; margin-bottom: 20px; border: 1px solid #eee; border-radius: 5px;">
                                         <p><strong>{{ $review->user->name }}</strong> ({{ $review->rating }} stars)</p>
                                         <p>{{ $review->comment }}</p>
                                         <p><small>{{ $review->created_at->format('d M, Y') }}</small></p>
@@ -159,10 +158,12 @@
                                 @empty
                                     <p>No reviews yet.</p>
                                 @endforelse   
-                           </div>
+                            </div>
                     </div>
                 </div>
             </div>
         </div>            
     </section>
 </div>
+
+
