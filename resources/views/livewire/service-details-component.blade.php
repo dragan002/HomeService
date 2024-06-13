@@ -35,6 +35,25 @@
                                             <div class="post-info-wrap">
                                                 <h2 class="post-title"><a href="#" title="Post Format: Standard"
                                                         rel="bookmark">{{ $service->name }}: {{ $service->category->name }}</a></h2>
+                                                        <div class="post-meta" style="height: 10px;">
+                                                            @php
+                                                                $averageRating = round($service->averageRating(), 1);
+                                                            @endphp
+                                                            @if ($averageRating)
+                                                                <p>Average Rating: 
+                                                                    @for ($i = 1; $i <= 5; $i++)
+                                                                        @if ($i <= $averageRating)
+                                                                            <i class="fa fa-star" style="color: gold;"></i>
+                                                                        @else
+                                                                            <i class="fa fa-star" style="color: #ddd;"></i>
+                                                                        @endif
+                                                                    @endfor
+                                                                    ({{ $averageRating }})
+                                                                </p>
+                                                            @else
+                                                                <p>No ratings yet.</p>
+                                                            @endif
+                                                        </div>
                                                 <div class="post-meta" style="height: 10px;">
                                                 </div>
                                             </div>
@@ -180,5 +199,6 @@
         </div>            
     </section>
 </div>
+
 
 
