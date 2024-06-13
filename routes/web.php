@@ -11,9 +11,9 @@ use App\Livewire\ServiceDetailsComponent;
 use App\Http\Controllers\SearchController;
 use App\Livewire\Admin\AdminSliderComponent;
 use App\Livewire\ServiceCategoriesComponent;
-use App\Livewire\ServicesByCategoryComponent;
-//admin
 use App\Livewire\Admin\AdminContactComponent;
+//admin
+use App\Livewire\ServicesByCategoryComponent;
 use App\Livewire\Admin\AdminAddSlideComponent;
 use App\Livewire\Admin\AdminServicesComponent;
 use App\Livewire\Admin\AdminDashboardComponent;
@@ -22,12 +22,13 @@ use App\Livewire\Admin\AdminAddServiceComponent;
 use App\Livewire\Admin\AdminEditServiceComponent;
 use App\Livewire\Admin\AdminServiceStatusComponent;
 use App\Livewire\Admin\AdminServiceCategoryComponent;
-use App\Livewire\Sprovider\SproviderProfileComponent;
-use App\Livewire\Admin\AdminServiceProvidersComponent;
-//customers
 use App\Livewire\Customer\CustomerDashboardComponent;
+use App\Livewire\Sprovider\SproviderProfileComponent;
+//customers
+use App\Livewire\Admin\AdminServiceProvidersComponent;
 use App\Livewire\Customer\CustomerReviewFormComponent;
 //sprovider
+use App\Livewire\ProvidersProfileInformationComponent;
 use App\Livewire\Sprovider\SproviderDashboardComponent;
 use App\Livewire\Admin\AdminAddServiceCategoryComponent;
 use App\Livewire\Admin\AdminServicesByCategoryComponent;
@@ -49,6 +50,9 @@ Route::post('/search', [SearchController::class, 'searchService'])->name('search
 
 Route::get('/change-location', ChangeLocationComponent::class)->name('home.change_location');
 Route::get('/contact-us', ContactComponent::class)->name('home.contact');
+
+//To check profile of provider
+Route::get('/providers-profile-information/{userId}', ProvidersProfileInformationComponent::class)->name('providersprofile');
 
 //For Customers
 Route::middleware([

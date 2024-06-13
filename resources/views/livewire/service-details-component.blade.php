@@ -83,7 +83,7 @@
                                                     <li><i class="fa fa-minus"></i>{{ $exclusion }}</li>
                                                 @endforeach
                                             </ul>
-                                            <h2>Name of Service Provider: {{ $service->user->name }}</h2>
+                                            <h2>Name of Service Provider: <a href="{{ route('providersprofile',['userId'=>$service->user->id]) }}">{{ $service->user->name }}</a></h2>
                                         </div>
                                     </div>
                                 </div>
