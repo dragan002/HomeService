@@ -83,6 +83,7 @@
                                                     <li><i class="fa fa-minus"></i>{{ $exclusion }}</li>
                                                 @endforeach
                                             </ul>
+                                            <h2>Name of Service Provider: {{ $service->user->name }}</h2>
                                         </div>
                                     </div>
                                 </div>
@@ -199,6 +200,5 @@
         </div>            
     </section>
 </div>
-
 
 
