@@ -144,14 +144,29 @@
                             </aside>
                         </div>
                         <div class="col-md-12">
+                            @auth
+                            <h3>Please give us review</h3>
                             <div class="col-md-6">
                                 @livewire('customer.customer-review-form-component', ['serviceId' => $service->id])
                             </div>
+                            @endauth
                             <div class="col-md-12" style="margin-top: 30px;">
                                 <h3>Reviews</h3>
                                 @forelse ($service->reviews as $review)
                                     <div class="review col-md-3" style="padding: 15px; margin-bottom: 20px; border: 1px solid #eee; border-radius: 5px;">
-                                        <p><strong>{{ $review->user->name }}</strong> ({{ $review->rating }} stars)</p>
+                                        <img src="{{ asset('images/sproviders/default.png') }}" alt="" style="width: 50px;">
+                                        <p>
+                                            <strong>{{ $review->user->name }}</strong>
+                                             <span>
+                                                @for ($i = 1; $i <= 5; $i++)
+                                                     @if ($i <= $review->rating)
+                                                        <i class="fa fa-star" style="color: #ffd700"></i>
+                                                     @else
+                                                        <i class="fa fa-star" style="color: #ddd"></i>
+                                                     @endif
+                                                @endfor
+                                            </span>
+                                        </p>
                                         <p>{{ $review->comment }}</p>
                                         <p><small>{{ $review->created_at->format('d M, Y') }}</small></p>
                                     </div>

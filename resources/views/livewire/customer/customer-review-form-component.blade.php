@@ -7,7 +7,7 @@
 
     <form wire:submit.prevent="submitReview">
         <div class="form-group">
-            <label for="comment">Comment</label>
+            <label for="comment">Tell us about experience</label>
             <textarea id="comment" class="form-control" wire:model="comment"></textarea>
             @error('comment') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
