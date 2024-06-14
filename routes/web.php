@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Message;
 use App\Livewire\HomeComponent;
 use App\Http\Middleware\AuthAdmin;
 use App\Livewire\ContactComponent;
@@ -11,8 +12,8 @@ use App\Livewire\ServiceDetailsComponent;
 use App\Http\Controllers\SearchController;
 use App\Livewire\Admin\AdminSliderComponent;
 use App\Livewire\ServiceCategoriesComponent;
-use App\Livewire\Admin\AdminContactComponent;
 //admin
+use App\Livewire\Admin\AdminContactComponent;
 use App\Livewire\ServicesByCategoryComponent;
 use App\Livewire\Admin\AdminAddSlideComponent;
 use App\Livewire\Admin\AdminServicesComponent;
@@ -23,11 +24,11 @@ use App\Livewire\Admin\AdminEditServiceComponent;
 use App\Livewire\Admin\AdminServiceStatusComponent;
 use App\Livewire\Admin\AdminServiceCategoryComponent;
 use App\Livewire\Customer\CustomerDashboardComponent;
-use App\Livewire\Sprovider\SproviderProfileComponent;
 //customers
+use App\Livewire\Sprovider\SproviderProfileComponent;
 use App\Livewire\Admin\AdminServiceProvidersComponent;
-use App\Livewire\Customer\CustomerReviewFormComponent;
 //sprovider
+use App\Livewire\Customer\CustomerReviewFormComponent;
 use App\Livewire\ProvidersProfileInformationComponent;
 use App\Livewire\Sprovider\SproviderDashboardComponent;
 use App\Livewire\Admin\AdminAddServiceCategoryComponent;
@@ -52,7 +53,7 @@ Route::get('/change-location', ChangeLocationComponent::class)->name('home.chang
 Route::get('/contact-us', ContactComponent::class)->name('home.contact');
 
 //For messages
-// Route::get('/messages', [MessageController::class, 'store'])->name('message.store')
+Route::get('/messages', [Message::class, 'store'])->name('message.store')
 
 //To check profile of provider
 Route::get('/providers-profile-information/{userId}', ProvidersProfileInformationComponent::class)->name('providersprofile');
