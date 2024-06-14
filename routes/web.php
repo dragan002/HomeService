@@ -55,7 +55,7 @@ Route::get('/change-location', ChangeLocationComponent::class)->name('home.chang
 Route::get('/contact-us', ContactComponent::class)->name('home.contact');
 
 //For messages
-Route::get('/messages', [MessageController::class, 'store'])->name('message.store')
+Route::post('/messages', [MessageController::class, 'store'])->name('message.store');
 
 //To check profile of provider
 Route::get('/providers-profile-information/{userId}', ProvidersProfileInformationComponent::class)->name('providersprofile');

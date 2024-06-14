@@ -26,10 +26,12 @@
                                         Profile
                                     </div>
                                     <div class="col-md-6">
-
                                     </div>
                                 </div>
                                 <div class="panel-body">
+                                @if(Session::has('success'))
+                                    <div class="alert alert-success" role="alert">{{ Session::get('success') }}</div>
+                                @endif
                                     <div class="row">
                                         <div class="col-md-4">
                                             @if($sprovider->image)
@@ -55,8 +57,25 @@
                                 </div>
                             </div>
                         </div>
+
+                        @auth
+                        <div class="col-md-4">
+                            <h2>Send a Message</h2>
+                            <form action="{{ route('message.store') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="receiver_id" value="{{ $sprovider->user->id }}">
+                                <div class="form-group">
+                                    <label for="message">Message:</label>
+                                    <textarea name="message" id="message" class="form-control" rows="4"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Send</button>
+                            </form>
+                        </div>
+                        @endauth
+
                     </div>
                 </div>
             </div>
         </div>
+    </section>
 </div>

@@ -6,7 +6,7 @@ use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class MessagesController extends Controller
+class MessageController extends Controller
 {
     public function store(Request $request)
     {
@@ -21,6 +21,7 @@ class MessagesController extends Controller
             'message' => $request->message,
         ]);
 
-        return redirect()->back()->with('success', 'Message sent successfully');
+        session()->flash('success', 'Message Sent Successfully');
+        return redirect()->back();
     }
 }
