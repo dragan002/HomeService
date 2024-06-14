@@ -1,20 +1,22 @@
 <?php
 
-use App\Models\Message;
 use App\Livewire\HomeComponent;
 use App\Http\Middleware\AuthAdmin;
 use App\Livewire\ContactComponent;
 use App\Http\Middleware\AuthCustomer;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\AuthSprovider;
+//other Component
 use App\Livewire\ChangeLocationComponent;
 use App\Livewire\ServiceDetailsComponent;
+//Controllers
 use App\Http\Controllers\SearchController;
-use App\Livewire\Admin\AdminSliderComponent;
-use App\Livewire\ServiceCategoriesComponent;
+use App\Http\Controllers\MessageController;
 //admin
-use App\Livewire\Admin\AdminContactComponent;
+use App\Livewire\ServiceCategoriesComponent;
 use App\Livewire\ServicesByCategoryComponent;
+use App\Livewire\Admin\AdminSliderComponent;
+use App\Livewire\Admin\AdminContactComponent;
 use App\Livewire\Admin\AdminAddSlideComponent;
 use App\Livewire\Admin\AdminServicesComponent;
 use App\Livewire\Admin\AdminDashboardComponent;
@@ -23,18 +25,18 @@ use App\Livewire\Admin\AdminAddServiceComponent;
 use App\Livewire\Admin\AdminEditServiceComponent;
 use App\Livewire\Admin\AdminServiceStatusComponent;
 use App\Livewire\Admin\AdminServiceCategoryComponent;
-use App\Livewire\Customer\CustomerDashboardComponent;
-//customers
-use App\Livewire\Sprovider\SproviderProfileComponent;
 use App\Livewire\Admin\AdminServiceProvidersComponent;
-//sprovider
-use App\Livewire\Customer\CustomerReviewFormComponent;
-use App\Livewire\ProvidersProfileInformationComponent;
-use App\Livewire\Sprovider\SproviderDashboardComponent;
 use App\Livewire\Admin\AdminAddServiceCategoryComponent;
 use App\Livewire\Admin\AdminServicesByCategoryComponent;
-use App\Livewire\Sprovider\AddSproviderServiceComponent;
 use App\Livewire\Admin\AdminEditServiceCategoryComponent;
+//customers
+use App\Livewire\Customer\CustomerDashboardComponent;
+use App\Livewire\Customer\CustomerReviewFormComponent;
+//sprovider
+use App\Livewire\Sprovider\SproviderProfileComponent;
+use App\Livewire\ProvidersProfileInformationComponent;
+use App\Livewire\Sprovider\SproviderDashboardComponent;
+use App\Livewire\Sprovider\AddSproviderServiceComponent;
 use App\Livewire\Sprovider\EditSproviderProfileComponent;
 use App\Livewire\Sprovider\EditSproviderServiceComponent;
 use App\Livewire\Sprovider\SproviderServicesListComponent;
@@ -53,7 +55,7 @@ Route::get('/change-location', ChangeLocationComponent::class)->name('home.chang
 Route::get('/contact-us', ContactComponent::class)->name('home.contact');
 
 //For messages
-Route::get('/messages', [Message::class, 'store'])->name('message.store')
+Route::get('/messages', [MessageController::class, 'store'])->name('message.store')
 
 //To check profile of provider
 Route::get('/providers-profile-information/{userId}', ProvidersProfileInformationComponent::class)->name('providersprofile');

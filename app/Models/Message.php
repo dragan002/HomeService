@@ -9,17 +9,17 @@ class Message extends Model
 {
     use HasFactory;
 
-    public function store(Request $request) {
-        $request->validate([
-            'receiver_id' => 'required|exists:users,id',
-            'message' => 'required|string|max:1000'
-        ]);
+    protected $fillable = [
+        'sender_id',
+        'receiver_id',
+        'message'
+    ];
 
-        Message::create([
-            'sender_id' => Auth::id(),
-            'receiver_id' => $request->receiver_id,
-            'message' => $request->message
-        ]);
-        return redirect()->back()->with('success', 'Message sent Successfully');
+    public function sender () {
+        return $this->belongsTo(User::class, 'sender_id');
+    }
+
+    public function receiver() {
+        return $this->belongsTo(User::class, 'receiver_id');
     }
 }
