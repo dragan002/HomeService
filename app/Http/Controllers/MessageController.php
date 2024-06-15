@@ -16,14 +16,14 @@ class MessageController extends Controller
                        ->orWhere('sender_id', $user->id)
                        ->orderBy('created_at', 'desc')
                        ->get();
-    return view('messages.index', compact('messages'));
+    return view('message.index', compact('messages'));
 }
 
 
     // public function show($id) {
     //     $message = findOrFail($id);
 
-    //     if($message->receiver_id !== Auth::id() $message->sender_id !== Auth::id()) {
+    //     if($message->receiver_id !== Auth::id() && $message->sender_id !== Auth::id()) {
     //         abort(403);
     //     }
     //     // if ($message->receiver_id === Auth::id() && !$message->read_at) {

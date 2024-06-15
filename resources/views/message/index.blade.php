@@ -9,7 +9,7 @@
         <ul class="list-group">
             @forelse ($messages as $message)
                 <li class="list-group-item">
-                    <a href="{{ route('messages.show', $message->id) }}">
+                    {{-- <a href="{{ route('message.show', $message->id) }}"> --}}
                         {{ $message->message }}
                     </a>
                 </li>
