@@ -55,7 +55,10 @@ Route::get('/change-location', ChangeLocationComponent::class)->name('home.chang
 Route::get('/contact-us', ContactComponent::class)->name('home.contact');
 
 //For messages
+Route::get('/messages', [MessageController::class, 'index'])->name('message.index');
+Route::get('/messages', [MessageController::class, 'show'])->name('message.show');
 Route::post('/messages', [MessageController::class, 'store'])->name('message.store');
+Route::delete('/messages/{id}', [MessageController::class, 'destroy'])->name('message.destroy');
 
 //To check profile of provider
 Route::get('/providers-profile-information/{userId}', ProvidersProfileInformationComponent::class)->name('providersprofile');

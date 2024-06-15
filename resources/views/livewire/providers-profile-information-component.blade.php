@@ -29,8 +29,8 @@
                                     </div>
                                 </div>
                                 <div class="panel-body">
-                                @if(Session::has('success'))
-                                    <div class="alert alert-success" role="alert">{{ Session::get('success') }}</div>
+                                @if(Session::has('message'))
+                                    <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
                                 @endif
                                     <div class="row">
                                         <div class="col-md-4">
