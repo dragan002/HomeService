@@ -51,15 +51,15 @@ class MessageController extends Controller
         return redirect()->back();
     }
 
-    // public function destroy($id) {
-    //     $message = findOrFail($id);
+    public function destroy($id) {
+        $message = findOrFail($id);
 
-    //     if ($message->receiver_id !== Auth::id() && $message->sender_id !== Auth::id()) {
-    //         abort(403); 
-    //     }
-    //     $message->delete();
+        if ($message->receiver_id !== Auth::id() && $message->sender_id !== Auth::id()) {
+            abort(403); 
+        }
+        $message->delete();
 
-    //     session()->flash('message', 'Message deleted Successfully');
-    //     return redirect()->back();
-    // }
+        session()->flash('message', 'Message deleted Successfully');
+        return redirect()->back();
+    }
 }
