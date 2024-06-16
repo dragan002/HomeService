@@ -6,33 +6,17 @@ use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class MessageController extends Controller
-{   
 
+class MessageController extends Controller
+{       
 
     public function index() {
     $user = Auth::user();
     $messages = Message::where('receiver_id', $user->id)
-                       ->orWhere('sender_id', $user->id)
                        ->orderBy('created_at', 'desc')
                        ->paginate(5);
     return view('message.index', compact('messages'));
 }
-
-
-    public function show($id) {
-        $message = findOrFail($id);
-
-        if($message->receiver_id !== Auth::id() && $message->sender_id !== Auth::id()) {
-            abort(403);
-        }
-        // if ($message->receiver_id === Auth::id() && !$message->read_at) {
-        //     $message->read_at = now();
-        //     $message->save();
-        // }
-
-        return view('messages.show', compact('message'));
-    }
 
     public function store(Request $request)
     {
@@ -51,15 +35,21 @@ class MessageController extends Controller
         return redirect()->back();
     }
 
-    public function destroy($id) {
-        $message = findOrFail($id);
+    public function sendAnswer(Request $request, $messageId) {
+        
+        $request->validate([
+            'message' => 'required|string'
+        ]);
 
-        if ($message->receiver_id !== Auth::id() && $message->sender_id !== Auth::id()) {
-            abort(403); 
-        }
-        $message->delete();
+        $originalMessage = Message::findOrFail($messageId);
 
-        session()->flash('message', 'Message deleted Successfully');
+        Message::create([
+            'sender_id' => Auth::id(),
+            'receiver_id' => $originalMessage->sender_id,
+            'message' => $request->message
+        ]);
+        
+        session()->flash('message', 'Reply sent Successfully');
         return redirect()->back();
     }
 }

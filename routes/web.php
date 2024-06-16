@@ -59,6 +59,8 @@ Route::get('/messages', [MessageController::class, 'index'])->name('message.inde
 Route::post('/messages', [MessageController::class, 'store'])->name('message.store');
 Route::delete('/messages/{id}', [MessageController::class, 'destroy'])->name('message.destroy');
 Route::get('/messages/{id}', [MessageController::class, 'show'])->name('message.show');
+Route::post('/messages/{message}/reply', [MessageController::class, 'sendAnswer'])->name('message.reply');
+
 
 //To check profile of provider
 Route::get('/providers-profile-information/{userId}', ProvidersProfileInformationComponent::class)->name('providersprofile');

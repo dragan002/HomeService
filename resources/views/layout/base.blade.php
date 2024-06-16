@@ -136,6 +136,7 @@
                             <li class="login-form"> <a href="#" title="Register">My Account (S Provider)</a>
                                 <ul class="drop-down one-column hover-fade">
                                     <li><a href="{{ route('sprovider.dashboard') }}">Dashboard</a></li>
+                                    <li><a href="{{ route('message.index') }}">Inbox</a></li>
                                     <li><a href="{{ route('sprovider.profile') }}">Profile</a></li>
                                     <li><a href="{{ route('sprovider.add_service') }}">Add Service</a></li>
                                     <li><a href="{{ route('sprovider.list') }}">My services</a></li>
