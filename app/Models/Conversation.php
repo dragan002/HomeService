@@ -19,7 +19,7 @@ class Conversation extends Model
     }
     
     public function sender() {
-        return $this->belongTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'sender_id');
     }
 
     public function receiver() {

@@ -27,7 +27,7 @@ class MessageController extends Controller
             abort(403);
         }
         
-        $messages = $conversation->message()->orderBy('created_at', 'asc')->get();
+        $messages = $conversation->messages()->orderBy('created_at', 'asc')->get();
 
         return view('message.show', compact('conversation', 'messages'));
     }
@@ -68,7 +68,7 @@ class MessageController extends Controller
         ]);
 
         Message::create([
-            'conversation_id' => $conversation->id;
+            'conversation_id' => $conversation->id,
             'sender_id' => Auth::id(),
             'receiver_id' => $conversation->sender_id === Auth::id() ? $conversation->receiver_id : $conversation->sender_id,
             'message' => $request->message
