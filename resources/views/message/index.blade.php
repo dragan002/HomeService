@@ -17,11 +17,9 @@
             <div class="card mb-3 border-primary">
                 <div class="card-body">
                     <h5 class="card-title">
-                        <span class="text-primary">To: {{ $message->receiver->name }}</span><br>
                         <span class="text-success">From: {{ $message->sender->name }}</span>
                     </h5>
                     <p class="card-text">{{ Str::limit($message->message, 50) }}</p>
-                    <a href="{{ route('message.show', $message->id) }}" class="btn btn-outline-primary btn-sm">Read More</a>
                     <p class="text-muted small mt-2">{{ $message->created_at->format('M d, Y H:i') }}</p>
                 </div>
                 <div class="card-footer">
