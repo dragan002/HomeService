@@ -11,6 +11,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
+
 class NewMessageNotification extends Mailable
 {
     use Queueable, SerializesModels;
@@ -18,12 +19,12 @@ class NewMessageNotification extends Mailable
     /**
      * Create a new message instance.
      */
-    public $message;
+    public $messageContent;
     public $sender;
 
     public function __construct(Message $message, User $sender)
     {   
-        $this->message = $message;
+        $this->messageContent = $message;
         $this->sender = $sender;
     }
 
@@ -34,7 +35,7 @@ class NewMessageNotification extends Mailable
     //         'messageContent' => $this->message->message,
     //         'senderName' => $this->sender->name,
     //     ]);
-    }
+    
     /**
      * Get the message envelope.
      */

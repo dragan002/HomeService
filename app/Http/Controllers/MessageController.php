@@ -68,30 +68,39 @@ class MessageController extends Controller
     
 
     public function sendAnswer(Request $request, $conversationId) {
-        
         $conversation = Conversation::findOrFail($conversationId);
-        if($conversation->sender_id !== Auth::id() && $conversation->receiver_id !== Auth::id()) {
-            abort(403);
+    
+        // Check if the authenticated user is a participant in the conversation
+        if ($conversation->sender_id !== Auth::id() && $conversation->receiver_id !== Auth::id()) {
+            abort(403); // or handle unauthorized access appropriately
         }
-
+    
         $request->validate([
             'message' => 'required|string'
         ]);
-
-        Message::create([
+    
+        // Create a new message
+        $message = Message::create([
             'conversation_id' => $conversation->id,
             'sender_id' => Auth::id(),
             'receiver_id' => $conversation->sender_id === Auth::id() ? $conversation->receiver_id : $conversation->sender_id,
             'message' => $request->message
         ]);
-
+    
+        // Retrieve the sender and receiver
         $sender = Auth::user();
-        $receiver = User::find($request->receiver_id);
-
+        $receiver = User::find($message->receiver_id); // Use $message instead of $request->receiver_id
+    
+        // Check if receiver exists
+        if (!$receiver) {
+            abort(404); // or handle appropriately
+        }
+    
         // Send the email notification
         Mail::to($receiver->email)->send(new NewMessageNotification($message, $sender));
-                
+    
         session()->flash('message', 'Reply sent Successfully');
         return redirect()->back();
     }
+    
 }
