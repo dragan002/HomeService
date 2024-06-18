@@ -2,12 +2,13 @@
 
 namespace App\Mail;
 
+use App\Models\Message;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
 class NewMessageNotification extends Mailable
 {
@@ -17,14 +18,21 @@ class NewMessageNotification extends Mailable
      * Create a new message instance.
      */
     public $message;
+    public $sender;
 
     public function __construct(Message $message)
     {   
         $this->message = $message;
+        $this->sender = $sender;
     }
 
     public function build() {
-        return $this->subject('New Message Notification')->view('emails.new-message');
+        return $this->subject('New Message Notification')
+        ->view('emails.message_sent_notification')
+        ->with([
+            'messageContent' => $this->message->message,
+            'senderName' = $this->sender->name,
+        ]);
     }
     /**
      * Get the message envelope.

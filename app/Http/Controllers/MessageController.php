@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Message;
 use App\Models\Conversation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Notifications\NewMessageNotification;
 
 
 class MessageController extends Controller
 {       
-
+    public $message;
+    
     public function index() {
     $user = Auth::user();
     $conversations = Conversation::where('receiver_id', $user->id)
@@ -52,6 +56,13 @@ class MessageController extends Controller
             'message' => $request->message,
         ]);
 
+            // Retrieve the sender and receiver
+        $sender = Auth::user();
+        $receiver = User::find($request->receiver_id);
+
+        // Send the email notification
+        Mail::to($receiver->email)->send(new MessageSentNotification($message, $sender));
+        
         session()->flash('message', 'Message Sent Successfully');
         return redirect()->back();
     }
@@ -74,18 +85,14 @@ class MessageController extends Controller
             'message' => $request->message
         ]);
 
-        Mail::to($message->receiver->email)->send(new NewMessageNotification($message));
+        $sender = Auth::user();
+        $receiver = User::find($request->receiver_id);
+
+        // Send the email notification
+        // Mail::to($receiver->email)->send(new NewMessageNotification($message, $sender));
+
         
         session()->flash('message', 'Reply sent Successfully');
         return redirect()->back();
-    }
-
-
-    public function checkNewMessage() {
-        $user = Auth::user();
-
-        $newMessagesCount = Message::where('receiver_id', $user->id)->where('created_at', now()->subMinute())-count();
-
-        return response()->json(['newMessageCount' => $newMessagesCount]);
     }
 }

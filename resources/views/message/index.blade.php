@@ -23,17 +23,4 @@
         </div>
     @endif
 </div>
-
-<script>
-    function checkNewMessage() {
-        fetch('/api/messages/check-new')
-            .then(response => response.json())
-            .then(data => {
-                if(data.newMessageCount) > 0  {
-                    alert('You have a new message');
-                }
-            });
-    }
-    setInterval(checkNewMessage, 60000);
-</script>
 @endsection
