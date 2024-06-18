@@ -73,8 +73,19 @@ class MessageController extends Controller
             'receiver_id' => $conversation->sender_id === Auth::id() ? $conversation->receiver_id : $conversation->sender_id,
             'message' => $request->message
         ]);
+
+        Mail::to($message->receiver->email)->send(new NewMessageNotification($message));
         
         session()->flash('message', 'Reply sent Successfully');
         return redirect()->back();
+    }
+
+
+    public function checkNewMessage() {
+        $user = Auth::user();
+
+        $newMessagesCount = Message::where('receiver_id', $user->id)->where('created_at', now()->subMinute())-count();
+
+        return response()->json(['newMessageCount' => $newMessagesCount]);
     }
 }

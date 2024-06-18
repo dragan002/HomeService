@@ -60,6 +60,7 @@ Route::post('/messages', [MessageController::class, 'store'])->name('message.sto
 Route::delete('/messages/{id}', [MessageController::class, 'destroy'])->name('message.destroy');
 Route::get('/messages/{id}', [MessageController::class, 'show'])->name('message.show');
 Route::post('/messages/{message}/reply', [MessageController::class, 'sendAnswer'])->name('message.reply');
+Route::get('/messages/check-new', [MessageController::class, 'checkNewMessage']);
 
 
 //To check profile of provider
