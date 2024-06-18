@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\User;
 use App\Models\Message;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -20,19 +21,19 @@ class NewMessageNotification extends Mailable
     public $message;
     public $sender;
 
-    public function __construct(Message $message)
+    public function __construct(Message $message, User $sender)
     {   
         $this->message = $message;
         $this->sender = $sender;
     }
 
-    public function build() {
-        return $this->subject('New Message Notification')
-        ->view('emails.message_sent_notification')
-        ->with([
-            'messageContent' => $this->message->message,
-            'senderName' = $this->sender->name,
-        ]);
+    // public function build() {
+    //     return $this->subject('New Message Notification')
+    //     ->view('emails.message_sent_notification')
+    //     ->with([
+    //         'messageContent' => $this->message->message,
+    //         'senderName' => $this->sender->name,
+    //     ]);
     }
     /**
      * Get the message envelope.
@@ -50,7 +51,7 @@ class NewMessageNotification extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'emails.message_sent_notification',
         );
     }
 

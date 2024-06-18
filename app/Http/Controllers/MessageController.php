@@ -8,7 +8,7 @@ use App\Models\Conversation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-use App\Notifications\NewMessageNotification;
+use App\Mail\NewMessageNotification;
 
 
 class MessageController extends Controller
@@ -42,30 +42,30 @@ class MessageController extends Controller
             'receiver_id' => 'required|exists:users,id',
             'message' => 'required|string|max:1000',
         ]);
-
+    
         $conversation = Conversation::firstOrCreate(
             ['sender_id' => Auth::id(), 'receiver_id' => $request->receiver_id],
-            ['sender_id' => Auth::id(), 'receiver_id' =>$request->receiver_id]
+            ['sender_id' => Auth::id(), 'receiver_id' => $request->receiver_id]
         );
-
-
-        Message::create([
+    
+        $message = Message::create([
             'conversation_id' => $conversation->id,
             'sender_id' => Auth::id(),
             'receiver_id' => $request->receiver_id,
             'message' => $request->message,
         ]);
-
-            // Retrieve the sender and receiver
+    
+        // Retrieve the sender and receiver
         $sender = Auth::user();
         $receiver = User::find($request->receiver_id);
-
+    
         // Send the email notification
-        Mail::to($receiver->email)->send(new MessageSentNotification($message, $sender));
+        Mail::to($receiver->email)->send(new NewMessageNotification($message, $sender));
         
         session()->flash('message', 'Message Sent Successfully');
         return redirect()->back();
     }
+    
 
     public function sendAnswer(Request $request, $conversationId) {
         
@@ -89,9 +89,8 @@ class MessageController extends Controller
         $receiver = User::find($request->receiver_id);
 
         // Send the email notification
-        // Mail::to($receiver->email)->send(new NewMessageNotification($message, $sender));
-
-        
+        Mail::to($receiver->email)->send(new NewMessageNotification($message, $sender));
+                
         session()->flash('message', 'Reply sent Successfully');
         return redirect()->back();
     }
