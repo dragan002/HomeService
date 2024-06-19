@@ -23,4 +23,11 @@
         </div>
     @endif
 </div>
+<script>
+    Echo.private('messages.' + userId)
+        .listen('NewMessage', (e) => {
+            console.log('New message received:', e.message);
+        });
+</script>
+
 @endsection

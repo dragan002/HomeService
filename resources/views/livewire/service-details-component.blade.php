@@ -132,10 +132,15 @@
                                         </table>
                                     </div>
                                     <div class="panel-footer">
-                                        <form>                                                
-                                            <input type="submit" class="btn btn-primary" name="submit" value=" Book Now">
+                                        <form action="{{ route('bookings.store', ['service' => $service->id]) }}" method="POST">
+                                            @csrf
+                                            <div class="form-group">
+                                                <label for="booking_time">Booking Time</label>
+                                                <input type="date" id="booking_time" name="booking_time" class="form-control" required>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Book Now</button>
                                         </form>
-                                    </div>
+                                    </div>                                    
                                 </div>
                             </aside>
                             <aside>
