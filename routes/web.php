@@ -12,7 +12,9 @@ use App\Livewire\ChangeLocationComponent;
 //Controllers
 use App\Livewire\ServiceDetailsComponent;
 //admin
+use Illuminate\Support\Facades\Broadcast;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\MessageController;
 use App\Livewire\Admin\AdminSliderComponent;
 use App\Livewire\ServiceCategoriesComponent;
@@ -26,24 +28,23 @@ use App\Livewire\Admin\AdminAddServiceComponent;
 use App\Livewire\Admin\AdminEditServiceComponent;
 use App\Livewire\Admin\AdminServiceStatusComponent;
 use App\Livewire\Admin\AdminServiceCategoryComponent;
+//customers
 use App\Livewire\Customer\CustomerDashboardComponent;
 use App\Livewire\Sprovider\SproviderProfileComponent;
-//customers
+//sprovider
 use App\Livewire\Admin\AdminServiceProvidersComponent;
 use App\Livewire\Customer\CustomerReviewFormComponent;
-//sprovider
 use App\Livewire\ProvidersProfileInformationComponent;
 use App\Livewire\Sprovider\SproviderDashboardComponent;
 use App\Livewire\Admin\AdminAddServiceCategoryComponent;
 use App\Livewire\Admin\AdminServicesByCategoryComponent;
 use App\Livewire\Sprovider\AddSproviderServiceComponent;
+
 use App\Livewire\Admin\AdminEditServiceCategoryComponent;
 use App\Livewire\Sprovider\EditSproviderProfileComponent;
-
+//broadcast
 use App\Livewire\Sprovider\EditSproviderServiceComponent;
 use App\Livewire\Sprovider\SproviderServicesListComponent;
-//broadcast
-use Illuminate\Support\Facades\Broadcast;
 
 Broadcast::channel('messages.{receiverId}', function ($user, $receiverId) {
     return $user->id === (int) $receiverId;
@@ -67,6 +68,14 @@ Route::post('/messages', [MessageController::class, 'store'])->name('message.sto
 Route::delete('/messages/{id}', [MessageController::class, 'destroy'])->name('message.destroy');
 Route::get('/messages/{id}', [MessageController::class, 'show'])->name('message.show');
 Route::post('/messages/{message}/reply', [MessageController::class, 'sendAnswer'])->name('message.reply');
+
+//For Booking
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/services/{service}/book', [BookingController::class, 'create'])->name('bookings.create');
+    Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
+    Route::post('/services/{service}/book', [BookingController::class, 'store'])->name('bookings.store');
+});
 
 
 
