@@ -61,6 +61,9 @@ class MessageController extends Controller
     
         // Send the email notification
         Mail::to($receiver->email)->send(new NewMessageNotification($message, $sender));
+
+        //event for message real time notification 
+        event(new Message($message));
         
         session()->flash('message', 'Message Sent Successfully');
         return redirect()->back();
@@ -89,15 +92,18 @@ class MessageController extends Controller
     
         // Retrieve the sender and receiver
         $sender = Auth::user();
-        $receiver = User::find($message->receiver_id); // Use $message instead of $request->receiver_id
+        $receiver = User::find($message->receiver_id); 
     
         // Check if receiver exists
         if (!$receiver) {
-            abort(404); // or handle appropriately
+            abort(404); 
         }
     
         // Send the email notification
         Mail::to($receiver->email)->send(new NewMessageNotification($message, $sender));
+   
+        //event for message real time notification 
+        event(new Message($message));
     
         session()->flash('message', 'Reply sent Successfully');
         return redirect()->back();

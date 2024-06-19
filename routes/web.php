@@ -3,20 +3,21 @@
 use App\Livewire\HomeComponent;
 use App\Http\Middleware\AuthAdmin;
 use App\Livewire\ContactComponent;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Middleware\AuthCustomer;
 use Illuminate\Support\Facades\Route;
-use App\Http\Middleware\AuthSprovider;
 //other Component
+use App\Http\Middleware\AuthSprovider;
 use App\Livewire\ChangeLocationComponent;
-use App\Livewire\ServiceDetailsComponent;
 //Controllers
+use App\Livewire\ServiceDetailsComponent;
+//admin
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\MessageController;
-//admin
-use App\Livewire\ServiceCategoriesComponent;
-use App\Livewire\ServicesByCategoryComponent;
 use App\Livewire\Admin\AdminSliderComponent;
+use App\Livewire\ServiceCategoriesComponent;
 use App\Livewire\Admin\AdminContactComponent;
+use App\Livewire\ServicesByCategoryComponent;
 use App\Livewire\Admin\AdminAddSlideComponent;
 use App\Livewire\Admin\AdminServicesComponent;
 use App\Livewire\Admin\AdminDashboardComponent;
@@ -25,24 +26,28 @@ use App\Livewire\Admin\AdminAddServiceComponent;
 use App\Livewire\Admin\AdminEditServiceComponent;
 use App\Livewire\Admin\AdminServiceStatusComponent;
 use App\Livewire\Admin\AdminServiceCategoryComponent;
-use App\Livewire\Admin\AdminServiceProvidersComponent;
-use App\Livewire\Admin\AdminAddServiceCategoryComponent;
-use App\Livewire\Admin\AdminServicesByCategoryComponent;
-use App\Livewire\Admin\AdminEditServiceCategoryComponent;
-//customers
 use App\Livewire\Customer\CustomerDashboardComponent;
+use App\Livewire\Sprovider\SproviderProfileComponent;
+//customers
+use App\Livewire\Admin\AdminServiceProvidersComponent;
 use App\Livewire\Customer\CustomerReviewFormComponent;
 //sprovider
-use App\Livewire\Sprovider\SproviderProfileComponent;
 use App\Livewire\ProvidersProfileInformationComponent;
 use App\Livewire\Sprovider\SproviderDashboardComponent;
+use App\Livewire\Admin\AdminAddServiceCategoryComponent;
+use App\Livewire\Admin\AdminServicesByCategoryComponent;
 use App\Livewire\Sprovider\AddSproviderServiceComponent;
+use App\Livewire\Admin\AdminEditServiceCategoryComponent;
 use App\Livewire\Sprovider\EditSproviderProfileComponent;
+
 use App\Livewire\Sprovider\EditSproviderServiceComponent;
 use App\Livewire\Sprovider\SproviderServicesListComponent;
+//broadcast
+use Illuminate\Support\Facades\Broadcast;
 
-use Illuminate\Support\Facades\Mail;
-
+Broadcast::channel('messages.{receiverId}', function ($user, $receiverId) {
+    return $user->id === (int) $receiverId;
+});
 
 
 Route::get('/', HomeComponent::class)->name('home');
