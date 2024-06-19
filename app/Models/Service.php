@@ -25,15 +25,16 @@ class Service extends Model
     public function category() {
         return $this->belongsTo(ServiceCategory::class, 'service_category_id');
     }
-
     public function user() {
         return $this->belongsTo(User::class, 'user_id');
     }
-
     public function reviews() {
         return $this->hasMany(Review::class);
     }
     public function averageRating() {
         return $this->reviews()->avg('rating');
+    }
+    public function bookings() {
+        return $this->hasMany(User::class);
     }
 }
