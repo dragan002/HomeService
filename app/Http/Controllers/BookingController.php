@@ -33,4 +33,19 @@ class BookingController extends Controller
         $bookings = Booking::where('user_id', Auth::id())->orderBy('booking_time', 'asc')->get();
         return view('bookings.index', compact('bookings'));
     }
+
+    public function manage () {
+        $bookings = Booking::whereHas('service', function ($query) {
+            $query->where('user_id', Auth::id());
+        })->orderBy('booking_time', 'asc')->get();
+
+        return view('bookings.manage', compact('bookings'));
+    }
+
+    public function update(Request $request, $id) {
+        $booking = Booking::findOrFail($id);
+        $booking->update(['status' => $request->status]);
+
+        return redirect()->route('bookings.manage')->with('message', 'Booking Status Updated Successfully');
+    }
 }

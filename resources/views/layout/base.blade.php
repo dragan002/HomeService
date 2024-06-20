@@ -140,6 +140,7 @@
                                     <li><a href="{{ route('sprovider.profile') }}">Profile</a></li>
                                     <li><a href="{{ route('sprovider.add_service') }}">Add Service</a></li>
                                     <li><a href="{{ route('sprovider.list') }}">My services</a></li>
+                                    <li><a href="{{ route('bookings.manage') }}">Reserved Services</a></li>
                                     <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>    
                                 </ul>
                             </li>
@@ -148,6 +149,7 @@
                             <li class="login-form"> <a href="#" title="Register">My Account (Customer)</a>
                                 <ul class="drop-down one-column hover-fade">
                                     <li><a href="{{ route('customer.dashboard') }}">Dashboard</a></li>
+                                    <li><a href="{{ route('bookings.index')}}">My Status Booking</a></li>
                                     <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
                                 </ul>
                             </li>

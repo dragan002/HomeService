@@ -106,6 +106,9 @@ Route::middleware([
     Route::get('/sprovider/service/add', AddSproviderServiceComponent::class)->name('sprovider.add_service');
     Route::get('/sprovider/service/edit/{service_id}', EditSproviderServiceComponent::class)->name('sprovider.edit_service');
     Route::get('/sprovider/service/list', SproviderServicesListComponent::class)->name('sprovider.list');
+    // For confirmation status when is service booked
+    Route::get('/bookings/manage', [BookingController::class, 'manage'])->name('bookings.manage');
+    Route::put('/bookins/{id}', [BookingController::class, 'update'])->name('bookings.update');
 });
 
 //For Admin

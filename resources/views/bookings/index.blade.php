@@ -11,6 +11,7 @@
         <table class="table table-bordered table-striped">
             <thead class="thead-dark">
                 <tr>
+                    <th class="text-center">Provider Name</th>
                     <th class="text-center">Service</th>
                     <th class="text-center">Booking Time</th>
                     <th class="text-center">Status</th>
@@ -19,6 +20,7 @@
             <tbody>
                 @foreach($bookings as $booking)
                     <tr>
+                        <td class="text-center">{{ $booking->service->user->name }}</td>
                         <td class="text-center">{{ $booking->service->name }}</td>
                         <td class="text-center">{{ $booking->booking_time }}</td>
                         <td class="text-center">
