@@ -46,6 +46,16 @@ class BookingController extends Controller
         $booking = Booking::findOrFail($id);
         $booking->update(['status' => $request->status]);
 
+        // Notification::create([
+        //     'user_id' => $booking->user_id,
+        //     'type' => 'booking_status',
+        //     'data' => [
+        //         'message' => 'Your booking for ' . $booking->service->name . ' has been ' . $request->status . '.',
+        //     ],
+        //     'read' => false,
+        // ]);
+        // Mail::to($receiver->email)->send(new NewMessageNotification($message, $sender));
+
         return redirect()->route('bookings.manage')->with('message', 'Booking Status Updated Successfully');
     }
 }
