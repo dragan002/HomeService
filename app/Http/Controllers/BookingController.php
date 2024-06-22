@@ -6,6 +6,7 @@ use App\Models\Booking;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\BookingStatusChanged;
 
 class BookingController extends Controller
 {
@@ -46,16 +47,8 @@ class BookingController extends Controller
         $booking = Booking::findOrFail($id);
         $booking->update(['status' => $request->status]);
 
-        // Notification::create([
-        //     'user_id' => $booking->user_id,
-        //     'type' => 'booking_status',
-        //     'data' => [
-        //         'message' => 'Your booking for ' . $booking->service->name . ' has been ' . $request->status . '.',
-        //     ],
-        //     'read' => false,
-        // ]);
-        // Mail::to($receiver->email)->send(new NewMessageNotification($message, $sender));
-
+        // notification for booking
+        $booking->user->notify(new BookingStatusChanged($booking, $request->status));
         return redirect()->route('bookings.manage')->with('message', 'Booking Status Updated Successfully');
     }
 }

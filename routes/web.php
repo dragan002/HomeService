@@ -75,7 +75,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/services/{service}/book', [BookingController::class, 'create'])->name('bookings.create');
     Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
     Route::post('/services/{service}/book', [BookingController::class, 'store'])->name('bookings.store');
+
+    //Booking Notification
+    Route::get('/notifications', function() {
+        return view('notifications.index');
+    })->name('notifications.index');
 });
+
+
+
 
 
 
