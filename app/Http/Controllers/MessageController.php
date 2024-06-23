@@ -61,9 +61,6 @@ class MessageController extends Controller
     
         // Send the email notification
         Mail::to($receiver->email)->send(new NewMessageNotification($message, $sender));
-
-        //event for message real time notification 
-        event(new Message($message));
         
         session()->flash('message', 'Message Sent Successfully');
         return redirect()->back();
@@ -101,9 +98,6 @@ class MessageController extends Controller
     
         // Send the email notification
         Mail::to($receiver->email)->send(new NewMessageNotification($message, $sender));
-   
-        //event for message real time notification 
-        event(new Message($message));
     
         session()->flash('message', 'Reply sent Successfully');
         return redirect()->back();

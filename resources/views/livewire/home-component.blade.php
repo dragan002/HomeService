@@ -19,9 +19,10 @@
             </ul>
             <div class="tp-bannertimer"></div>
         </div>
+
         <div class="filter-title">
             <div class="title-header">
-                <h2 style="color:#fff;">BOOK A SERVICE</h2>
+                <h2 class="sss">BOOK A SERVICE</h2>
                 <p class="lead">Book a service at very affordable price, </p>
             </div>
             <div class="filter-header">
@@ -64,7 +65,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="titles">
-                            <h2>SurfsideMedia <span>Choice</span> of Services</h2>
+                            <h2><span>Choice</span> of Services</h2>
                             <i class="fa fa-plane"></i>
                             <hr class="tall">
                         </div>
@@ -84,7 +85,7 @@
                                             <hr class="separator">
                                             <p>{{ $service->tagline }}</p>
                                             <div class="content-btn"><a href="{{ route('home.service_details', ['service_slug'=>$service->slug]) }}"
-                                                    class="btn btn-primary">Book Now</a></div>
+                                                    class="btn btn-primary">Details</a></div>
                                             <div class="price"><span>&#36;</span><b>From</b>{{ $service->price }}</div>
                                         </div>
                                     </a>
@@ -152,7 +153,7 @@
                                 <hr class="separator">
                                 <p>{{ $aservice->tagline }}</p>
                                 <div class="content-btn"><a href="{{ route('home.service_details', ['service_slug'=>$aservice->slug]) }}"
-                                        class="btn btn-primary">Book Now</a></div>
+                                        class="btn btn-primary">Details</a></div>
                                 <div class="price"><span>&#36;</span><b>From</b>{{ $aservice->price }}</div>
                             </div>
                         </a>

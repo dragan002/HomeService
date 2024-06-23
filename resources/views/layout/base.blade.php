@@ -18,6 +18,7 @@
     <script type="text/javascript" src="{{ asset('assets/js/jquery-ui.1.10.4.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/js/toastr.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/js/modernizr.js') }}"></script>
+    
     @livewireStyles
 </head>
 <body>
@@ -31,12 +32,6 @@
                             <li><a href="mailto:contact@surfsidemedia.in"><i class="fa fa-envelope"></i>
                                     draganvujic@gmail.com</a></li>
                         </ul>
-                        <ul class="visible-xs visible-sm">
-                            <li class="text-left"><a href="tel:+911234567890"><i class="fa fa-phone"></i>
-                                    +91-1234567890</a></li>
-                            <li class="text-right"><a href="index.php/changelocation.html"><i
-                                        class="fa fa-map-marker"></i> Faridabad, Haryana</a></li>
-                        </ul>
                     </div>
                     @livewire('location-component')
                 </div>
@@ -48,23 +43,12 @@
                 <input id="mobile-button" type="checkbox">
 
                 <ul class="collapse">
-                    <li class="title">
+                    {{-- <li class="title">
                         <a href="/"><img src="images/logo.png"></a>
-                    </li>
+                    </li> --}}
 
                     <li> <a href="{{ route('home.service_categories') }}">Service Categories</a>
 
-                    {{-- <li> <a href="javascript:void(0);">Air Conditioners</a>
-                        <ul class="drop-down one-column hover-fade">
-                            <li><a href="service-details/ac-wet-servicing.html">Wet Servicing</a></li>
-                            <li><a href="service-details/ac-dry-servicing.html">Dry Servicing</a></li>
-                            <li><a href="service-details/ac-installation.html">Installation</a></li>
-                            <li><a href="service-details/ac-uninstallation.html">Uninstallation</a></li>
-                            <li><a href="service-details/ac-gas-top-up.html">Gas Top Up</a></li>
-                            <li><a href="service-details/ac-gas-refill.html">Gas Refill</a></li>
-                            <li><a href="service-details/ac-repair.html">Repair</a></li>
-                        </ul>
-                    </li> --}}
                     <li> <a href="#">Appliances</a>
                         <ul class="drop-down one-column hover-fade">
                             <li><a href="servicesbycategory/11.html">Computer Repair</a></li>
@@ -237,14 +221,14 @@
                         <h3 class="mlist-h">CONTACT US</h3>
                         <ul class="contact_footer mlist">
                             <li class="location">
-                                <i class="fa fa-map-marker"></i> <a href="#"> Faridabad, Haryana, India</a>
+                                <i class="fa fa-map-marker"></i> <a href="#">Prnjavor</a>
                             </li>
                             <li>
                                 <i class="fa fa-envelope"></i> <a
-                                    href="mailto:contact@surfsidemedia.in">contact@surfsidemedia.in</a>
+                                    href="mailto:contact@surfsidemedia.in">draganvujic29@gmail.com</a>
                             </li>
                             <li>
-                                <i class="fa fa-phone"></i> <a href="tel:+911234567890">+91-1234567890</a>
+                                <i class="fa fa-phone"></i> <a href="tel:+911234567890">+387644441119</a>
                             </li>
                         </ul>
                         <ul class="social mlist-h">
