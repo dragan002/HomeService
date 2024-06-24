@@ -1,3 +1,5 @@
+@extends('layouts.app');
+
 <div>
     <section class="tp-banner-container">
         <div class="tp-banner">
@@ -176,3 +178,5 @@
         });
     </script>
 @endpush
+
+
