@@ -148,7 +148,7 @@
                                     <h3>Related Service</h3>
                                     <div class="col-md-12 col-sm-6 col-xs-12 bg-dark color-white padding-top-mini"
                                         style="max-width: 360px">
-                                        <a href="{{ route('home.service_details', ['service_slug'=> $r_service->slug]) }}">
+                                        <a href="{{ route('service.service_details', ['service_slug'=> $r_service->slug]) }}">
                                             <div class="img-hover">
                                                 <img src="{{ asset('images/services/thumbnails') }}/{{ $r_service->thumbnail }}" alt="{{ $r_service->name }}"
                                                     class="img-responsive">
@@ -159,7 +159,7 @@
                                                 </h3>
                                                 <hr class="separator">
                                                 <p>{{ $r_service->name }}</p>
-                                                <div class="content-btn"><a href="{{ route('home.service_details', ['service_slug'=> $r_service->slug]) }}"
+                                                <div class="content-btn"><a href="{{ route('service.service_details', ['service_slug'=> $r_service->slug]) }}"
                                                         class="btn btn-warning">View Details</a></div>
                                                 <div class="price"><span>&#36;</span><b>From</b>{{ $r_service->price }}</div>
                                             </div>

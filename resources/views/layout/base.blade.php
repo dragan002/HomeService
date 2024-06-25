@@ -47,7 +47,7 @@
                         <a href="/"><img src="images/logo.png"></a>
                     </li> --}}
 
-                    <li> <a href="{{ route('home.service_categories') }}">Service Categories</a>
+                    <li> <a href="{{ route('service.service_categories') }}">Service Categories</a>
 
                     <li> <a href="#">Appliances</a>
                         <ul class="drop-down one-column hover-fade">

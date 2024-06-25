@@ -52,24 +52,24 @@ Broadcast::channel('messages.{receiverId}', function ($user, $receiverId) {
 
 
 Route::get('/', HomeComponent::class)->name('home');
-Route::get('/service-categories', ServiceCategoriesComponent::class)->name('home.service_categories');
-Route::get('/{category_slug}/services', ServicesByCategoryComponent::class)->name('home.services_by_category');
-Route::get('/service/{service_slug}', ServiceDetailsComponent::class)->name('home.service_details');
+
+Route::get('/service-categories', ServiceCategoriesComponent::class)->name('service.service_categories');
+Route::get('/{category_slug}/services', ServicesByCategoryComponent::class)->name('service.services_by_category');
+Route::get('/service/{service_slug}', ServiceDetailsComponent::class)->name('service.service_details');
 
 Route::get('/autocomplete', [SearchController::class,'autocomplete'])->name('autocomplete');
 Route::post('/search', [SearchController::class, 'searchService'])->name('searchService');
+
+Route::prefix('search')->group(function () {
+    Route::get('/autocomplete', [SearchController::class, 'autocomplete'])->name('search.autocomplete');
+    Route::post('/', [SearchController::class, 'searchService'])->name('search.service');
+});
+
 
 Route::get('/change-location', ChangeLocationComponent::class)->name('home.change_location');
 Route::get('/contact-us', ContactComponent::class)->name('home.contact');
 
 // //For messages
-// Route::get('/messages', [MessageController::class, 'index'])->name('message.index');
-// Route::post('/messages', [MessageController::class, 'store'])->name('message.store');
-// Route::delete('/messages/{id}', [MessageController::class, 'destroy'])->name('message.destroy');
-// Route::get('/messages/{id}', [MessageController::class, 'show'])->name('message.show');
-// Route::post('/messages/{message}/reply', [MessageController::class, 'sendAnswer'])->name('message.reply');
-
-// //For Booking
 
 Route::resource('messages', MessageController::class)->only([
     'index', 'store', 'show', 'destroy'
@@ -89,8 +89,6 @@ Route::middleware(['auth'])->group(function () {
         return view('notifications.index');
     })->name('notifications.index');
 });
-
-
 
 
 

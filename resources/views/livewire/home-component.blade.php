@@ -1,5 +1,3 @@
-@extends('layouts.app');
-
 <div>
     <section class="tp-banner-container">
         <div class="tp-banner">
@@ -28,7 +26,7 @@
                 <p class="lead">Book a service at very affordable price, </p>
             </div>
             <div class="filter-header">
-                <form id="sform" action="{{ route('searchService') }}" method="post"> 
+                <form id="sform" action="{{ route('search.service') }}" method="post"> 
                     @csrf                       
                     <input type="text" id="q" name="q" required="required" placeholder="What Services do you want?"
                         class="input-large typeahead" autocomplete="off">
@@ -49,7 +47,7 @@
                         <ul id="sponsors" class="tooltip-hover">
                             @foreach($scategories as $scategory)
                                 <li data-toggle="tooltip" title="" data-original-title="{{ $scategory->name }}">
-                                    <a href="{{ route('home.services_by_category', ['category_slug' => $scategory->slug]) }}">
+                                    <a href="{{ route('service.services_by_category', ['category_slug' => $scategory->slug]) }}">
                                         <img src="{{ asset('images/categories') }}/{{ $scategory->image }}" alt="{{ $scategory->name }}">
                                     </a>
                                 </li>
@@ -77,7 +75,7 @@
                             @if($service->service_status === 'approved')
                                 <div class="col-xs-6 col-sm-4 col-md-3 hsgrids"
                                     style="padding-right: 5px;padding-left: 5px;">
-                                    <a class="g-list" href="{{ route('home.service_details', ['service_slug'=>$service->slug]) }}">
+                                    <a class="g-list" href="{{ route('service.service_details', ['service_slug'=>$service->slug]) }}">
                                         <div class="img-hover">
                                             <img src="{{ asset('images/services/thumbnails') }}/{{ $service->thumbnail }}" alt="{{ $service->name }}"
                                                 class="img-responsive">
@@ -86,7 +84,7 @@
                                             <h3>{{ $service->name }}</h3>
                                             <hr class="separator">
                                             <p>{{ $service->tagline }}</p>
-                                            <div class="content-btn"><a href="{{ route('home.service_details', ['service_slug'=>$service->slug]) }}"
+                                            <div class="content-btn"><a href="{{ route('service.service_details', ['service_slug'=>$service->slug]) }}"
                                                     class="btn btn-primary">Details</a></div>
                                             <div class="price"><span>&#36;</span><b>From</b>{{ $service->price }}</div>
                                         </div>
@@ -117,7 +115,7 @@
                             <ul class="services-lines">
                                 @foreach($fscategories as $fscategory)
                                     <li>
-                                        <a href={{ route('home.services_by_category', ['category_slug' => $fscategory->slug]) }}>
+                                        <a href={{ route('service.services_by_category', ['category_slug' => $fscategory->slug]) }}>
                                             <div class="item-service-line">
                                                 <i class="fa"><img class="icon-img"
                                                         src="{{ asset('images/categories') }}/{{ $fscategory->image }}"></i>
@@ -145,7 +143,7 @@
             <div id="boxes-carousel">
                 @foreach($aservices as $aservice)
                     <div>
-                        <a class="g-list" href="{{ route('home.service_details', ['service_slug'=>$aservice->slug]) }}">
+                        <a class="g-list" href="{{ route('service.service_details', ['service_slug'=>$aservice->slug]) }}">
                             <div class="img-hover">
                                 <img src="{{ asset('images/services/thumbnails') }}/{{ $aservice->thumbnail }}" alt="{{ $aservice->name }}" class="img-responsive">
                             </div>
@@ -154,7 +152,7 @@
                                 <h3>{{ $aservice->name }}</h3>
                                 <hr class="separator">
                                 <p>{{ $aservice->tagline }}</p>
-                                <div class="content-btn"><a href="{{ route('home.service_details', ['service_slug'=>$aservice->slug]) }}"
+                                <div class="content-btn"><a href="{{ route('service.service_details', ['service_slug'=>$aservice->slug]) }}"
                                         class="btn btn-primary">Details</a></div>
                                 <div class="price"><span>&#36;</span><b>From</b>{{ $aservice->price }}</div>
                             </div>
