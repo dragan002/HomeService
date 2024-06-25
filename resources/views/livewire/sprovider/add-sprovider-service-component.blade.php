@@ -83,7 +83,7 @@
                                                 <select class="form-control" wire:model="discount_type">
                                                     <option value="">Select Discount Type</option>
                                                     <option value="fixed">Fixed</option>
-                                                    <option value="percent">Percent</option>
+                                                    <option value="percentage">Percentage</option>
                                                 </select>
                                                 @error('discount_type') <p class="text-danger">{{ $message }}</p> @enderror
                                             </div>

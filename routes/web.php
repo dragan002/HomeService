@@ -105,24 +105,49 @@ Route::middleware([
     Route::get('/customer/reviewform', CustomerReviewFormComponent::class)->name('customer.review');
 });
 
+
+
 // For Service Provider
+// Route::middleware([
+//     'auth:sanctum',
+//     config('jetstream.auth_session'),
+//     'verified',
+//     'authsprovider' => AuthSprovider::class,
+// ])->group(function () {
+//     Route::get('/sprovider/dashboard', SproviderDashboardComponent::class)->name('sprovider.dashboard');
+//     Route::get('/sprovider/profile', SproviderProfileComponent::class)->name('sprovider.profile');
+//     Route::get('/sprovider/profile/edit', EditSproviderProfileComponent::class)->name('sprovider.edit_profile');
+//     Route::get('/sprovider/service/add', AddSproviderServiceComponent::class)->name('sprovider.add_service');
+//     Route::get('/sprovider/service/edit/{service_id}', EditSproviderServiceComponent::class)->name('sprovider.edit_service');
+//     Route::get('/sprovider/service/list', SproviderServicesListComponent::class)->name('sprovider.list');
+//     // For confirmation status when is service booked
+//     Route::get('/bookings/manage', [BookingController::class, 'manage'])->name('bookings.manage');
+//     Route::put('/bookins/{id}', [BookingController::class, 'update'])->name('bookings.update');
+// });
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
     'authsprovider' => AuthSprovider::class,
-])->group(function () {
-    Route::get('/sprovider/dashboard', SproviderDashboardComponent::class)->name('sprovider.dashboard');
-    Route::get('/sprovider/profile', SproviderProfileComponent::class)->name('sprovider.profile');
-    Route::get('/sprovider/profile/edit', EditSproviderProfileComponent::class)->name('sprovider.edit_profile');
-    Route::get('/sprovider/service/add', AddSproviderServiceComponent::class)->name('sprovider.add_service');
-    Route::get('/sprovider/service/edit/{service_id}', EditSproviderServiceComponent::class)->name('sprovider.edit_service');
-    Route::get('/sprovider/service/list', SproviderServicesListComponent::class)->name('sprovider.list');
-    // For confirmation status when is service booked
-    Route::get('/bookings/manage', [BookingController::class, 'manage'])->name('bookings.manage');
-    Route::put('/bookins/{id}', [BookingController::class, 'update'])->name('bookings.update');
-});
+])->prefix('sprovider')->as('sprovider.')->group(function () {
 
+    // Dashboard
+    Route::get('/dashboard', SproviderDashboardComponent::class)->name('dashboard');
+
+    // Profile
+    Route::get('/profile', SproviderProfileComponent::class)->name('profile');
+    Route::get('/profile/edit', EditSproviderProfileComponent::class)->name('edit_profile');
+
+    // Services
+    Route::get('/service/add', AddSproviderServiceComponent::class)->name('add_service');
+    Route::get('/service/edit/{service_id}', EditSproviderServiceComponent::class)->name('edit_service');
+    Route::get('/service/list', SproviderServicesListComponent::class)->name('list');
+
+    // Bookings
+    Route::get('/bookings/manage', [BookingController::class, 'manage'])->name('bookings_manage');
+    Route::put('/bookings/{id}', [BookingController::class, 'update'])->name('bookings_update');
+});
 //For Admin
 Route::middleware([
     'auth:sanctum',

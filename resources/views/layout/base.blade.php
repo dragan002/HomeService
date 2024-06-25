@@ -124,7 +124,7 @@
                                     <li><a href="{{ route('sprovider.profile') }}">Profile</a></li>
                                     <li><a href="{{ route('sprovider.add_service') }}">Add Service</a></li>
                                     <li><a href="{{ route('sprovider.list') }}">My services</a></li>
-                                    <li><a href="{{ route('bookings.manage') }}">Reserved Services</a></li>
+                                    <li><a href="{{ route('sprovider.bookings_manage') }}">Reserved Services</a></li>
                                     <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>    
                                 </ul>
                             </li>
