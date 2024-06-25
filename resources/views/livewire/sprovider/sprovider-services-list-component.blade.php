@@ -85,7 +85,7 @@
 
                                                         <td>
                                                             <a href="{{ route('sprovider.edit_service', ['service_id' => $service->id])}}"><i class="fa fa-edit fa-2x text-info"></i></a>
-                                                            <a href="#" style="margin-left: 10px;" onclick="confirm('Are you sure you want to delete this services?') || event.stopImmidiatePropagation()" wire:click.prevent="deleteServiceByProvider({{ $service->id }})"><i class="fa fa-times fa-2x text-danger"></i>
+                                                            <a href="" onclick="confirm('Are you sure you want to delete this category?') || event.stopImmediatePropagation()" wire:click.prevent="deleteServiceByProvider({{ $service->id }})" style="margin-left: 10px;"><i class="fa fa-times fa-2x text-danger"></i></a>
                                                             </a>
                                                         </td>
                                                     </tr>
