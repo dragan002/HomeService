@@ -1,5 +1,4 @@
 <?php
-
 use App\Livewire\HomeComponent;
 use App\Http\Middleware\AuthAdmin;
 use App\Livewire\ContactComponent;
@@ -75,19 +74,21 @@ Route::resource('messages', MessageController::class)->only([
 Route::post('/messages/{message}/reply', [MessageController::class, 'sendAnswer'])->name('message.reply');
 // =============  END FOR MESSAGES ===========
 
-
+//  ============== BOOKING AND EMAIL NOTIFICATION =========
 Route::middleware(['auth'])->group(function () {
-    Route::get('/services/{service}/book', [BookingController::class, 'create'])->name('bookings.create');
-    Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
-    Route::post('/services/{service}/book', [BookingController::class, 'store'])->name('bookings.store');
+    // Bookings routes
+    Route::prefix('bookings')->as('bookings.')->group(function () {
+        Route::get('/', [BookingController::class, 'index'])->name('index');
+        Route::get('/{service}/book', [BookingController::class, 'create'])->name('create');
+        Route::post('/{service}/book', [BookingController::class, 'store'])->name('store');
+    });
 
-    //Booking Notification
+    // Notifications routes
     Route::get('/notifications', function() {
         return view('notifications.index');
     })->name('notifications.index');
 });
-
-
+//  ============== END OF BOOKING AND EMAIL NOTIFICATION =========
 
 
 //To check profile of provider
