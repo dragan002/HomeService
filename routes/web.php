@@ -57,26 +57,23 @@ Route::get('/service-categories', ServiceCategoriesComponent::class)->name('serv
 Route::get('/{category_slug}/services', ServicesByCategoryComponent::class)->name('service.services_by_category');
 Route::get('/service/{service_slug}', ServiceDetailsComponent::class)->name('service.service_details');
 
-Route::get('/autocomplete', [SearchController::class,'autocomplete'])->name('autocomplete');
-Route::post('/search', [SearchController::class, 'searchService'])->name('searchService');
-
+// ===== SEARCH AND AUTOCOMPLETE ======
 Route::prefix('search')->group(function () {
     Route::get('/autocomplete', [SearchController::class, 'autocomplete'])->name('search.autocomplete');
     Route::post('/', [SearchController::class, 'searchService'])->name('search.service');
 });
+// =====END SEARCH AND AUTOCOMPLETE ======
 
 
-Route::get('/change-location', ChangeLocationComponent::class)->name('home.change_location');
-Route::get('/contact-us', ContactComponent::class)->name('home.contact');
+Route::get('/change-location', ChangeLocationComponent::class)->name('change_location');
+Route::get('/contact-us', ContactComponent::class)->name('contact');
 
-// //For messages
-
+// =============FOR MESSAGES ===========
 Route::resource('messages', MessageController::class)->only([
     'index', 'store', 'show', 'destroy'
 ]);
-
-// Custom route for replying to a message
 Route::post('/messages/{message}/reply', [MessageController::class, 'sendAnswer'])->name('message.reply');
+// =============  END FOR MESSAGES ===========
 
 
 Route::middleware(['auth'])->group(function () {
