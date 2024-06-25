@@ -1,4 +1,3 @@
-@extends('layouts.app');
 
 <div>
     <section class="tp-banner-container">
@@ -77,7 +76,7 @@
                             @if($service->service_status === 'approved')
                                 <div class="col-xs-6 col-sm-4 col-md-3 hsgrids"
                                     style="padding-right: 5px;padding-left: 5px;">
-                                    <a class="g-list" href="{{ route('home.service_details', ['service_slug'=>$service->slug]) }}">
+                                    <a class="g-list" href="{{ route('service.details', ['service_slug'=>$service->slug]) }}">
                                         <div class="img-hover">
                                             <img src="{{ asset('images/services/thumbnails') }}/{{ $service->thumbnail }}" alt="{{ $service->name }}"
                                                 class="img-responsive">
@@ -86,7 +85,7 @@
                                             <h3>{{ $service->name }}</h3>
                                             <hr class="separator">
                                             <p>{{ $service->tagline }}</p>
-                                            <div class="content-btn"><a href="{{ route('home.service_details', ['service_slug'=>$service->slug]) }}"
+                                            <div class="content-btn"><a href="{{ route('service.details', ['service_slug'=>$service->slug]) }}"
                                                     class="btn btn-primary">Details</a></div>
                                             <div class="price"><span>&#36;</span><b>From</b>{{ $service->price }}</div>
                                         </div>
@@ -117,7 +116,7 @@
                             <ul class="services-lines">
                                 @foreach($fscategories as $fscategory)
                                     <li>
-                                        <a href={{ route('home.services_by_category', ['category_slug' => $fscategory->slug]) }}>
+                                        <a href={{ route('service.by_category', ['category_slug' => $fscategory->slug]) }}>
                                             <div class="item-service-line">
                                                 <i class="fa"><img class="icon-img"
                                                         src="{{ asset('images/categories') }}/{{ $fscategory->image }}"></i>
@@ -145,7 +144,7 @@
             <div id="boxes-carousel">
                 @foreach($aservices as $aservice)
                     <div>
-                        <a class="g-list" href="{{ route('home.service_details', ['service_slug'=>$aservice->slug]) }}">
+                        <a class="g-list" href="{{ route('service.details', ['service_slug'=>$aservice->slug]) }}">
                             <div class="img-hover">
                                 <img src="{{ asset('images/services/thumbnails') }}/{{ $aservice->thumbnail }}" alt="{{ $aservice->name }}" class="img-responsive">
                             </div>
@@ -154,7 +153,7 @@
                                 <h3>{{ $aservice->name }}</h3>
                                 <hr class="separator">
                                 <p>{{ $aservice->tagline }}</p>
-                                <div class="content-btn"><a href="{{ route('home.service_details', ['service_slug'=>$aservice->slug]) }}"
+                                <div class="content-btn"><a href="{{ route('service.details', ['service_slug'=>$aservice->slug]) }}"
                                         class="btn btn-primary">Details</a></div>
                                 <div class="price"><span>&#36;</span><b>From</b>{{ $aservice->price }}</div>
                             </div>
@@ -178,5 +177,6 @@
         });
     </script>
 @endpush
+
 
 

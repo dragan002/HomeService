@@ -52,9 +52,13 @@ Broadcast::channel('messages.{receiverId}', function ($user, $receiverId) {
 
 
 Route::get('/', HomeComponent::class)->name('home');
-Route::get('/service-categories', ServiceCategoriesComponent::class)->name('home.service_categories');
-Route::get('/{category_slug}/services', ServicesByCategoryComponent::class)->name('home.services_by_category');
-Route::get('/service/{service_slug}', ServiceDetailsComponent::class)->name('home.service_details');
+
+Route::controller(ServiceCategoriesComponent::class)->prefix('/service')->name('service.')->group(function() {
+    Route::get('/categories')->name('categories');
+    Route::get('{category_slug}/services')->name('by_category');
+    Route::get('{service_slug}')->name('details');
+});
+
 
 Route::get('/autocomplete', [SearchController::class,'autocomplete'])->name('autocomplete');
 Route::post('/search', [SearchController::class, 'searchService'])->name('searchService');
