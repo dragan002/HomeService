@@ -116,7 +116,7 @@
                                     <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
                                 </ul>
                             </li>
-                            <li><a href="{{ route('message.index') }}" class="fa fa-envelope">Inbox</a></li>
+                            <li><a href="{{ route('messages.index') }}" class="fa fa-envelope">Inbox</a></li>
                         @elseif(Auth::user()->utype === 'SVP')
                             <li class="login-form"> <a href="#" title="Register">My Account (S Provider)</a>
                                 <ul class="drop-down one-column hover-fade">
@@ -128,7 +128,7 @@
                                     <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>    
                                 </ul>
                             </li>
-                            <li><a href="{{ route('message.index') }}">Inbox</a></li>
+                            <li><a href="{{ route('messages.index') }}">Inbox</a></li>
                         @else
                             <li class="login-form"> <a href="#" title="Register">My Account (Customer)</a>
                                 <ul class="drop-down one-column hover-fade">
@@ -137,7 +137,7 @@
                                     <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
                                 </ul>
                             </li>
-                            <li><a href="{{ route('message.index') }}" class="fa fa-envelope">Inbox</a></li>
+                            <li><a href="{{ route('messages.index') }}" class="fa fa-envelope">Inbox</a></li>
                         @endif
                         <form action="{{ route('logout') }}" id="logout-form" method="post" style="display: none;">
                             @csrf

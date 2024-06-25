@@ -61,7 +61,7 @@
                         @auth
                         <div class="col-md-4">
                             <h2>Send a Message</h2>
-                            <form action="{{ route('message.store') }}" method="POST">
+                            <form action="{{ route('messages.store') }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="receiver_id" value="{{ $sprovider->user->id }}">
                                 <div class="form-group">
