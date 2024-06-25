@@ -27,21 +27,19 @@ use App\Livewire\Admin\AdminAddServiceComponent;
 use App\Livewire\Admin\AdminEditServiceComponent;
 use App\Livewire\Admin\AdminServiceStatusComponent;
 use App\Livewire\Admin\AdminServiceCategoryComponent;
-//customers
-use App\Livewire\Customer\CustomerDashboardComponent;
-use App\Livewire\Sprovider\SproviderProfileComponent;
-//sprovider
 use App\Livewire\Admin\AdminServiceProvidersComponent;
-use App\Livewire\Customer\CustomerReviewFormComponent;
-use App\Livewire\ProvidersProfileInformationComponent;
-use App\Livewire\Sprovider\SproviderDashboardComponent;
 use App\Livewire\Admin\AdminAddServiceCategoryComponent;
 use App\Livewire\Admin\AdminServicesByCategoryComponent;
-use App\Livewire\Sprovider\AddSproviderServiceComponent;
-
 use App\Livewire\Admin\AdminEditServiceCategoryComponent;
+//customers
+use App\Livewire\Customer\CustomerDashboardComponent;
+//sprovider
+use App\Livewire\Customer\CustomerReviewFormComponent;
+use App\Livewire\Sprovider\SproviderProfileComponent;
+use App\Livewire\ProvidersProfileInformationComponent;
+use App\Livewire\Sprovider\SproviderDashboardComponent;
+use App\Livewire\Sprovider\AddSproviderServiceComponent;
 use App\Livewire\Sprovider\EditSproviderProfileComponent;
-//broadcast
 use App\Livewire\Sprovider\EditSproviderServiceComponent;
 use App\Livewire\Sprovider\SproviderServicesListComponent;
 
