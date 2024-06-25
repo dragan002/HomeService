@@ -23,7 +23,7 @@ class ChangeLocationComponent extends Component
         session()->put('zipcode', $this->zipcode);
 
         session()->flash('message', 'Location has been changed');
-        $this->redirect('location-component', 'refreshComponent');
+        $this->redirect('change-location', 'refreshComponent');
     }
     public function render()
     {
