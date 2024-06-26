@@ -47,7 +47,6 @@ Broadcast::channel('messages.{receiverId}', function ($user, $receiverId) {
     return $user->id === (int) $receiverId;
 });
 
-
 Route::get('/', HomeComponent::class)->name('home');
 
 Route::get('/service-categories', ServiceCategoriesComponent::class)->name('service.service_categories');
@@ -55,10 +54,12 @@ Route::get('/{category_slug}/services', ServicesByCategoryComponent::class)->nam
 Route::get('/service/{service_slug}', ServiceDetailsComponent::class)->name('service.service_details');
 
 // ===== SEARCH AND AUTOCOMPLETE ======
+
 Route::prefix('search')->group(function () {
     Route::get('/autocomplete', [SearchController::class, 'autocomplete'])->name('search.autocomplete');
     Route::post('/', [SearchController::class, 'searchService'])->name('search.service');
 });
+
 // =====END SEARCH AND AUTOCOMPLETE ======
 
 
@@ -66,13 +67,16 @@ Route::get('/change-location', ChangeLocationComponent::class)->name('change_loc
 Route::get('/contact-us', ContactComponent::class)->name('contact');
 
 // =============FOR MESSAGES ===========
+
 Route::resource('messages', MessageController::class)->only([
     'index', 'store', 'show', 'destroy'
 ]);
 Route::post('/messages/{message}/reply', [MessageController::class, 'sendAnswer'])->name('message.reply');
+
 // =============  END FOR MESSAGES ===========
 
 //  ============== BOOKING AND EMAIL NOTIFICATION =========
+
 Route::middleware(['auth'])->group(function () {
     // Bookings routes
     Route::prefix('bookings')->as('bookings.')->group(function () {
@@ -86,6 +90,7 @@ Route::middleware(['auth'])->group(function () {
         return view('notifications.index');
     })->name('notifications.index');
 });
+
 //  ============== END OF BOOKING AND EMAIL NOTIFICATION =========
 
 
@@ -128,6 +133,7 @@ Route::middleware([
     Route::get('/bookings/manage', [BookingController::class, 'manage'])->name('bookings_manage');
     Route::put('/bookings/{id}', [BookingController::class, 'update'])->name('bookings_update');
 });
+
 //===================== FOR ADMIN ==================
 
 Route::middleware([
