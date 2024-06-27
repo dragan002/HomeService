@@ -21,6 +21,7 @@ class AdminServicesComponent extends Component
         $service->delete();
         session()->flash('message', 'Service has been deleted successfully');
     }
+
     public function render()
     {
         $services = Service::paginate(10);

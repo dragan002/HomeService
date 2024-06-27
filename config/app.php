@@ -1,7 +1,5 @@
 <?php
 
-use App\Providers\ServiceProviderRepository;
-
 return [
 
 
@@ -124,11 +122,6 @@ return [
     'maintenance' => [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
-    ],
-
-
-    'providers' => [
-        App\Providers\ServiceProviderRepository::class,
     ],
 
 ];
