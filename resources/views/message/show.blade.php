@@ -14,7 +14,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ $message->sender->name }}</h5>
                     <p class="card-text">{{ $message->message }}</p>
-                    <p class="card-text"><small class="text-muted">{{ $message->created_at }}</small></p>
+                    <p class="card-text"><small class="text-muted">{{ $message->created_at->format('Y-m-d H:i:s') }}</small></p>
                 </div>
             </div>
         @endforeach
@@ -28,3 +28,4 @@
         <button type="submit" class="btn btn-primary mt-2">Send Reply</button>
     </form>
 </div>
+@endsection

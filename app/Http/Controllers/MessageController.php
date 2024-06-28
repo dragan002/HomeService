@@ -45,7 +45,7 @@ class MessageController extends Controller
     
         $conversation = Conversation::firstOrCreate(
             ['sender_id' => Auth::id(), 'receiver_id' => $request->receiver_id],
-            ['sender_id' => Auth::id(), 'receiver_id' => $request->receiver_id]
+            ['sender_id' => Auth::id(), 'receiver_id' => $request->receiver_id],
         );
     
         $message = Message::create([

@@ -11,8 +11,10 @@
     @else
         <div class="list-group">
             @foreach($conversations as $conversation)
-                <a href="{{ route('message.show', $conversation->id) }}" class="list-group-item list-group-item-action">
-                    <h5 class="mb-1">{{ $conversation->sender_id === Auth::id() ? 'To: ' . $conversation->receiver->name : 'From: ' . $conversation->sender->name }}</h5>
+                <a href="{{ route('messages.show', $conversation->id) }}" class="list-group-item list-group-item-action m-2 border">
+                    <h5 class="mb-1">
+                        {{ $conversation->sender_id === Auth::id() ? 'To: ' . $conversation->receiver->name : 'From: ' . $conversation->sender->name }}
+                    </h5>
                     <p class="mb-1">Last message: {{ $conversation->messages()->latest()->first()->message }}</p>
                     <small>{{ $conversation->updated_at }}</small>
                 </a>
@@ -23,11 +25,11 @@
         </div>
     @endif
 </div>
+@endsection
+
 <script>
     Echo.private('messages.' + userId)
         .listen('NewMessage', (e) => {
             console.log('New message received:', e.message);
         });
 </script>
-
-@endsection
