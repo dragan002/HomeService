@@ -22,8 +22,7 @@
 
         <div class="filter-title">
             <div class="title-header">
-                <h2 class="sss">BOOK A SERVICE</h2>
-                <p class="lead">Book a service at very affordable price, </p>
+                <h2>Rezervisite svoju uslugu</h2>
             </div>
             <div class="filter-header">
                 <form id="sform" action="{{ route('search.service') }}" method="post"> 
@@ -102,13 +101,13 @@
                     <div class="row">
                         <div class="col-md-4 ">
                             <div class="services-lines-info">
-                                <h2>WELCOME TO DIVERSIFIED</h2>
+                                <h2>Dobrodošli</h2>
                                 <p class="lead">
-                                    Book best services at one place.
+                                    Rezervišite usluge na jednom mestu
                                     <span class="line"></span>
                                 </p>
 
-                                <p>Find a wide variety of home services.</p>
+                                <p>Pronađite različite vrste usluga kod nas</p>
                             </div>
                         </div>
                         <div class="col-md-8">
@@ -134,7 +133,7 @@
             <div class="container">
                 <div class="row">
                     <div class="titles">
-                        <h2><span>Appliance</span>Services</h2>
+                        <h2><span>Popularne</span>Usluge</h2>
                         <i class="fa fa-plane"></i>
                         <hr class="tall">
                     </div>
@@ -153,8 +152,8 @@
                                 <hr class="separator">
                                 <p>{{ $aservice->tagline }}</p>
                                 <div class="content-btn"><a href="{{ route('service.service_details', ['service_slug'=>$aservice->slug]) }}"
-                                        class="btn btn-primary">Details</a></div>
-                                <div class="price"><span>&#36;</span><b>From</b>{{ $aservice->price }}</div>
+                                        class="btn btn-primary">Detalji</a></div>
+                                <div class="price"><span>&#36;</span><b>Cijena</b>{{ $aservice->price }}</div>
                             </div>
                         </a>
                     </div>

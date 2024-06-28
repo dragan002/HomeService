@@ -139,7 +139,6 @@ body{
 h1, h2, h3, h4, h5, h6 {	
 	padding: 5px 0 15px 0;	
 	margin: 0;	
-	color: #272727;
 	font-weight: normal;
 	font-family: 'Raleway', sans-serif;
 	-webkit-font-smoothing: antialiased;
@@ -755,6 +754,12 @@ hr.tall{
 .title-header{
 	text-align: center;
 }
+
+.title-header h2 {
+	font-size: 40px;
+	color: black;
+}
+
 .title-header h1{
 	color: #fff;
 	font-size: 5.2rem;
@@ -763,10 +768,11 @@ hr.tall{
 	font-weight: bold;
 }
 .title-header p{
-	color: #f7f7f7;
 	margin: 0 auto 30px auto;
 	max-width: 700px;
 	text-shadow: 2px 3px 3px rgba(0,0,0,0.3);
+	font-size: 25px;
+	color: black;
 }
 
 /* Nav Tabs ------------------------------*/
@@ -3942,7 +3948,7 @@ i.fa-truck {
 }
 @media (min-width:768px) and (max-width:1500px){
 	.filter-title {
-		top: 12% !important;			
+		top: 36% !important;			
 	}
 	.filter-header input[type="text"]{
 		min-width: 340px !important;

@@ -47,104 +47,104 @@
                         <a href="/"><img src="images/logo.png"></a>
                     </li> --}}
 
-                    <li> <a href="{{ route('service.service_categories') }}">Service Categories</a>
+                    <li> <a href="{{ route('service.service_categories') }}">Kategorije Usluga</a>
 
-                    <li> <a href="#">Appliances</a>
-                        <ul class="drop-down one-column hover-fade">
-                            <li><a href="servicesbycategory/11.html">Computer Repair</a></li>
-                            <li><a href="servicesbycategory/12.html">TV</a></li>
-                            <li><a href="servicesbycategory/1.html">AC</a></li>
-                            <li><a href="servicesbycategory/14.html">Geyser</a></li>
-                            <li><a href="servicesbycategory/21.html">Washing Machine</a></li>
-                            <li><a href="servicesbycategory/22.html">Microwave Oven</a></li>
-                            <li><a href="servicesbycategory/9.html">Chimney and Hob</a></li>
-                            <li><a href="servicesbycategory/10.html">Water Purifier</a></li>
-                            <li><a href="servicesbycategory/13.html">Refrigerator</a></li>
-                        </ul>
-                    </li>
-                    <li> <a href="#">Home Needs</a>
-                        <ul class="drop-down one-column hover-fade">
-                            <li><a href="servicesbycategory/19.html">Laundry</a></li>
-                            <li><a href="servicesbycategory/4.html">Electrical</a></li>
-                            <li><a href="servicesbycategory/8.html">Pest Control</a></li>
-                            <li><a href="servicesbycategory/7.html">Carpentry</a></li>
-                            <li><a href="servicesbycategory/3.html">Plumbing </a></li>
-                            <li><a href="servicesbycategory/20.html">Painting</a></li>
-                            <li><a href="servicesbycategory/17.html">Movers &amp; Packers</a></li>
-                            <li><a href="servicesbycategory/5.html">Shower Filters </a></li>
-                        </ul>
-                    </li>
-                    <li> <a href="#">Home Cleaning</a>
-                        <ul class="drop-down one-column hover-fade">
-                            <li><a href="service-details/bedroom-deep-cleaning.html">Bedroom Deep Cleaning</a></li>
-                            <li><a href="service-details/overhead-water-storage.html">Overhead Water Storage </a></li>
-                            <li><a href="/service-details/tank-cleaning">Tank Cleaning</a></li>
-                            <li><a href="service-details/underground-sump-cleaning.html">Underground Sump Cleaning</a>
-                            </li>
-                            <li><a href="service-details/dining-chair-shampooing.html">Dining Chair Shampooing </a></li>
-                            <li><a href="service-details/office-chair-shampooing.html">Office Chair Shampooing</a></li>
-                            <li><a href="service-details/home-deep-cleaning.html">Home Deep Cleaning </a></li>
-                            <li><a href="service-details/carpet-shampooing.html">Carpet Shampooing </a></li>
-                            <li><a href="service-details/fabric-sofa-shampooing.html">Fabric Sofa Shampooing</a></li>
-                            <li><a href="service-details/bathroom-deep-cleaning.html">Bathroom Deep Cleaning</a></li>
-                            <li><a href="service-details/floor-scrubbing-polishing.html">Floor Scrubbing &amp; Polishing
-                                </a></li>
-                            <li><a href="service-details/mattress-shampooing.html">Mattress Shampooing </a></li>
-                            <li><a href="service-details/kitchen-deep-cleaning.html">Kitchen Deep Cleaning </a></li>
-                        </ul>
-                    </li>
-                    <li> <a href="#">Special Services</a>
-                        <ul class="drop-down one-column hover-fade">
-                            <li><a href="servicesbycategory/16.html">Document Services</a></li>
-                            <li><a href="servicesbycategory/15.html">Cars &amp; Bikes</a></li>
-                            <li><a href="servicesbycategory/17.html">Movers &amp; Packers </a></li>
-                            <li><a href="servicesbycategory/18.html">Home Automation</a></li>
-                        </ul>
-                    </li>
+                        <li> <a href="#">Aparati</a>
+                            <ul class="drop-down one-column hover-fade">
+                                <li><a href="servicesbycategory/11.html">Popravka računara</a></li>
+                                <li><a href="servicesbycategory/12.html">Televizor</a></li>
+                                <li><a href="servicesbycategory/1.html">Klima uređaj</a></li>
+                                <li><a href="servicesbycategory/14.html">Bojler</a></li>
+                                <li><a href="servicesbycategory/21.html">Veš mašina</a></li>
+                                <li><a href="servicesbycategory/22.html">Mikrotalasna pećnica</a></li>
+                                <li><a href="servicesbycategory/9.html">Nape i ploče za kuvanje</a></li>
+                                <li><a href="servicesbycategory/10.html">Prečišćivač vode</a></li>
+                                <li><a href="servicesbycategory/13.html">Frižider</a></li>
+                            </ul>
+                        </li>
+                        <li> <a href="#">Kućne potrebe</a>
+                            <ul class="drop-down one-column hover-fade">
+                                <li><a href="servicesbycategory/19.html">Pranje veša</a></li>
+                                <li><a href="servicesbycategory/4.html">Električari</a></li>
+                                <li><a href="servicesbycategory/8.html">Dezinsekcija</a></li>
+                                <li><a href="servicesbycategory/7.html">Stolarija</a></li>
+                                <li><a href="servicesbycategory/3.html">Vodoinstalateri</a></li>
+                                <li><a href="servicesbycategory/20.html">Farbanje</a></li>
+                                <li><a href="servicesbycategory/17.html">Selidbe</a></li>
+                                <li><a href="servicesbycategory/5.html">Tuš filteri</a></li>
+                            </ul>
+                        </li>
+                        <li> <a href="#">Čišćenje doma</a>
+                            <ul class="drop-down one-column hover-fade">
+                                <li><a href="service-details/bedroom-deep-cleaning.html">Dubinsko čišćenje spavaće sobe</a></li>
+                                <li><a href="service-details/overhead-water-storage.html">Čišćenje rezervoara za vodu</a></li>
+                                <li><a href="/service-details/tank-cleaning">Čišćenje rezervoara</a></li>
+                                <li><a href="service-details/underground-sump-cleaning.html">Čišćenje podzemnih rezervoara</a></li>
+                                <li><a href="service-details/dining-chair-shampooing.html">Šamponiranje stolica u trpezariji</a></li>
+                                <li><a href="service-details/office-chair-shampooing.html">Šamponiranje kancelarijskih stolica</a></li>
+                                <li><a href="service-details/home-deep-cleaning.html">Dubinsko čišćenje doma</a></li>
+                                <li><a href="service-details/carpet-shampooing.html">Šamponiranje tepiha</a></li>
+                                <li><a href="service-details/fabric-sofa-shampooing.html">Šamponiranje tkanine na sofama</a></li>
+                                <li><a href="service-details/bathroom-deep-cleaning.html">Dubinsko čišćenje kupatila</a></li>
+                                <li><a href="service-details/floor-scrubbing-polishing.html">Ribanje i poliranje podova</a></li>
+                                <li><a href="service-details/mattress-shampooing.html">Šamponiranje dušeka</a></li>
+                                <li><a href="service-details/kitchen-deep-cleaning.html">Dubinsko čišćenje kuhinje</a></li>
+                            </ul>
+                        </li>
+                        <li> <a href="#">Posebne usluge</a>
+                            <ul class="drop-down one-column hover-fade">
+                                <li><a href="servicesbycategory/16.html">Usluge dokumentacije</a></li>
+                                <li><a href="servicesbycategory/15.html">Automobili i motocikli</a></li>
+                                <li><a href="servicesbycategory/17.html">Selidbe</a></li>
+                                <li><a href="servicesbycategory/18.html">Automatizacija doma</a></li>
+                            </ul>
+                        </li>
+                        
 
                     @if(Route::has('login'))
                     @auth   
                         @if(Auth::user()->utype === 'ADM')
-                            <li class="login-form"> <a href="#" title="Register">My Account (Admin)</a>
-                                <ul class="drop-down one-column hover-fade">
-                                    <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                                    <li><a href="{{ route('admin.service_categories') }}">Service Categories</a></li>
-                                    <li><a href="{{ route('admin.all_services') }}">All Services</a></li>
-                                    <li><a href="{{ route('admin.slider') }}">Manage Slider</a></li>
-                                    <li><a href="{{ route('admin.contacts') }}">All Contacts</a></li>
-                                    <li><a href="{{ route('admin.service_providers') }}">All Service Providers</a></li>
-                                    <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="{{ route('messages.index') }}" class="fa fa-envelope">Inbox</a></li>
+                        <li class="login-form"> <a href="#" title="Registruj se">Moj nalog (Admin)</a>
+                            <ul class="drop-down one-column hover-fade">
+                                <li><a href="{{ route('admin.dashboard') }}">Kontrolna tabla</a></li>
+                                <li><a href="{{ route('admin.service_categories') }}">Kategorije usluga</a></li>
+                                <li><a href="{{ route('admin.all_services') }}">Sve usluge</a></li>
+                                <li><a href="{{ route('admin.slider') }}">Upravljanje slajderom</a></li>
+                                <li><a href="{{ route('admin.contacts') }}">Svi kontakti</a></li>
+                                <li><a href="{{ route('admin.service_providers') }}">Svi pružaoci usluga</a></li>
+                                <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Odjava</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="{{ route('messages.index') }}" class="fa fa-envelope">Poruke</a></li>
                         @elseif(Auth::user()->utype === 'SVP')
-                            <li class="login-form"> <a href="#" title="Register">My Account (S Provider)</a>
-                                <ul class="drop-down one-column hover-fade">
-                                    <li><a href="{{ route('sprovider.dashboard') }}">Dashboard</a></li>
-                                    <li><a href="{{ route('sprovider.profile') }}">Profile</a></li>
-                                    <li><a href="{{ route('sprovider.add_service') }}">Add Service</a></li>
-                                    <li><a href="{{ route('sprovider.list') }}">My services</a></li>
-                                    <li><a href="{{ route('sprovider.bookings_manage') }}">Reserved Services</a></li>
-                                    <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>    
-                                </ul>
-                            </li>
-                            <li><a href="{{ route('messages.index') }}">Inbox</a></li>
+                        <li class="login-form"> <a href="#" title="Registruj se">Moj nalog (Pružalac usluga)</a>
+                            <ul class="drop-down one-column hover-fade">
+                                <li><a href="{{ route('sprovider.dashboard') }}">Kontrolna tabla</a></li>
+                                <li><a href="{{ route('sprovider.profile') }}">Profil</a></li>
+                                <li><a href="{{ route('sprovider.add_service') }}">Dodaj uslugu</a></li>
+                                <li><a href="{{ route('sprovider.list') }}">Moje usluge</a></li>
+                                <li><a href="{{ route('sprovider.bookings_manage') }}">Rezervisane usluge</a></li>
+                                <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Odjava</a></li>    
+                            </ul>
+                        </li>
+                        <li><a href="{{ route('messages.index') }}">Poruke</a></li>
                         @else
-                            <li class="login-form"> <a href="#" title="Register">My Account (Customer)</a>
-                                <ul class="drop-down one-column hover-fade">
-                                    <li><a href="{{ route('customer.dashboard') }}">Dashboard</a></li>
-                                    <li><a href="{{ route('bookings.index')}}">My Status Booking</a></li>
-                                    <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="{{ route('messages.index') }}" class="fa fa-envelope">Inbox</a></li>
+                        <li class="login-form"> <a href="#" title="Registruj se">Moj nalog (Korisnik)</a>
+                            <ul class="drop-down one-column hover-fade">
+                                <li><a href="{{ route('customer.dashboard') }}">Kontrolna tabla</a></li>
+                                <li><a href="{{ route('bookings.index')}}">Moji statusi rezervacija</a></li>
+                                <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Odjava</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="{{ route('messages.index') }}" class="fa fa-envelope">Inbox</a></li>
                         @endif
                         <form action="{{ route('logout') }}" id="logout-form" method="post" style="display: none;">
                             @csrf
                         </form>
-                    @else
-                        <li class="login-form"> <a href="{{ route('register') }}" title="Register">Register</a></li>
-                        <li class="login-form"> <a href="{{ route('login') }}" title="Login">Login</a></li>
+                        @else
+                        <li class="login-form"> <a href="{{ route('register') }}" title="Registruj se">Registruj se</a></li>
+                        <li class="login-form"> <a href="{{ route('login') }}" title="Prijavi se">Prijavi se</a></li>
+                        
                     @endauth
                 @endif
                     </li>
@@ -156,59 +156,52 @@
             <div class="container">
                 <div class="row visible-md visible-lg">
                     <div class="col-md-3 col-xs-6 col-sm-6">
-                        <h3>APPLIANCE SERVICES </h3>
+                        <h3>USLUGE ZA APARATE</h3>
                         <ul>
-                            <li><i class="fa fa-check"></i> <a href="servicesbycategory/12.html">TV</a></li>
-                            <li><i class="fa fa-check"></i> <a href="servicesbycategory/14.html">Geyser</a></li>
-                            <li><i class="fa fa-check"></i> <a href="servicesbycategory/13.html">Refrigerator</a></li>
-                            <li><i class="fa fa-check"></i> <a href="servicesbycategory/21.html">Washing Machine</a>
-                            </li>
-                            <li><i class="fa fa-check"></i> <a href="servicesbycategory/22.html">Microwave Oven</a></li>
-                            <li><i class="fa fa-check"></i> <a href="servicesbycategory/10.html">Water Purifier</a></li>
+                            <li><i class="fa fa-check"></i> <a href="servicesbycategory/12.html">Televizori</a></li>
+                            <li><i class="fa fa-check"></i> <a href="servicesbycategory/14.html">Bojleri</a></li>
+                            <li><i class="fa fa-check"></i> <a href="servicesbycategory/13.html">Frižideri</a></li>
+                            <li><i class="fa fa-check"></i> <a href="servicesbycategory/21.html">Veš mašine</a></li>
+                            <li><i class="fa fa-check"></i> <a href="servicesbycategory/22.html">Mikrotalasne pećnice</a></li>
+                            <li><i class="fa fa-check"></i> <a href="servicesbycategory/10.html">Prečišćivači vode</a></li>
                         </ul>
                     </div>
                     <div class="col-md-3 col-xs-6 col-sm-6">
-                        <h3>AC SERVICES </h3>
+                        <h3>USLUGE ZA KLIMATIZACIJU</h3>
                         <ul>
-                            <li><i class="fa fa-check"></i> <a
-                                    href="service-details/ac-installation.html">Installation</a></li>
-                            <li><i class="fa fa-check"></i> <a
-                                    href="service-details/ac-uninstallation.html">Uninstallation</a></li>
-                            <li><i class="fa fa-check"></i> <a href="service-details/ac-repair.html">AC Repair</a></li>
-                            <li><i class="fa fa-check"></i> <a href="service-details/ac-gas-refill.html">Gas Refill</a>
-                            </li>
-                            <li><i class="fa fa-check"></i> <a href="service-details/ac-wet-servicing.html">Wet
-                                    Servicing</a></li>
-                            <li><i class="fa fa-check"></i> <a href="service-details/ac-dry-servicing.html">Dry
-                                    Servicing </a></li>
+                            <li><i class="fa fa-check"></i> <a href="service-details/ac-installation.html">Instalacija</a></li>
+                            <li><i class="fa fa-check"></i> <a href="service-details/ac-uninstallation.html">Deinstalacija</a></li>
+                            <li><i class="fa fa-check"></i> <a href="service-details/ac-repair.html">Popravka klima uređaja</a></li>
+                            <li><i class="fa fa-check"></i> <a href="service-details/ac-gas-refill.html">Dopuna gasa</a></li>
+                            <li><i class="fa fa-check"></i> <a href="service-details/ac-wet-servicing.html">Servisiranje vlažno</a></li>
+                            <li><i class="fa fa-check"></i> <a href="service-details/ac-dry-servicing.html">Servisiranje suvo </a></li>
                         </ul>
                     </div>
                     <div class="col-md-3 col-xs-6 col-sm-6">
-                        <h3>HOME NEEDS </h3>
+                        <h3>POTREBE ZA DOM</h3>
                         <ul>
-                            <li><i class="fa fa-check"></i> <a href="servicesbycategory/19.html">Laundry </a></li>
-                            <li><i class="fa fa-check"></i> <a href="servicesbycategory/4.html">Electrical</a></li>
-                            <li><i class="fa fa-check"></i> <a href="servicesbycategory/8.html">Pest Control </a></li>
-                            <li><i class="fa fa-check"></i> <a href="servicesbycategory/7.html">Carpentry </a></li>
-                            <li><i class="fa fa-check"></i> <a href="servicesbycategory/3.html">Plumbing </a></li>
-                            <li><i class="fa fa-check"></i> <a href="servicesbycategory/20.html">Painting </a></li>
+                            <li><i class="fa fa-check"></i> <a href="servicesbycategory/19.html">Pranje veša</a></li>
+                            <li><i class="fa fa-check"></i> <a href="servicesbycategory/4.html">Električari</a></li>
+                            <li><i class="fa fa-check"></i> <a href="servicesbycategory/8.html">Dezinsekcija</a></li>
+                            <li><i class="fa fa-check"></i> <a href="servicesbycategory/7.html">Stolarija</a></li>
+                            <li><i class="fa fa-check"></i> <a href="servicesbycategory/3.html">Vodoinstalateri</a></li>
+                            <li><i class="fa fa-check"></i> <a href="servicesbycategory/20.html">Farbanje</a></li>
                         </ul>
                     </div>
                     <div class="col-md-3 col-xs-6 col-sm-6">
-                        <h3>CONTACT US</h3>
+                        <h3>KONTAKTIRAJTE NAS</h3>
                         <ul class="contact_footer">
                             <li class="location">
-                                <i class="fa fa-map-marker"></i> <a href="#"> Faridabad, Haryana, India</a>
+                                <i class="fa fa-map-marker"></i> <a href="#">Bosna i Hercegovina</a>
                             </li>
                             <li>
-                                <i class="fa fa-envelope"></i> <a
-                                    href="mailto:contact@surfsidemedia.in">contact@surfsidemedia.in</a>
+                                <i class="fa fa-envelope"></i> <a href="mailto:draganvujic29@gmail.com">draganvujic29@gmail.com</a>
                             </li>
                             <li>
-                                <i class="fa fa-headphones"></i> <a href="tel:+911234567890">+91-1234567890</a>
+                                <i class="fa fa-headphones"></i> <a href="tel:+387644441119">064 444 111 9</a>
                             </li>
                         </ul>
-                        <h3 style="margin-top: 10px">FOLLOW US</h3>
+                        <h3 style="margin-top: 10px">PRATITE NAS</h3>
                         <ul class="social">
                             <li class="facebook"><span><i class="fa fa-facebook"></i></span><a href="#"></a></li>
                             <li class="twitter"><span><i class="fa fa-twitter"></i></span><a href="#"></a></li>
@@ -218,17 +211,16 @@
                 </div>
                 <div class="row visible-sm visible-xs">
                     <div class="col-md-6">
-                        <h3 class="mlist-h">CONTACT US</h3>
+                        <h3 class="mlist-h">KONTAKTIRAJTE NAS</h3>
                         <ul class="contact_footer mlist">
                             <li class="location">
                                 <i class="fa fa-map-marker"></i> <a href="#">Prnjavor</a>
                             </li>
                             <li>
-                                <i class="fa fa-envelope"></i> <a
-                                    href="mailto:contact@surfsidemedia.in">draganvujic29@gmail.com</a>
+                                <i class="fa fa-envelope"></i> <a href="mailto:draganvujic29@gmail.com">draganvujic29@gmail.com</a>
                             </li>
                             <li>
-                                <i class="fa fa-phone"></i> <a href="tel:+911234567890">+387644441119</a>
+                                <i class="fa fa-phone"></i> <a href="tel:+387644441119">+387644441119</a>
                             </li>
                         </ul>
                         <ul class="social mlist-h">
@@ -244,20 +236,21 @@
                     <div class="row">
                         <div class="col-md-6">
                             <ul class="nav-footer">
-                                <li><a href="about-us.html">About Us</a> </li>
-                                <li><a href="{{ route('contact') }}">Contact Us</a></li>
+                                <li><a href="about-us.html">O nama</a> </li>
+                                <li><a href="{{ route('contact') }}">Kontaktirajte nas</a></li>
                                 <li><a href="faq.html">FAQ</a></li>
-                                <li><a href="terms-of-use.html">Terms of Use</a></li>
-                                <li><a href="privacy.html">Privacy</a></li>
+                                <li><a href="terms-of-use.html">Uslovi korišćenja</a></li>
+                                <li><a href="privacy.html">Privatnost</a></li>
                             </ul>
                         </div>
                         <div class="col-md-6">
-                            <p class="text-xs-center crtext">&copy; 2024 SurfsideMedia. All Rights Reserved.</p>
+                            <p class="text-xs-center crtext">&copy; Dragan Vujić</p>
                         </div>
                     </div>
                 </div>                
             </div>            
         </footer>
+        
     </div>
     <script type="text/javascript" src="{{ asset('assets/js/nav/jquery.sticky.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/js/totop/jquery.ui.totop.js') }}"></script>
