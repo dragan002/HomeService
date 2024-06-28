@@ -83,7 +83,8 @@
                                                     <li><i class="fa fa-minus"></i>{{ $exclusion }}</li>
                                                 @endforeach
                                             </ul>
-                                            <h2>Name of Service Provider: <a href="{{ route('providersprofile',['userId'=>$service->user->id]) }}">{{ $service->user->name }}</a></h2>
+                                            <h2>Uslugu nudi: <a href="{{ route('providersprofile',['userId'=>$service->user->id]) }}">{{ $service->user->name }}</a></h2>
+                                            <h2>Pozovite <span>{{ $service->user->name }}</span> na broj <a href="tel:{{ $service->user->phone }}">{{ $service->user->phone }}</a></h2>
                                         </div>
                                     </div>
                                 </div>

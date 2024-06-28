@@ -182,9 +182,9 @@ $(function(){
 		},
 		messages:{
 			phone:{
-				number:"Please enter valid phone number",
-				minlength:"Please enter valid phone number",
-				maxlength:"Please enter valid phone number"								
+				number:"Please enter valid phone numberss",
+				minlength:"Please enter valid phone numberss",
+				maxlength:"Please enter valid phone numberss"								
 			}
 		}		
 
