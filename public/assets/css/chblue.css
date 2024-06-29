@@ -168,6 +168,6 @@ hr.separator::before {
 #sponsors{
 	z-index: 101;
 }
-.#owl-wrapper{
+#owl-wrapper{
 	z-index: 100;
 }

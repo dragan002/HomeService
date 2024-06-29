@@ -23,20 +23,6 @@
 </head>
 <body>
     <div id="layout">
-        <div class="info-head">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <ul class="visible-md visible-lg text-left">
-                            <li><a href="tel:+911234567890"><i class="fa fa-phone"></i> 064 444 111 9</a></li>
-                            <li><a href="mailto:contact@surfsidemedia.in"><i class="fa fa-envelope"></i>
-                                    draganvujic@gmail.com</a></li>
-                        </ul>
-                    </div>
-                    @livewire('location-component')
-                </div>
-            </div>
-        </div>
         <header id="header" class="header-v3">
             <nav class="flat-mega-menu">
                 <label for="mobile-button"> <i class="fa fa-bars"></i></label>

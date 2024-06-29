@@ -4,6 +4,7 @@
  */
 
 /* clearfix */
+
 .owl-carousel .owl-wrapper:after {
 	content: ".";
 	display: block;
@@ -37,7 +38,7 @@
 	-o-transition: height 500ms ease-in-out;
 	transition: height 500ms ease-in-out;
 }
-	
+
 .owl-carousel .owl-item{
 	float: left;
 }

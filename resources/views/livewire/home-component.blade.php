@@ -22,12 +22,11 @@
 
         <div class="filter-title">
             <div class="title-header">
-                <h2>Rezervisite svoju uslugu</h2>
             </div>
             <div class="filter-header">
                 <form id="sform" action="{{ route('search.service') }}" method="post"> 
                     @csrf                       
-                    <input type="text" id="q" name="q" required="required" placeholder="What Services do you want?"
+                    <input type="text" id="q" name="q" required="required" placeholder="Pretrazite uslugu"
                         class="input-large typeahead" autocomplete="off">
                     <input type="submit" name="submit" value="Search">
                 </form>
@@ -64,7 +63,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="titles">
-                            <h2><span>Choice</span> of Services</h2>
+                            <h2><span>Izaberi </span> Uslugu</h2>
                             <i class="fa fa-plane"></i>
                             <hr class="tall">
                         </div>
@@ -84,7 +83,7 @@
                                             <hr class="separator">
                                             <p>{{ $service->tagline }}</p>
                                             <div class="content-btn"><a href="{{ route('service.service_details', ['service_slug'=>$service->slug]) }}"
-                                                    class="btn btn-primary">Details</a></div>
+                                                    class="btn btn-primary">Detalji</a></div>
                                             <div class="price"><span>&#36;</span><b>From</b>{{ $service->price }}</div>
                                         </div>
                                     </a>

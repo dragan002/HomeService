@@ -11,12 +11,12 @@
         <div class="bg_parallax image_02_parallax"></div>
         <div class="opacy_bg_02">
             <div class="container">
-                <h1>All Services</h1>
+                <h1>Sve Usluge</h1>
                 <div class="crumbs">
                     <ul>
-                        <li><a href="/">Home</a></li>
+                        <li><a href="/">Početna</a></li>
                         <li>/</li>
-                        <li>Service Categories</li>
+                        <li>Kategorije Usluga</li>
                     </ul>
                 </div>
             </div>
@@ -32,13 +32,13 @@
                                 <div class="panel-heading">
                                     <div class="row">
                                         <div class="col-md-4">
-                                            All Services
+                                            Sve Usluge
                                         </div>
                                         <div class="col-md-4">
-                                            <a href="{{ route('admin.service_status') }}" class="btn btn-info pull-right">Services Status</a>
+                                            <a href="{{ route('admin.service_status') }}" class="btn btn-info pull-right">Status Servisa</a>
                                         </div>
                                         <div class="col-md-4">
-                                            <a href="{{ route('admin.add_service') }}" class="btn btn-info pull-right">Add New</a>
+                                            <a href="{{ route('admin.add_service') }}" class="btn btn-info pull-right">Dodaj Novu</a>
                                         </div>
                                     </div>
                                 </div>
@@ -50,15 +50,15 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Image</th>
-                                                <th>Name</th>
-                                                <th>Price</th>
+                                                <th>Slika</th>
+                                                <th>Ime</th>
+                                                <th>Cena</th>
                                                 <th>Status</th>
-                                                <th>Featured</th>
-                                                <th>Category</th>
-                                                <th>Created at</th>
-                                                <th>Service Status</th>
-                                                <th>Action</th>
+                                                <th>Istaknuto</th>
+                                                <th>Kategorija</th>
+                                                <th>Kreirano</th>
+                                                <th>Status Usluge</th>
+                                                <th>Akcija</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -71,25 +71,25 @@
                                                         <td>{{ $service->price }}</td>
                                                         <td>
                                                             @if($service->status)
-                                                                    Active
+                                                                    Aktivno
                                                             @else
-                                                                    Inactive
+                                                                    Neaktivno
                                                             @endif
                                                         </td>
                                                         <td>
                                                             @if($service->featured)
-                                                                Yes
+                                                                Da
                                                             @else
-                                                                No
+                                                                Ne
                                                             @endif
                                                         </td>
                                                         <td>{{ $service->category->name }}</td>
                                                         <td>{{ $service->created_at }}</td>
                                                         <td>{{ $service->service_status }}</td>
 
-                                                        <td>
+                                                        <td class="action_icons">
                                                             <a href="{{ route('admin.edit_service', ['id' => $service->id])}}"><i class="fa fa-edit fa-2x text-info"></i></a>
-                                                            <a href="#" style="margin-left: 10px;" onclick="confirm('Are you sure you want to delete this services?') || event.stopImmidiatePropagation()" wire:click.prevent="deleteService({{ $service->id }})"><i class="fa fa-times fa-2x text-danger"></i>
+                                                            <a href="#" style="margin-left: 10px;" onclick="confirm('Da li ste sigurni da želite da obrišete ovu uslugu?') || event.stopImmidiatePropagation()" wire:click.prevent="deleteService({{ $service->id }})"><i class="fa fa-times fa-2x text-danger"></i>
                                                             </a>
                                                         </td>
                                                     </tr>
