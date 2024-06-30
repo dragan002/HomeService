@@ -10,22 +10,26 @@
         </div>
     @else
         @foreach($messages as $message)
-            <div class="card mb-3">
+            <div class="card mb-3 shadow-sm">
                 <div class="card-body">
-                    <h5 class="card-title">{{ $message->sender->name }}</h5>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">{{ $message->sender->name }}</h5>
+                        <small class="text-muted">{{ $message->created_at->format('Y-m-d H:i:s') }}</small>
+                    </div>
+                    <hr>
                     <p class="card-text">{{ $message->message }}</p>
-                    <p class="card-text"><small class="text-muted">{{ $message->created_at->format('Y-m-d H:i:s') }}</small></p>
                 </div>
             </div>
         @endforeach
     @endif
 
-    <form action="{{ route('message.reply', $conversation->id) }}" method="POST">
+    <form action="{{ route('message.reply', $conversation->id) }}" method="POST" class="mt-4">
         @csrf
-        <div class="form-group">
-            <textarea name="message" class="form-control" rows="4" required></textarea>
+        <div class="form-group mb-3">
+            <label for="message">Reply</label>
+            <textarea name="message" id="message" class="form-control" rows="4" required></textarea>
         </div>
-        <button type="submit" class="btn btn-primary mt-2">Send Reply</button>
+        <button type="submit" class="btn btn-primary">Send Reply</button>
     </form>
 </div>
 @endsection

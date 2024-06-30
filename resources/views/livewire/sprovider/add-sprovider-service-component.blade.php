@@ -19,7 +19,7 @@
             <div class="paddings-mini">
                 <div class="container">
                     <div class="row portfolioContainer">
-                        <div class="col-md-12 col-md-offest-2 profile1">
+                        <div class="col-md-12 col-md-offest-2 profile2">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <div class="col-md-6">
