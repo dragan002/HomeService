@@ -16,7 +16,7 @@ class ServiceController extends Controller {
 
     public function index() {
         $services = $this->serviceRepository->all();
-        return view('admin.all_services', compact('services'))
+        return view('admin.allServices', compact('services'))
     }
 
     public function show($id) {
@@ -41,7 +41,7 @@ class ServiceController extends Controller {
         ]);
 
         $this->serviceRepository->create($data);
-        return redirect()->route('admin.all_services')->with('message', 'Service Created Successfully');
+        return redirect()->route('admin.allServices')->with('message', 'Service Created Successfully');
     }
 
     public function update(Request $request, $id) {
@@ -61,7 +61,7 @@ class ServiceController extends Controller {
         ]);
 
         $this->serviceRepository->update($id, $data);
-        return redirect()->route('admin.all_services')->with('message', 'Service Updated Successfully');
+        return redirect()->route('admin.allServices')->with('message', 'Service Updated Successfully');
 
     }
 }

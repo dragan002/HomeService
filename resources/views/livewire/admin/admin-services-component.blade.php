@@ -35,10 +35,10 @@
                                             Sve Usluge
                                         </div>
                                         <div class="col-md-4">
-                                            <a href="{{ route('admin.service_status') }}" class="btn btn-info pull-right">Status Servisa</a>
+                                            <a href="{{ route('admin.serviceStatus') }}" class="btn btn-info pull-right">Status Servisa</a>
                                         </div>
                                         <div class="col-md-4">
-                                            <a href="{{ route('admin.add_service') }}" class="btn btn-info pull-right">Dodaj Novu</a>
+                                            <a href="{{ route('admin.addService') }}" class="btn btn-info pull-right">Dodaj Novu</a>
                                         </div>
                                     </div>
                                 </div>
@@ -88,7 +88,7 @@
                                                         <td>{{ $service->service_status }}</td>
 
                                                         <td class="action_icons">
-                                                            <a href="{{ route('admin.edit_service', ['id' => $service->id])}}"><i class="fa fa-edit fa-2x text-info"></i></a>
+                                                            <a href="{{ route('admin.editService', ['id' => $service->id])}}"><i class="fa fa-edit fa-2x text-info"></i></a>
                                                             <a href="#" style="margin-left: 10px;" onclick="confirm('Da li ste sigurni da želite da obrišete ovu uslugu?') || event.stopImmidiatePropagation()" wire:click.prevent="deleteService({{ $service->id }})"><i class="fa fa-times fa-2x text-danger"></i>
                                                             </a>
                                                         </td>

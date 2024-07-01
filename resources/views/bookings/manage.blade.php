@@ -1,5 +1,3 @@
-
-
 @extends('layouts.app')
 
 @section('content')
@@ -29,7 +27,7 @@
                         <td>{{ $booking->status }}</td>
                         <td>
                             @if ($booking->status == 'pending')
-                                <form action="{{ route('sprovider.bookings_update', $booking->id) }}" method="POST" style="display:inline;">
+                                <form action="{{ route('sprovider.bookingsUpdate', $booking->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('PUT')
                                     <button type="submit" name="status" value="confirmed" class="btn btn-success btn-sm">Confirm</button>

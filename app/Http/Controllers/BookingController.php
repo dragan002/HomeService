@@ -49,6 +49,5 @@ class BookingController extends Controller
 
         // notification for booking
         $booking->user->notify(new BookingStatusChanged($booking, $request->status));
-        return redirect()->route('bookings.manage')->with('message', 'Booking Status Updated Successfully');
-    }
+        return redirect()->route('sprovider.bookingManage')->with('message', 'Booking Status Updated Successfully');    }
 }

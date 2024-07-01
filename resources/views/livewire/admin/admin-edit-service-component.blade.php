@@ -29,7 +29,7 @@
                                         <a href="{{ route('admin.service_status') }}" class="btn btn-info pull-right">Services Status</a>
                                     </div>
                                     <div class="col-md-4">
-                                        <a href="{{ route('admin.all_services') }}" class="btn btn-info pull-right">All Services</a>
+                                        <a href="{{ route('admin.allServices') }}" class="btn btn-info pull-right">All Services</a>
                                     </div>
                                 </div>
                                 <div class="panel-body">

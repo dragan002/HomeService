@@ -35,7 +35,7 @@
                                             All Services Categories
                                         </div>
                                         <div class="col-md-6">
-                                            <a href="{{ route('admin.add_service_category') }}" class="btn btn-info pull-right">Add New</a>
+                                            <a href="{{ route('admin.addServiceCategory') }}" class="btn btn-info pull-right">Add New</a>
                                         </div>
                                     </div>
                                 </div>
@@ -69,8 +69,8 @@
                                                         @endif
                                                     </td>
                                                     <td>
-                                                        <a href="{{ route('admin.services_by_category', ['category_slug' => $scategory->slug]) }}" style="margin-right: 10px;"><i class="fa fa-list fa-2x text-info"></i></a>
-                                                        <a href="{{ route('admin.edit_service_category', ['category_id' => $scategory->id]) }}"><i class="fa fa-edit fa-2x text-info"></i></a>
+                                                        <a href="{{ route('admin.servicesByCategory', ['categorySlug' => $scategory->slug]) }}" style="margin-right: 10px;"><i class="fa fa-list fa-2x text-info"></i></a>
+                                                        <a href="{{ route('admin.editServiceCategory', ['categoryId' => $scategory->id]) }}"><i class="fa fa-edit fa-2x text-info"></i></a>
                                                         <a href="" onclick="confirm('Are you sure you want to delete this category?') || event.stopImmediatePropagation()" wire:click.prevent="deleteServiceCategory({{ $scategory->id }})" style="margin-left: 10px;"><i class="fa fa-times fa-2x text-danger"></i></a>
                                                     </td>
                                                 </tr>

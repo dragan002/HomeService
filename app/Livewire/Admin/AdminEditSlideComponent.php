@@ -11,15 +11,15 @@ class AdminEditSlideComponent extends Component
 {
     use WithFileUploads;
 
-    public $slide_id;
+    public $slideId;
     public $title;
     public $image;  
     public $status;
     public $newImage;
 
-    public function mount($slide_id) {
-        $slide = Slider::find($slide_id);
-        $this->slide_id = $slide->id;
+    public function mount($slideId) {
+        $slide = Slider::find($slideId);
+        $this->slideId = $slide->id;
         $this->title = $slide->title;
         $this->image = $slide->image;
         $this->status = $slide->status;
@@ -48,7 +48,7 @@ class AdminEditSlideComponent extends Component
             ]);
         }
 
-        $slide = Slider::find($this->slide_id);
+        $slide = Slider::find($this->slideId);
         $slide->title = $this->title;
         $slide->status = $this->status;
 

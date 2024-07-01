@@ -35,7 +35,7 @@
                                             All Services
                                         </div>
                                         <div class="col-md-6">
-                                            <a href="{{ route('sprovider.add_service') }}" class="btn btn-info pull-right">Add New</a>
+                                            <a href="{{ route('sprovider.addService') }}" class="btn btn-info pull-right">Add New</a>
                                         </div>
                                     </div>
                                 </div>
@@ -84,7 +84,7 @@
                                                         <td>{{ $service->service_status }}</td>
 
                                                         <td>
-                                                            <a href="{{ route('sprovider.edit_service', ['service_id' => $service->id])}}"><i class="fa fa-edit fa-2x text-info"></i></a>
+                                                            <a href="{{ route('sprovider.editService', ['serviceId' => $service->id])}}"><i class="fa fa-edit fa-2x text-info"></i></a>
                                                             <a href="" onclick="confirm('Are you sure you want to delete this category?') || event.stopImmediatePropagation()" wire:click.prevent="deleteServiceByProvider({{ $service->id }})" style="margin-left: 10px;"><i class="fa fa-times fa-2x text-danger"></i></a>
                                                             </a>
                                                         </td>

@@ -99,16 +99,6 @@ Route::middleware(['auth'])->group(function () {
 //To check profile of provider
 Route::get('/providersProfileInformation/{userId}', ProvidersProfileInformationComponent::class)->name('providersProfile');
 
-//For Customers
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-    'authcustomer' => AuthCustomer::class, 
-])->group(function () {
-    Route::get('/customer/dashboard', CustomerDashboardComponent::class)->name('customer.dashboard');
-    Route::get('/customer/reviewform', CustomerReviewFormComponent::class)->name('customer.review');
-});
 
 // =============== FOR SERVICE PROVIDER ===================
 
@@ -124,16 +114,16 @@ Route::middleware([
 
     // Profile
     Route::get('/profile', SproviderProfileComponent::class)->name('profile');
-    Route::get('/profile/edit', EditSproviderProfileComponent::class)->name('edit_profile');
+    Route::get('/profile/edit', EditSproviderProfileComponent::class)->name('editProfile');
 
     // Services
-    Route::get('/service/add', AddSproviderServiceComponent::class)->name('add_service');
-    Route::get('/service/edit/{service_id}', EditSproviderServiceComponent::class)->name('edit_service');
+    Route::get('/service/add', AddSproviderServiceComponent::class)->name('addService');
+    Route::get('/service/edit/{serviceId}', EditSproviderServiceComponent::class)->name('editService');
     Route::get('/service/list', SproviderServicesListComponent::class)->name('list');
 
     // Bookings
-    Route::get('/bookings/manage', [BookingController::class, 'manage'])->name('bookings_manage');
-    Route::put('/bookings/{id}', [BookingController::class, 'update'])->name('bookings_update');
+    Route::get('/bookings/manage', [BookingController::class, 'manage'])->name('bookingManage');
+    Route::put('/bookings/{id}', [BookingController::class, 'update'])->name('bookingUpdate');
 });
 
 //===================== FOR ADMIN ==================
@@ -147,24 +137,24 @@ Route::middleware([
     // Dashboard
     Route::get('/dashboard', AdminDashboardComponent::class)->name('dashboard');
     //Admin Categories
-    Route::get('/service-categories', AdminServiceCategoryComponent::class)->name('service_categories');
-    Route::get('/service-category/add', AdminAddServiceCategoryComponent::class)->name('add_service_category');
-    Route::get('/service-category/edit/{category_id}', AdminEditServiceCategoryComponent::class)->name('edit_service_category');
+    Route::get('/serviceCategories', AdminServiceCategoryComponent::class)->name('serviceCategories');
+    Route::get('/serviceCategory/add', AdminAddServiceCategoryComponent::class)->name('addServiceCategory');
+    Route::get('/serviceCategory/edit/{categoryId}', AdminEditServiceCategoryComponent::class)->name('editServiceCategory');
     //Admin Services
-    Route::get('/all-services', AdminServicesComponent::class)->name('all_services');
-    Route::get('/service/add', AdminAddServiceComponent::class)->name('add_service');
-    Route::get('/service/edit/{id}', AdminEditServiceComponent::class)->name('edit_service');
+    Route::get('/allServices', AdminServicesComponent::class)->name('allServices');
+    Route::get('/service/add', AdminAddServiceComponent::class)->name('addService');
+    Route::get('/service/edit/{id}', AdminEditServiceComponent::class)->name('editService');
     //Service Status
-    Route::get('service/service_status', AdminServiceStatusComponent::class)->name('service_status');
+    Route::get('service/serviceStatus', AdminServiceStatusComponent::class)->name('serviceStatus');
     //Service By Category
-    Route::get('/service/{category_slug}/services', AdminServicesByCategoryComponent::class)->name('services_by_category');
+    Route::get('/service/{category_slug}/services', AdminServicesByCategoryComponent::class)->name('servicesByCategory');
     //Sliders
     Route::get('/slider', AdminSliderComponent::class)->name('slider');
-    Route::get('/slider/add', AdminAddSlideComponent::class)->name('add_slide');
-    Route::get('/slider/edit/{slide_id}', AdminEditSlideComponent::class)->name('edit_slide');
+    Route::get('/slider/add', AdminAddSlideComponent::class)->name('addSlide');
+    Route::get('/slider/edit/{slideId}', AdminEditSlideComponent::class)->name('editSlide');
     //Contact
     Route::get('/contacts', AdminContactComponent::class)->name('contacts');
     //Service Providers
-    Route::get('/service-providers', AdminServiceProvidersComponent::class)->name('service_providers');
+    Route::get('/serviceProviders', AdminServiceProvidersComponent::class)->name('serviceProviders');
 });
 

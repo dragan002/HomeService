@@ -13,7 +13,7 @@ class EditSproviderServiceComponent extends Component
 {
     use WithFileUploads;
 
-    public $service_id;
+    public $serviceId;
     public $name;
     public $slug;
     public $tagline;
@@ -29,12 +29,12 @@ class EditSproviderServiceComponent extends Component
     public $newImage;
     public $newThumbnail;
 
-    public function mount($service_id) {
-        $service = Service::where('id', $service_id)->where('user_id', Auth::id())->first();
+    public function mount($serviceId) {
+        $service = Service::where('id', $serviceId)->where('user_id', Auth::id())->first();
         if (!$service) {
             abort(403, 'Unauthorized Action');
         }
-        $this->service_id = $service->id;
+        $this->serviceId = $service->id;
         $this->name = $service->name;
         $this->slug = $service->slug;
         $this->tagline = $service->tagline;
@@ -102,7 +102,7 @@ class EditSproviderServiceComponent extends Component
             ]);
         }
 
-        $service = Service::find($this->service_id);
+        $service = Service::find($this->serviceId);
         $service->name = $this->name;
         $service->slug = $this->slug;
         $service->tagline = $this->tagline;

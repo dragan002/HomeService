@@ -92,12 +92,11 @@
                         @if(Auth::user()->utype === 'ADM')
                         <li class="login-form"> <a href="#" title="Registruj se">Moj nalog (Admin)</a>
                             <ul class="drop-down one-column hover-fade">
-                                <li><a href="{{ route('admin.dashboard') }}">Kontrolna tabla</a></li>
-                                <li><a href="{{ route('admin.service_categories') }}">Kategorije usluga</a></li>
-                                <li><a href="{{ route('admin.all_services') }}">Sve usluge</a></li>
+                                <li><a href="{{ route('admin.serviceCategories') }}">Kategorije usluga</a></li>
+                                <li><a href="{{ route('admin.allServices') }}">Sve usluge</a></li>
                                 <li><a href="{{ route('admin.slider') }}">Upravljanje slajderom</a></li>
                                 <li><a href="{{ route('admin.contacts') }}">Svi kontakti</a></li>
-                                <li><a href="{{ route('admin.service_providers') }}">Svi pružaoci usluga</a></li>
+                                <li><a href="{{ route('admin.serviceProviders') }}">Svi pružaoci usluga</a></li>
                                 <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Odjava</a></li>
                             </ul>
                         </li>
@@ -105,11 +104,10 @@
                         @elseif(Auth::user()->utype === 'SVP')
                         <li class="login-form"> <a href="#" title="Registruj se">Moj nalog (Pružalac usluga)</a>
                             <ul class="drop-down one-column hover-fade">
-                                <li><a href="{{ route('sprovider.dashboard') }}">Kontrolna tabla</a></li>
                                 <li><a href="{{ route('sprovider.profile') }}">Profil</a></li>
-                                <li><a href="{{ route('sprovider.add_service') }}">Dodaj uslugu</a></li>
+                                <li><a href="{{ route('sprovider.addService') }}">Dodaj uslugu</a></li>
                                 <li><a href="{{ route('sprovider.list') }}">Moje usluge</a></li>
-                                <li><a href="{{ route('sprovider.bookings_manage') }}">Rezervisane usluge</a></li>
+                                <li><a href="{{ route('sprovider.bookingManage') }}">Rezervisane usluge</a></li>
                                 <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Odjava</a></li>    
                             </ul>
                         </li>
@@ -117,7 +115,6 @@
                         @else
                         <li class="login-form"> <a href="#" title="Registruj se">Moj nalog (Korisnik)</a>
                             <ul class="drop-down one-column hover-fade">
-                                <li><a href="{{ route('customer.dashboard') }}">Kontrolna tabla</a></li>
                                 <li><a href="{{ route('bookings.index')}}">Moji statusi rezervacija</a></li>
                                 <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Odjava</a></li>
                             </ul>

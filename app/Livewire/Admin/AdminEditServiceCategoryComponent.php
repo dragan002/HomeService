@@ -11,16 +11,16 @@ use App\Models\ServiceCategory;
 class AdminEditServiceCategoryComponent extends Component
 {
     use WithFileUploads;
-    public $category_id;
+    public $categoryId;
     public $name;
     public $slug;
     public $image;
     public $featured;
     public $newImage;
 
-    public function mount($category_id) {
-        $scategory = ServiceCategory::find($category_id);
-        $this->category_id = $scategory->id;
+    public function mount($categoryId) {
+        $scategory = ServiceCategory::find($categoryId);
+        $this->categoryId = $scategory->id;
         $this->name = $scategory->name;
         $this->slug = $scategory->slug;
         $this->image = $scategory->image;
@@ -55,7 +55,7 @@ class AdminEditServiceCategoryComponent extends Component
             ]);
         }
 
-        $scategory = ServiceCategory::find($this->category_id);
+        $scategory = ServiceCategory::find($this->categoryId);
         $scategory->name = $this->name;
         $scategory->slug = $this->slug;
         $scategory->featured = $this->featured;
