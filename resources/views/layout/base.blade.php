@@ -33,7 +33,7 @@
                         <a href="/"><img src="images/logo.png"></a>
                     </li> --}}
 
-                    <li> <a href="{{ route('service.service_categories') }}">Kategorije Usluga</a>
+                    <li> <a href="{{ route('service.serviceCategories') }}">Kategorije Usluga</a>
 
                         <li> <a href="#">Aparati</a>
                             <ul class="drop-down one-column hover-fade">

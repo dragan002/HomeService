@@ -48,41 +48,44 @@ Broadcast::channel('messages.{receiverId}', function ($user, $receiverId) {
 });
 
 Route::get('/', HomeComponent::class)->name('home');
-
-Route::get('/service-categories', ServiceCategoriesComponent::class)->name('service.service_categories');
-Route::get('/{category_slug}/services', ServicesByCategoryComponent::class)->name('service.services_by_category');
-Route::get('/service/{service_slug}', ServiceDetailsComponent::class)->name('service.service_details');
+Route::as('service.')->group(function() {
+    Route::get('/serviceCategories', ServiceCategoriesComponent::class)->name('serviceCategories');
+    Route::get('{categorySlug}/service', ServicesByCategoryComponent::class)->name('serviceByCategory');
+    Route::get('/service/{serviceSlug}', ServiceDetailsComponent::class)->name('serviceDetails');
+});
 
 // ===== SEARCH AND AUTOCOMPLETE ======
 
-Route::prefix('search')->group(function () {
-    Route::get('/autocomplete', [SearchController::class, 'autocomplete'])->name('search.autocomplete');
-    Route::post('/', [SearchController::class, 'searchService'])->name('search.service');
+Route::prefix('search')->as('search.')->controller(SearchController::class)->group(function () {
+    Route::get('/autocomplete','autocomplete')->name('autocomplete');
+    Route::post('/', 'searchService')->name('service');
 });
 
 // =====END SEARCH AND AUTOCOMPLETE ======
-
 
 Route::get('/change-location', ChangeLocationComponent::class)->name('change_location');
 Route::get('/contact-us', ContactComponent::class)->name('contact');
 
 // =============FOR MESSAGES ===========
 
-Route::resource('messages', MessageController::class)->only([
-    'index', 'store', 'show', 'destroy'
-]);
-Route::post('/messages/{message}/reply', [MessageController::class, 'sendAnswer'])->name('message.reply');
+Route::prefix('messages')->as('messages.')->controller(MessageController::class)->group(function() {
+    Route::get('/', 'index')->name('index');
+    Route::post('/', 'store')->name('store');
+    Route::get('/{message}', 'show')->name('show');
+    Route::delete('/{message}', 'destroy')->name('destroy');
+
+    Route::post('/{message}/reply', 'sendAnswer')->name('reply');
+});
 
 // =============  END FOR MESSAGES ===========
 
 //  ============== BOOKING AND EMAIL NOTIFICATION =========
 
 Route::middleware(['auth'])->group(function () {
-    // Bookings routes
-    Route::prefix('bookings')->as('bookings.')->group(function () {
-        Route::get('/', [BookingController::class, 'index'])->name('index');
-        Route::get('/{service}/book', [BookingController::class, 'create'])->name('create');
-        Route::post('/{service}/book', [BookingController::class, 'store'])->name('store');
+    Route::prefix('bookings')->as('bookings.')->controller(BookingController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/{service}/book', 'create')->name('create');
+        Route::post('/{service}/book','store')->name('store');
     });
 
     // Notifications routes
@@ -93,9 +96,8 @@ Route::middleware(['auth'])->group(function () {
 
 //  ============== END OF BOOKING AND EMAIL NOTIFICATION =========
 
-
 //To check profile of provider
-Route::get('/providers-profile-information/{userId}', ProvidersProfileInformationComponent::class)->name('providersprofile');
+Route::get('/providersProfileInformation/{userId}', ProvidersProfileInformationComponent::class)->name('providersProfile');
 
 //For Customers
 Route::middleware([

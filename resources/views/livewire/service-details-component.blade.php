@@ -83,7 +83,7 @@
                                                     <li><i class="fa fa-minus"></i>{{ $exclusion }}</li>
                                                 @endforeach
                                             </ul>
-                                            <h2>Uslugu nudi: <a href="{{ route('providersprofile',['userId'=>$service->user->id]) }}">{{ $service->user->name }}</a></h2>
+                                            <h2>Uslugu nudi: <a href="{{ route('providersProfile',['userId'=>$service->user->id]) }}">{{ $service->user->name }}</a></h2>
                                             <h2>Pozovite <span>{{ $service->user->name }}</span> na broj <a href="tel:{{ $service->user->phone }}">{{ $service->user->phone }}</a></h2>
                                         </div>
                                     </div>
@@ -149,7 +149,7 @@
                                     <h3>Related Service</h3>
                                     <div class="col-md-12 col-sm-6 col-xs-12 bg-dark color-white padding-top-mini"
                                         style="max-width: 360px">
-                                        <a href="{{ route('service.service_details', ['service_slug'=> $r_service->slug]) }}">
+                                        <a href="{{ route('service.serviceDetails', ['serviceSlug'=> $r_service->slug]) }}">
                                             <div class="img-hover">
                                                 <img src="{{ asset('images/services/thumbnails') }}/{{ $r_service->thumbnail }}" alt="{{ $r_service->name }}"
                                                     class="img-responsive">
@@ -160,7 +160,7 @@
                                                 </h3>
                                                 <hr class="separator">
                                                 <p>{{ $r_service->name }}</p>
-                                                <div class="content-btn"><a href="{{ route('service.service_details', ['service_slug'=> $r_service->slug]) }}"
+                                                <div class="content-btn"><a href="{{ route('service.serviceDetails', ['serviceSlug'=> $r_service->slug]) }}"
                                                         class="btn btn-warning">View Details</a></div>
                                                 <div class="price"><span>&#36;</span><b>From</b>{{ $r_service->price }}</div>
                                             </div>

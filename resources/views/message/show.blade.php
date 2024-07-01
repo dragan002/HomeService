@@ -23,7 +23,7 @@
         @endforeach
     @endif
 
-    <form action="{{ route('message.reply', $conversation->id) }}" method="POST" class="mt-4">
+    <form action="{{ route('messages.reply', $conversation->id) }}" method="POST" class="mt-4">
         @csrf
         <div class="form-group mb-3">
             <label for="message">Reply</label>
