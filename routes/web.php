@@ -63,8 +63,8 @@ Route::prefix('search')->as('search.')->controller(SearchController::class)->gro
 
 // =====END SEARCH AND AUTOCOMPLETE ======
 
-Route::get('/change-location', ChangeLocationComponent::class)->name('change_location');
-Route::get('/contact-us', ContactComponent::class)->name('contact');
+Route::get('/updateoLcation', ChangeLocationComponent::class)->name('updateLocation');
+Route::get('/contactUs', ContactComponent::class)->name('contact');
 
 // =============FOR MESSAGES ===========
 
@@ -147,7 +147,7 @@ Route::middleware([
     //Service Status
     Route::get('service/serviceStatus', AdminServiceStatusComponent::class)->name('serviceStatus');
     //Service By Category
-    Route::get('/service/{category_slug}/services', AdminServicesByCategoryComponent::class)->name('servicesByCategory');
+    Route::get('/service/{categorySlug}/services', AdminServicesByCategoryComponent::class)->name('servicesByCategory');
     //Sliders
     Route::get('/slider', AdminSliderComponent::class)->name('slider');
     Route::get('/slider/add', AdminAddSlideComponent::class)->name('addSlide');
