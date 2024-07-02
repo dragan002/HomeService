@@ -30,6 +30,7 @@ class AdminAddServiceComponent extends Component
 
     protected $serviceProcessor;
     protected $serviceRepository;
+    
 
     public function __construct() 
     {
@@ -62,6 +63,7 @@ class AdminAddServiceComponent extends Component
             'description' => $this->description,
             'inclusion' => str_replace('\n', '|', trim($this->inclusion)),
             'exclusion' => str_replace('\n', '|', trim($this->exclusion)),
+            'user_id' => Auth::id(),
         ];
 
         try {

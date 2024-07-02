@@ -4,16 +4,17 @@ namespace App\Livewire\Sprovider;
 
 use App\Models\Service;
 use Livewire\Component;
-use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
-use Illuminate\Support\Carbon;
 use App\Models\ServiceCategory;
+use App\Services\ServiceProcessor;
 use Illuminate\Support\Facades\Auth;
+use App\Repositories\ServiceRepository;
 
 class AddSproviderServiceComponent extends Component
 {
 
     use WithFileUploads;
+
     public $name;
     public $slug;
     public $tagline;
@@ -27,69 +28,63 @@ class AddSproviderServiceComponent extends Component
     public $inclusion;
     public $exclusion;
 
-    public function generateSlug() {
-        $this->slug = Str::slug($this->name, '-');
+    protected $serviceProcessor;
+    protected $serviceRepository;
+
+    public function __construct() 
+    {
+        $this->serviceProcessor = new ServiceProcessor;
+        $this->serviceRepository = new ServiceRepository;
     }
 
-    public function updated($fields) {
-        $this->validateOnly($fields, [
-            'name'=> 'required',
-            'slug'=> 'required',
-            'tagline'=> 'required',
-            'service_category_id'=> 'required',
-            'price'=> 'required',
-            'discount' => 'nullable|numeric', 
-            'discount_type' => 'nullable|in:fixed,percentage',
-            'image'=> 'required|mimes:png,jpg',
-            'thumbnail'=> 'required|mimes:png,jpg',
-            'description'=> 'required',
-            'inclusion'=> 'required',
-            'exclusion'=> 'required',
+    public function createService(): void 
+    {
+        $this->validate([
+            'name' => 'required',
+            'service_category_id' => 'required',
+            'price' => 'required',
+            'image' => 'required|mimes:png,jpg',
+            'thumbnail' => 'required|mimes:png,jpg',
+            'tagline' => 'required',
+            'description' => 'required',
+            'inclusion' => 'required',
+            'exclusion' => 'required',
         ]);
+
+        $data = [
+            'name' => $this->name,
+            'slug' => $this->serviceProcessor->generateSlug($this->name),
+            'tagline' => $this->tagline,
+            'service_category_id' => $this->service_category_id,
+            'price' => $this->price,
+            'discount' => $this->discount,
+            'discount_type' => $this->discount_type,
+            'description' => $this->description,
+            'inclusion' => str_replace('\n', '|', trim($this->inclusion)),
+            'exclusion' => str_replace('\n', '|', trim($this->exclusion)),
+            'user_id' => Auth::id(),
+        ];
+
+
+        try {
+            $service = $this->serviceRepository->createService($data);
+
+            $imageName = $this->serviceProcessor->uploadImage($this->image, 'image');
+            $thumbnailName = $this->serviceProcessor->uploadImage($this->thumbnail, 'thumbnail');
+
+            $this->serviceRepository->updateServiceImages($service, $imageName, $thumbnailName);
+            
+            session()->flash('message', 'Service has been created successfully');
+        } catch(\Exception $e) {
+            \Log::error('Error creating service: ' . $e->getMessage());
+            session()->flash('error', 'An error occurred while creating the Service.');
+        }
+    }
+    public function generateSlug(): void
+    {
+        $this->slug = $this->serviceProcessor->generateSlug($this->name);
     }
 
-    public function createService() {
-        $this->validate([ 
-            'name'=> 'required',
-            'slug'=> 'required',
-            'tagline'=> 'required',
-            'service_category_id'=> 'required',
-            'price'=> 'required',
-            'discount' => 'nullable|numeric', 
-            'discount_type' => 'nullable|in:fixed,percentage',
-            'image'=> 'required|mimes:png,jpg',
-            'thumbnail'=> 'required|mimes:png,jpg',
-            'description'=> 'required',
-            'inclusion'=> 'required',
-            'exclusion'=> 'required',
-        ]);
-    
-        $service = new Service();
-        $service->name = $this->name;
-        $service->slug = $this->slug;
-        $service->tagline = $this->tagline;
-        $service->service_category_id = $this->service_category_id;
-        $service->price = $this->price;
-        $service->discount = $this->discount;
-        $service->discount_type = $this->discount_type;
-        $service->description = $this->description;
-        $service->inclusion = str_replace('\n', '|', trim($this->inclusion));
-        $service->exclusion = str_replace('\n', '|', trim($this->exclusion));
-        
-        $imageName = Carbon::now()->timestamp . '.' . $this->thumbnail->getClientOriginalExtension();
-        $this->thumbnail->storeAs('services/thumbnails', $imageName);
-        $service->thumbnail = $imageName;
-    
-        $imageName2 = Carbon::now()->timestamp . '.' . $this->image->getClientOriginalExtension();
-        $this->image->storeAs('services', $imageName2);
-        $service->image = $imageName2;
-    
-        $service->user_id = Auth::id();
-        
-        $service->save();
-        session()->flash('message', 'Service has been created!');
-    }
-    
     public function render()
     {
         $categories = ServiceCategory::all();
