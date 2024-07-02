@@ -5,9 +5,11 @@ namespace App\Livewire\Admin;
 use App\Models\Service;
 use Livewire\Component;
 use Illuminate\Support\Str;
+use Livewire\WithFileUploads;
 use Illuminate\Support\Carbon;
 use App\Models\ServiceCategory;
-use Livewire\WithFileUploads;
+use App\Services\ServiceProcessor;
+use App\Repositories\ServiceRepository;
 
 class AdminAddServiceComponent extends Component
 {
@@ -26,14 +28,18 @@ class AdminAddServiceComponent extends Component
     public $inclusion;
     public $exclusion;
 
-    public function generateSlug(): void
+    protected $serviceProcessor;
+    protected $serviceRepository;
+
+    public function __construct() 
     {
-        $this->slug = Str::slug($this->name, '-');
+        $this->serviceProcessor = new ServiceProcessor;
+        $this->serviceRepository = new ServiceRepository;
     }
 
-    public function validateInput(): void 
+    public function createService(): void 
     {
-        $this->validate([
+        $data = $this->validate([
             'name' => 'required',
             'slug' => 'required',
             'tagline' => 'required',
@@ -45,54 +51,28 @@ class AdminAddServiceComponent extends Component
             'inclusion' => 'required',
             'exclusion' => 'required',
         ]);
-    }
-    
-    private function createServiceInstance(): Service
-    {
-        $service = new Service();
-        $service->name = $this->name;
-        $service->slug = $this->slug;
-        $service->tagline = $this->tagline;
-        $service->service_category_id = $this->service_category_id;
-        $service->price = $this->price;
-        $service->discount = $this->discount;
-        $service->discount_type = $this->discount_type;
-        $service->description = $this->description;
-        $service->inclusion = str_replace('\n', '|', trim($this->inclusion));
-        $service->exclusion = str_replace('\n', '|', trim($this->exclusion));
-        return $service;
-    }
-
-    private function uploadImage(string $field): string 
-    {
-        $imageName = Carbon::now()->timestamp . $field . '.' . $this->{$field}->getClientOriginalExtension();
-        $this->{$field}->storeAs('services/' . ($field === 'thumbnail' ? 'thumbnails' : ''), $imageName);
-        return $imageName;
-    }
-
-    private function saveService(Service $service, string $imageName, string $thumbnailName): void 
-    {
-        $service->image = $imageName;
-        $service->thumbnail = $thumbnailName;
-        $service->save();
-    }
-
-    public function createService(): void 
-    {
-        $this->validateInput();
+        
+        $data['slug'] = $this->generateSlug();
+        $data['inclusion'] = str_replace('\n', '|', trim($this->inclusion));
+        $data['exclusion'] = str_replace('\n', '|', trim($this->exclusion));
 
         try {
-            $service = $this->createServiceInstance();
-            $imageName = $this->uploadImage('image');
-            $thumbnailName = $this->uploadImage('thumbnail');
+            $service = $this->serviceRepository->createService($data);
+            $imageName = $this->serviceProcessor->uploadImage($this->image, 'image');
+            $thumbnailName = $this->serviceProcessor->uploadImage($this->thumbnail, 'thumbnails');
 
-            $this->saveService($service, $imageName, $thumbnailName);
+            $this->serviceRepository->updateServiceImages($service, $imageName, $thumbnailName);
 
             session()->flash('message', 'Service has been created successfully');
-        } catch (\Exception $e) {
-            \Log::error($e->getMessage());
-            session()->flash('error', 'An error occurred while creating the Service. Please check AdminAddServiceComponent');
+        } catch(\Exception $e) {
+            \Log::error('Error creating service: ' . $e->getMessage());
+            session()->flash('error', 'An error occurred while creating the Service.');
         }
+    }
+
+    public function generateSlug(): void
+    {
+        $this->slug = $this->serviceProcessor->generateSlug($this->name);
     }
 
     public function render() 
