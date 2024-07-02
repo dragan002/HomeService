@@ -12,6 +12,7 @@ use Livewire\WithFileUploads;
 class AdminAddServiceComponent extends Component
 {
     use WithFileUploads;
+
     public $name;
     public $slug;
     public $tagline;
@@ -25,43 +26,29 @@ class AdminAddServiceComponent extends Component
     public $inclusion;
     public $exclusion;
 
-    public function generateSlug() {
+    public function generateSlug(): void
+    {
         $this->slug = Str::slug($this->name, '-');
     }
 
-    public function updated($fields) {
-        $this->validateOnly($fields, [
-            'name'=> 'required',
-            'slug'=> 'required',
-            'tagline'=> 'required',
-            'service_category_id'=> 'required',
-            'price'=> 'required',
-            'discount'=> 'required',
-            'discount_type'=> 'required',
-            'image'=> 'required|mimes:png,jpg',
-            'thumbnail'=> 'required|mimes:png,jpg',
-            'description'=> 'required',
-            'inclusion'=> 'required',
-            'exclusion'=> 'required',
+    public function validateInput(): void 
+    {
+        $this->validate([
+            'name' => 'required',
+            'slug' => 'required',
+            'tagline' => 'required',
+            'service_category_id' => 'required',
+            'price' => 'required',
+            'image' => 'required|mimes:png,jpg',
+            'thumbnail' => 'required|mimes:png,jpg',
+            'description' => 'required',
+            'inclusion' => 'required',
+            'exclusion' => 'required',
         ]);
     }
-
-    public function createService() {
-        $this->validate([ 
-            'name'=> 'required',
-            'slug'=> 'required',
-            'tagline'=> 'required',
-            'service_category_id'=> 'required',
-            'price'=> 'required',
-            'discount'=> 'required',
-            'discount_type'=> 'required',
-            'image'=> 'required|mimes:png,jpg',
-            'thumbnail'=> 'required|mimes:png,jpg',
-            'description'=> 'required',
-            'inclusion'=> 'required',
-            'exclusion'=> 'required',
-        ]);
     
+    private function createServiceInstance(): Service
+    {
         $service = new Service();
         $service->name = $this->name;
         $service->slug = $this->slug;
@@ -73,22 +60,45 @@ class AdminAddServiceComponent extends Component
         $service->description = $this->description;
         $service->inclusion = str_replace('\n', '|', trim($this->inclusion));
         $service->exclusion = str_replace('\n', '|', trim($this->exclusion));
-        
-        $imageName = Carbon::now()->timestamp . '.' . $this->thumbnail->getClientOriginalExtension();
-        $this->thumbnail->storeAs('services/thumbnails', $imageName);
-        $service->thumbnail = $imageName;
-    
-        $imageName2 = Carbon::now()->timestamp . '.' . $this->image->getClientOriginalExtension();
-        $this->image->storeAs('services', $imageName2);
-        $service->image = $imageName2;
-    
-        $service->save();
-        session()->flash('message', 'Service has been created!');
+        return $service;
     }
-    
-    public function render()
+
+    private function uploadImage(string $field): string 
+    {
+        $imageName = Carbon::now()->timestamp . '.' . $this->{$field}->getClientOriginalExtension();
+        $this->{$field}->storeAs('services/' . ($field === 'thumbnail' ? 'thumbnails' : 'images'), $imageName);
+        return $imageName;
+    }
+
+    private function saveService(Service $service, string $imageName, string $thumbnailName): void 
+    {
+        $service->image = $imageName;
+        $service->thumbnail = $thumbnailName;
+        $service->save();
+    }
+
+    public function createService(): void 
+    {
+        $this->validateInput();
+
+        try {
+            $service = $this->createServiceInstance();
+            $imageName = $this->uploadImage('image');
+            $thumbnailName = $this->uploadImage('thumbnail');
+
+            $this->saveService($service, $imageName, $thumbnailName);
+
+            session()->flash('message', 'Service has been created successfully');
+        } catch (\Exception $e) {
+            \Log::error($e->getMessage());
+            session()->flash('error', 'An error occurred while creating the Service. Please check AdminAddServiceComponent');
+        }
+    }
+
+    public function render() 
     {
         $categories = ServiceCategory::all();
-        return view('livewire.admin.admin-add-service-component', ['categories' => $categories])->layout('layout.base');
+        return view('livewire.admin.admin-add-service-component', ['categories' => $categories])
+            ->layout('layout.base');
     }
 }

@@ -3,62 +3,69 @@
 namespace App\Livewire\Admin;
 
 use Livewire\Component;
-
-use illuminate\Support\Str;
+use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 use App\Models\ServiceCategory;
 use Livewire\WithFileUploads;
 
-
 class AdminAddServiceCategoryComponent extends Component
 {
-    use WithFileUploads; 
+    use WithFileUploads;
+
     public $name;
     public $slug;
     public $image;
 
-    public function generateSlug(): void {
+    public function generateSlug(): void
+    {
         $this->slug = Str::slug($this->name, '-');
     }
 
-   public function storeServiceCategory() {
-    $this->validate([
-        'name' => 'required',
-        'slug' => 'required',
-        'image' => 'required|mimes:jpeg,png'
-    ]);
+    public function storeServiceCategory(): void
+    {
+        $this->validateInput();
 
-    try {
-        $serviceCategory = $this->createServiceCategory();
-        $imageName = $this->uploadImage();
-
-        $this->saveCategory($serviceCategory, $imageName);
-        
-        session()->flash('message', 'Category has been created successfully');
-    } catch (\Exception $e){
-        \Log::error($e->getMessage());
-        session()->flash('error', 'An error occurred while creating the category. Please check AdminAddServiceCategoryComponent');
+        try {
+            $serviceCategory = $this->createServiceCategory();
+            $imageName = $this->uploadImage();
+            $this->saveCategory($serviceCategory, $imageName);
+            
+            session()->flash('message', 'Category has been created successfully');
+        } catch (\Exception $e) {
+            \Log::error($e->getMessage());
+            session()->flash('error', 'An error occurred while creating the category. Please check AdminAddServiceCategoryComponent');
+        }
     }
-   }
 
-   private function createServiceCategory() {
-    
-    $serviceCategory = new ServiceCategory();
-    $serviceCategory->name = $this->name;
-    $serviceCategory->slug = $this->slug;
-    return $serviceCategory;
-   }
+    private function validateInput(): void
+    {
+        $this->validate([
+            'name' => 'required',
+            'slug' => 'required',
+            'image' => 'required|mimes:jpeg,png'
+        ]);
+    }
 
-   public function uploadImage(): string {
-    $imageName = Carbon::now()->timestamp . '.' . $this->image->extension();
-    $this->image->storeAs('categories', $imageName);
-    return $imageName;
-   }
+    private function createServiceCategory(): ServiceCategory
+    {
+        $serviceCategory = new ServiceCategory();
+        $serviceCategory->name = $this->name;
+        $serviceCategory->slug = $this->slug;
+        return $serviceCategory;
+    }
 
-   public function saveCategory(ServiceCategory $serviceCategory, string $imageName): void {
-    $serviceCategory->image = $imageName;
-    $serviceCategory->save();
-   }
+    private function uploadImage(): string
+    {
+        $imageName = Carbon::now()->timestamp . '.' . $this->image->extension();
+        $this->image->storeAs('categories', $imageName);
+        return $imageName;
+    }
+
+    private function saveCategory(ServiceCategory $serviceCategory, string $imageName): void
+    {
+        $serviceCategory->image = $imageName;
+        $serviceCategory->save();
+    }
 
     public function render()
     {
