@@ -39,37 +39,45 @@ class AdminAddServiceComponent extends Component
 
     public function createService(): void 
     {
-        $data = $this->validate([
+        $this->validate([
             'name' => 'required',
-            'slug' => 'required',
-            'tagline' => 'required',
             'service_category_id' => 'required',
             'price' => 'required',
             'image' => 'required|mimes:png,jpg',
             'thumbnail' => 'required|mimes:png,jpg',
+            'tagline' => 'required',
             'description' => 'required',
             'inclusion' => 'required',
             'exclusion' => 'required',
         ]);
-        
-        $data['slug'] = $this->generateSlug();
-        $data['inclusion'] = str_replace('\n', '|', trim($this->inclusion));
-        $data['exclusion'] = str_replace('\n', '|', trim($this->exclusion));
+
+        $data = [
+            'name' => $this->name,
+            'slug' => $this->serviceProcessor->generateSlug($this->name),
+            'tagline' => $this->tagline,
+            'service_category_id' => $this->service_category_id,
+            'price' => $this->price,
+            'discount' => $this->discount,
+            'discount_type' => $this->discount_type,
+            'description' => $this->description,
+            'inclusion' => str_replace('\n', '|', trim($this->inclusion)),
+            'exclusion' => str_replace('\n', '|', trim($this->exclusion)),
+        ];
 
         try {
             $service = $this->serviceRepository->createService($data);
+
             $imageName = $this->serviceProcessor->uploadImage($this->image, 'image');
-            $thumbnailName = $this->serviceProcessor->uploadImage($this->thumbnail, 'thumbnails');
+            $thumbnailName = $this->serviceProcessor->uploadImage($this->thumbnail, 'thumbnail');
 
             $this->serviceRepository->updateServiceImages($service, $imageName, $thumbnailName);
-
+            
             session()->flash('message', 'Service has been created successfully');
         } catch(\Exception $e) {
             \Log::error('Error creating service: ' . $e->getMessage());
             session()->flash('error', 'An error occurred while creating the Service.');
         }
     }
-
     public function generateSlug(): void
     {
         $this->slug = $this->serviceProcessor->generateSlug($this->name);

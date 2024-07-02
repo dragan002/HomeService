@@ -70,7 +70,6 @@
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" name="tagline" wire:model="tagline">
                                                 @error('tagline') <p class="text-danger">{{ $message }}</p> @enderror
-
                                             </div>
                                         </div>
                                         <div class="form-group">
