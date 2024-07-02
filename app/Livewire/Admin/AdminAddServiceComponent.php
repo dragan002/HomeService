@@ -65,8 +65,8 @@ class AdminAddServiceComponent extends Component
 
     private function uploadImage(string $field): string 
     {
-        $imageName = Carbon::now()->timestamp . '.' . $this->{$field}->getClientOriginalExtension();
-        $this->{$field}->storeAs('services/' . ($field === 'thumbnail' ? 'thumbnails' : 'images'), $imageName);
+        $imageName = Carbon::now()->timestamp . $field . '.' . $this->{$field}->getClientOriginalExtension();
+        $this->{$field}->storeAs('services/' . ($field === 'thumbnail' ? 'thumbnails' : ''), $imageName);
         return $imageName;
     }
 
