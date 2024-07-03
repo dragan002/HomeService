@@ -33,7 +33,7 @@
                                     @if(Session::has('message'))
                                         <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
                                     @endif
-                                    <form class="form-horizontal" wire:submit.prevent="createService">
+                                    <form class="form-horizontal" wire:submit.prevent="createService" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="form-group">
                                             <label for="name" class="control-label col-sm-3">Name:</label>

@@ -39,18 +39,6 @@ class AddSproviderServiceComponent extends Component
 
     public function createService(): void 
     {
-        $this->validate([
-            'name' => 'required',
-            'service_category_id' => 'required',
-            'price' => 'required',
-            'image' => 'required|mimes:png,jpg',
-            'thumbnail' => 'required|mimes:png,jpg',
-            'tagline' => 'required',
-            'description' => 'required',
-            'inclusion' => 'required',
-            'exclusion' => 'required',
-        ]);
-
         $data = [
             'name' => $this->name,
             'slug' => $this->serviceProcessor->generateSlug($this->name),
@@ -60,10 +48,14 @@ class AddSproviderServiceComponent extends Component
             'discount' => $this->discount,
             'discount_type' => $this->discount_type,
             'description' => $this->description,
+            'image' => $this->image,
+            'thumbnail' => $this->thumbnail,
             'inclusion' => str_replace('\n', '|', trim($this->inclusion)),
             'exclusion' => str_replace('\n', '|', trim($this->exclusion)),
             'user_id' => Auth::id(),
         ];
+
+        $this->serviceProcessor->validateData($data);
 
 
         try {
