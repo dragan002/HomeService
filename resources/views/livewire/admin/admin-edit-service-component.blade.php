@@ -26,7 +26,7 @@
                                         Edit Service Category
                                     </div>
                                     <div class="col-md-4">
-                                        <a href="{{ route('admin.service_status') }}" class="btn btn-info pull-right">Services Status</a>
+                                        <a href="{{ route('admin.serviceStatus') }}" class="btn btn-info pull-right">Services Status</a>
                                     </div>
                                     <div class="col-md-4">
                                         <a href="{{ route('admin.allServices') }}" class="btn btn-info pull-right">All Services</a>

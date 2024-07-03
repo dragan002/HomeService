@@ -6,9 +6,9 @@ use App\Models\Service;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\ServiceCategory;
-use App\Services\ServiceProcessor;
+use App\Processor\Services\ServiceProcessor;
 use Illuminate\Support\Facades\Auth;
-use App\Repositories\ServiceRepository;
+use App\Repositories\Service\ServiceRepository;
 
 class AddSproviderServiceComponent extends Component
 {
@@ -64,7 +64,7 @@ class AddSproviderServiceComponent extends Component
             $imageName = $this->serviceProcessor->uploadImage($this->image, 'image');
             $thumbnailName = $this->serviceProcessor->uploadImage($this->thumbnail, 'thumbnail');
 
-            $this->serviceRepository->updateServiceImages($service, $imageName, $thumbnailName);
+            $this->serviceRepository->setServiceImagesNamesAndSave($service, $imageName, $thumbnailName);
             
             session()->flash('message', 'Service has been created successfully');
         } catch(\Exception $e) {

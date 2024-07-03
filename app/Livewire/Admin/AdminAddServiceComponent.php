@@ -8,8 +8,8 @@ use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Carbon;
 use App\Models\ServiceCategory;
-use App\Services\ServiceProcessor;
-use App\Repositories\ServiceRepository;
+use App\Processor\Services\ServiceProcessor;
+use App\Repositories\Service\ServiceRepository;
 
 class AdminAddServiceComponent extends Component
 {
@@ -64,7 +64,7 @@ class AdminAddServiceComponent extends Component
             $imageName = $this->serviceProcessor->uploadImage($this->image, 'image');
             $thumbnailName = $this->serviceProcessor->uploadImage($this->thumbnail, 'thumbnail');
 
-            $this->serviceRepository->updateServiceImages($service, $imageName, $thumbnailName);
+            $this->serviceRepository->setServiceImagesNamesAndSave($service, $imageName, $thumbnailName);
             
             session()->flash('message', 'Service has been created successfully');
         } catch(\Exception $e) {
