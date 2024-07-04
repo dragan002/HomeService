@@ -35,14 +35,11 @@ class AdminEditServiceComponent extends Component
     protected $serviceProcessor;
     protected $serviceRepository;
 
-    public function __construct() 
+    public function mount($id)
     {
         $this->serviceProcessor = new ServiceProcessor;
         $this->serviceRepository = new ServiceRepository;
-    }
 
-    public function mount($id)
-    {
         $service = Service::find($id);
 
         if (!$service) {
@@ -53,7 +50,7 @@ class AdminEditServiceComponent extends Component
         $this->name = $service->name;
         $this->slug = $service->slug;
         $this->tagline = $service->tagline;
-        $this->serviceCategoryId = $service->serviceCategoryId;
+        $this->serviceCategoryId = $service->service_category_id;
         $this->price = $service->price;
         $this->discount = $service->discount;
         $this->discount_type = $service->discount_type;
@@ -71,9 +68,9 @@ class AdminEditServiceComponent extends Component
         $this->slug = $this->serviceProcessor->generateSlug($this->name);
     }
 
-    public function update($fields)
+    public function updateService()
     {
-        $this->validateOnly($fields, [
+        $this->validate([
             'name' => 'required',
             'slug' => 'required',
             'tagline' => 'required',
@@ -82,72 +79,50 @@ class AdminEditServiceComponent extends Component
             'featured' => 'nullable|boolean',
             'inclusion' => 'required',
             'exclusion' => 'required',
+            'newImage' => 'nullable|mimes:jpeg,png,jpg', // Updated image validation
+            'newThumbnail' => 'nullable|mimes:jpeg,png,jpg', // Updated thumbnail validation
         ]);
 
-        if ($this->newImage) {
-            $this->validateOnly($fields, [
-                'newImage' => 'required|mimes:jpg,png,jpeg'
-            ]);
-        }
-
-        if ($this->newThumbnail) {
-            $this->validateOnly($fields, [
-                'newThumbnail' => 'required|mimes:jpg,png,jpeg'
-            ]);
-        }
-    }
-
-    public function updateService()
-    {
-        $data = [
-            'name' => $this->name,
-            'slug' => $this->serviceProcessor->generateSlug($this->name),
-            'tagline' => $this->tagline,
-            'service_category_id' => $this->serviceCategoryId,
-            'price' => $this->price,
-            'discount' => $this->discount,
-            'discount_type' => $this->discount_type,
-            'description' => $this->description,
-            'image' => $this->image,
-            'thumbnail' => $this->thumbnail,
-            'inclusion' => str_replace('\n', '|', trim($this->inclusion)),
-            'exclusion' => str_replace('\n', '|', trim($this->exclusion)),
-            'user_id' => Auth::id(),
-        ];
-
-        $this->serviceProcessor->validateData($data);
-
-     
-        $service = Service::find($this->id);
-
-        if (!$service) {
-            abort(404); // Handle case where service is not found
-        }
-
-        $service->name = $this->name;
-        $service->slug = $this->slug;
-        $service->tagline = $this->tagline;
-        $service->price = $this->price;
-        $service->discount = $this->discount;
-        $service->discount_type = $this->discount_type;
-        $service->featured = $this->featured;
-        $service->serviceCategoryId = $this->serviceCategoryId;
-        $service->service_status = $this->service_status;
-        $service->description = $this->description;
-        $service->inclusion = $this->inclusion;
-        $service->exclusion = $this->exclusion;
-
         try {
-            $imageName = $this->serviceProcessor->changeImage($this->newImage);
-            $thumbnailName = $this->serviceProcessor->changeThumbnail($this->newThumbnail);
-    
-            $this->serviceRepository->setServiceImagesNamesAndSave($service, $imageName, $thumbnailName);
+            $service = Service::find($this->id);
+
+            if (!$service) {
+                abort(404); // Handle case where service is not found
+            }
+
+            // Update service data
+            $service->name = $this->name;
+            $service->slug = $this->slug;
+            $service->tagline = $this->tagline;
+            $service->price = $this->price;
+            $service->discount = $this->discount;
+            $service->discount_type = $this->discount_type;
+            $service->featured = $this->featured;
+            $service->service_category_id = $this->serviceCategoryId;
+            $service->service_status = $this->service_status;
+            $service->description = $this->description;
+            $service->inclusion = $this->inclusion;
+            $service->exclusion = $this->exclusion;
+
+            // Handle file uploads
+            if ($this->newImage) {
+                $imageName = $this->serviceProcessor->changeImage($this->newImage);
+                $service->image = $imageName;
+            }
+
+            if ($this->newThumbnail) {
+                $thumbnailName = $this->serviceProcessor->changeThumbnail($this->newThumbnail);
+                $service->thumbnail = $thumbnailName;
+            }
+
+            // Save updated service
+            $this->serviceRepository->updateService($service, $service->toArray());
+
             session()->flash('message', 'Service has been updated successfully');
         } catch(\Exception $e) {
-            \Log::error('Error creating service: ' . $e->getMessage());
-            session()->flash('error', 'An error occurred while creating the Service.');
+            \Log::error('Error updating service: ' . $e->getMessage());
+            session()->flash('error', 'An error occurred while updating the Service.');
         }
-
     }
 
     public function render()

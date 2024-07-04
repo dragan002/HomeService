@@ -56,4 +56,18 @@ class ServiceProcessor
         $this->newThumbnail->storeAs('services/thumbnails', $thumbnailName);
         $service->thumbnail = $thumbnailName;
     }
+
+    // public function changeImage($image)
+    // {
+    // $imageName = Carbon::now()->timestamp . "." . $image->extension();
+    // $image->storeAs('services/', $imageName);
+    // return $imageName;
+    // }
+
+    // public function changeThumbnail($thumbnail)
+    // {
+    // $thumbnailName = Carbon::now()->timestamp . "." . $thumbnail->extension();
+    // $thumbnail->storeAs('services/thumbnails', $thumbnailName);
+    // return $thumbnailName;
+    // }
 }
