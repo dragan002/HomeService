@@ -7,8 +7,12 @@ use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Carbon;
+use App\Helpers\ServiceHelpers;
 use App\Models\ServiceCategory;
-use App\Processor\Services\ServiceProcessor;
+use App\Services\ImageServices;
+use App\Validators\ServiceValidator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use App\Repositories\Service\ServiceRepository;
 
 class AdminAddServiceComponent extends Component
@@ -28,21 +32,25 @@ class AdminAddServiceComponent extends Component
     public $inclusion;
     public $exclusion;
 
-    protected $serviceProcessor;
     protected $serviceRepository;
+    protected $imageServices;
+    protected $validator;
+    protected $serviceHelpers;
     
 
     public function __construct() 
     {
-        $this->serviceProcessor = new ServiceProcessor;
         $this->serviceRepository = new ServiceRepository;
+        $this->imageServices = new ImageServices;
+        $this->validator = new ServiceValidator;
+        $this->serviceHelpers = new ServiceHelpers;
     }
 
     public function createService(): void 
     {
         $data = [
             'name' => $this->name,
-            'slug' => $this->serviceProcessor->generateSlug($this->name),
+            'slug' => $this->serviceHelpers->generateSlug($this->name),
             'tagline' => $this->tagline,
             'service_category_id' => $this->service_category_id,
             'price' => $this->price,
@@ -56,25 +64,25 @@ class AdminAddServiceComponent extends Component
             'user_id' => Auth::id(),
         ];
 
-        $this->serviceProcessor->validateData($data);
+        $this->validator->validate($data);
 
         try {
             $service = $this->serviceRepository->createService($data);
 
-            $imageName = $this->serviceProcessor->uploadImage($this->image, 'image');
-            $thumbnailName = $this->serviceProcessor->uploadImage($this->thumbnail, 'thumbnail');
+            $imageName = $this->imageServices->uploadImage($this->image, 'image');
+            $thumbnailName = $this->imageServices->uploadImage($this->thumbnail, 'thumbnail');
 
             $this->serviceRepository->setServiceImagesNamesAndSave($service, $imageName, $thumbnailName);
             
-            session()->flash('message', 'Service has been created successfully');
+            Session::flash('message', 'Service has been created successfully');
         } catch(\Exception $e) {
             \Log::error('Error creating service: ' . $e->getMessage());
-            session()->flash('error', 'An error occurred while creating the Service.');
+            Session::flash('error', 'An error occurred while creating the Service.');
         }
     }
     public function generateSlug(): void
     {
-        $this->slug = $this->serviceProcessor->generateSlug($this->name);
+        $this->slug = $this->serviceHelpers->generateSlug($this->name);
     }
 
     public function render() 
