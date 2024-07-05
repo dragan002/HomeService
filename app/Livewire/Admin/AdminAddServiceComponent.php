@@ -7,10 +7,11 @@ use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Carbon;
+use App\Helpers\ServiceHelpers;
 use App\Models\ServiceCategory;
 use App\Services\ImageServices;
+use App\Validators\ServiceValidator;
 use Illuminate\Support\Facades\Auth;
-use App\Processor\Services\ServiceProcessor;
 use App\Repositories\Service\ServiceRepository;
 
 class AdminAddServiceComponent extends Component
@@ -33,13 +34,16 @@ class AdminAddServiceComponent extends Component
     protected $serviceProcessor;
     protected $serviceRepository;
     protected $imageServices;
+    protected $validator;
+    protected $serviceHelpers;
     
 
     public function __construct() 
     {
-        $this->serviceProcessor = new ServiceProcessor;
         $this->serviceRepository = new ServiceRepository;
         $this->imageServices = new ImageServices;
+        $this->validator = new ServiceValidator;
+        $this->serviceHelpers = new ServiceHelpers;
     }
 
     public function createService(): void 
@@ -60,7 +64,7 @@ class AdminAddServiceComponent extends Component
             'user_id' => Auth::id(),
         ];
 
-        $this->serviceProcessor->validateData($data);
+        $this->validator->validate($data);
 
         try {
             $service = $this->serviceRepository->createService($data);
@@ -78,7 +82,7 @@ class AdminAddServiceComponent extends Component
     }
     public function generateSlug(): void
     {
-        $this->slug = $this->serviceProcessor->generateSlug($this->name);
+        $this->slug = $this->serviceHelpers->generateSlug($this->name);
     }
 
     public function render() 
