@@ -12,6 +12,7 @@ use App\Models\ServiceCategory;
 use App\Services\ImageServices;
 use App\Validators\ServiceValidator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use App\Repositories\Service\ServiceRepository;
 
 class AdminAddServiceComponent extends Component
@@ -31,7 +32,6 @@ class AdminAddServiceComponent extends Component
     public $inclusion;
     public $exclusion;
 
-    protected $serviceProcessor;
     protected $serviceRepository;
     protected $imageServices;
     protected $validator;
@@ -50,7 +50,7 @@ class AdminAddServiceComponent extends Component
     {
         $data = [
             'name' => $this->name,
-            'slug' => $this->serviceProcessor->generateSlug($this->name),
+            'slug' => $this->serviceHelpers->generateSlug($this->name),
             'tagline' => $this->tagline,
             'service_category_id' => $this->service_category_id,
             'price' => $this->price,
@@ -74,10 +74,10 @@ class AdminAddServiceComponent extends Component
 
             $this->serviceRepository->setServiceImagesNamesAndSave($service, $imageName, $thumbnailName);
             
-            session()->flash('message', 'Service has been created successfully');
+            Session::flash('message', 'Service has been created successfully');
         } catch(\Exception $e) {
             \Log::error('Error creating service: ' . $e->getMessage());
-            session()->flash('error', 'An error occurred while creating the Service.');
+            Session::flash('error', 'An error occurred while creating the Service.');
         }
     }
     public function generateSlug(): void
