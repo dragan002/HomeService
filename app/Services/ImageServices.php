@@ -27,6 +27,7 @@ class ImageServices {
         if (file_exists('images/services' . '/' . $service->image)) {
             unlink('images/services' . '/' . $service->image);
         }
+
         $imageName = Carbon::now()->timestamp . "." . $image->extension();
         $image->storeAs('services/', $imageName);
         return $imageName;
@@ -37,6 +38,7 @@ class ImageServices {
         if (file_exists('images/services/thumbnails' . '/' . $service->thumbnail)) {
             unlink('images/services/thumbnails' . '/' . $service->thumbnail);
         }
+        
         $thumbnailName = Carbon::now()->timestamp . "." . $thumbnail->extension();
         $thumbnail->storeAs('services/thumbnails', $thumbnailName);
         return $thumbnailName;

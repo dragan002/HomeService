@@ -49,19 +49,19 @@ class AdminAddServiceComponent extends Component
     public function createService(): void 
     {
         $data = [
-            'name' => $this->name,
-            'slug' => $this->serviceHelpers->generateSlug($this->name),
-            'tagline' => $this->tagline,
-            'service_category_id' => $this->service_category_id,
-            'price' => $this->price,
-            'discount' => $this->discount,
-            'discount_type' => $this->discount_type,
-            'description' => $this->description,
-            'image' => $this->image,
-            'thumbnail' => $this->thumbnail,
-            'inclusion' => str_replace('\n', '|', trim($this->inclusion)),
-            'exclusion' => str_replace('\n', '|', trim($this->exclusion)),
-            'user_id' => Auth::id(),
+            'name'                  => $this->name,
+            'slug'                  => $this->serviceHelpers->generateSlug($this->name),
+            'tagline'               => $this->tagline,
+            'service_category_id'   => $this->service_category_id,
+            'price'                 => $this->price,
+            'discount'              => $this->discount,
+            'discount_type'         => $this->discount_type,
+            'description'           => $this->description,
+            'image'                 => $this->image,
+            'thumbnail'             => $this->thumbnail,
+            'inclusion'             => str_replace('\n', '|', trim($this->inclusion)),
+            'exclusion'             => str_replace('\n', '|', trim($this->exclusion)),
+            'user_id'               => Auth::id(),
         ];
 
         $this->validator->validate($data);
