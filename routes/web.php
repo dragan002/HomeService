@@ -118,7 +118,7 @@ Route::middleware([
 
     // Services
     Route::get('/service/add', AddSproviderServiceComponent::class)->name('addService');
-    Route::get('/service/edit/{serviceId}', EditSproviderServiceComponent::class)->name('editService');
+    Route::get('/service/edit/{id}', EditSproviderServiceComponent::class)->name('editService');
     Route::get('/service/list', SproviderServicesListComponent::class)->name('list');
 
     // Bookings

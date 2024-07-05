@@ -33,9 +33,17 @@
                                     </div>
                                 </div>
                                 <div class="panel-body">
-                                    @if(Session::has('message'))
-                                        <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
-                                    @endif
+                                @if(session('message'))
+                                    <div class="alert alert-success">
+                                        {{ session('message') }}
+                                    </div>
+                                @endif
+                                <!-- Display error message -->
+                                @if(session('error'))
+                                    <div class="alert alert-danger">
+                                        {{ session('error') }}
+                                    </div>
+                                @endif
                                     <form class="form-horizontal" wire:submit.prevent="updateService">
                                         @csrf
                                         <div class="form-group">

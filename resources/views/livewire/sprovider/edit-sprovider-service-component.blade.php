@@ -33,10 +33,19 @@
                                     </div>
                                 </div>
                                 <div class="panel-body">
-                                    @if(Session::has('message'))
-                                        <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
-                                    @endif
-                                    <form class="form-horizontal" wire:submit.prevent="updateServiceProvider">
+                                    <div class="panel-body">
+                                        @if(session('message'))
+                                            <div class="alert alert-success">
+                                                {{ session('message') }}
+                                            </div>
+                                        @endif
+                                        <!-- Display error message -->
+                                        @if(session('error'))
+                                            <div class="alert alert-danger">
+                                                {{ session('error') }}
+                                            </div>
+                                        @endif
+                                    <form class="form-horizontal" wire:submit.prevent="updateService">
                                         @csrf
                                         <div class="form-group">
                                             <label for="name" class="control-label col-sm-3">Name:</label>
@@ -56,7 +65,7 @@
                                             {{-- check it --}}
                                             <label for="name" class="control-label col-sm-3">Service Category:</label> 
                                             <div class="col-sm-9">
-                                                <select class="form-control" wire:model="service_category_id">>
+                                                <select class="form-control" wire:model="serviceCategoryId">>
                                                     <option value="">Select Service Category</option>
                                                     @foreach($categories as $category)
                                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -83,7 +92,7 @@
                                         <div class="form-group">
                                             <label for="discount_type" class="control-label col-sm-3">Discount Type:</label>
                                             <div class="col-sm-9">
-                                                <select class="form-control" wire:model="discount_type">
+                                                <select class="form-control" name="discountType" wire:model="discountType">
                                                     <option value="">Select Discount Type</option>
                                                     <option value="fixed">Fixed</option>
                                                     <option value="percentage">Percent</option>
@@ -96,15 +105,6 @@
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" name="discount" wire:model="discount">
                                                 @error('discount') <p class="text-danger">{{ $message }}</p> @enderror
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="featured" class="control-label col-sm-3">Featured:</label>
-                                            <div class="col-sm-9">
-                                                <select class="form-control" wire:model="featured">
-                                                    <option value="0">No</option>
-                                                    <option value="1">Yes</option>
-                                                </select>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -153,7 +153,6 @@
                                                 @error('newImage') <p class="text-danger">{{ $message }}</p> @enderror
                                             </div>
                                         </div>
-                                        
                                         <button type="submit" class="btn btn-success pull-right">Update Service</button>
                                     </form>
                                 </div>

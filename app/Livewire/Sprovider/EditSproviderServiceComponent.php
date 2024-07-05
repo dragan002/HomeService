@@ -3,24 +3,29 @@ namespace App\Livewire\Sprovider;
 
 use App\Models\Service;
 use Livewire\Component;
-use Livewire\WithFileUploads;
 use Illuminate\Support\Str;
+use Livewire\WithFileUploads;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Auth;
+use App\Helpers\ServiceHelpers;
 use App\Models\ServiceCategory;
+use App\Services\ImageServices;
+use App\Validators\ServiceValidator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use App\Repositories\Service\ServiceRepository;
 
 class EditSproviderServiceComponent extends Component
 {
     use WithFileUploads;
 
-    public $serviceId;
+    public $id;
     public $name;
     public $slug;
     public $tagline;
-    public $service_category_id;
+    public $serviceCategoryId;
     public $price;
     public $discount;
-    public $discount_type;
+    public $discountType;
     public $image;
     public $thumbnail;
     public $description;
@@ -29,120 +34,105 @@ class EditSproviderServiceComponent extends Component
     public $newImage;
     public $newThumbnail;
 
-    public function mount($serviceId) {
-        $service = Service::where('id', $serviceId)->where('user_id', Auth::id())->first();
-        if (!$service) {
-            abort(403, 'Unauthorized Action');
-        }
-        $this->serviceId = $service->id;
-        $this->name = $service->name;
-        $this->slug = $service->slug;
-        $this->tagline = $service->tagline;
-        $this->service_category_id = $service->service_category_id;
-        $this->price = $service->price;
-        $this->discount = $service->discount;
-        $this->discount_type = $service->discount_type;
-        $this->image = $service->image;
-        $this->thumbnail = $service->thumbnail;
-        $this->description = $service->description;
-        $this->inclusion = str_replace('|', '\n', $service->inclusion);
-        $this->exclusion = str_replace('|', '\n' ,$service->exclusion);
+    protected $serviceRepository;
+    protected $imageService;
+    protected $validator;
+    protected $serviceHelpers;
+
+    public function __construct() 
+    {
+        $this->serviceRepository = new ServiceRepository;
+        $this->imageServices = new ImageServices;
+        $this->validator = new ServiceValidator;
+        $this->serviceHelpers = new ServiceHelpers;
     }
 
-    public function generateSlug() {
-        $this->slug = Str::slug($this->name, '-');
+    public function mount($id) {
+        $service = Service::findOrFail($id);
+
+        $this->id                   = $service->id;
+        $this->name                 = $service->name;
+        $this->slug                 = $service->slug;
+        $this->tagline              = $service->tagline;
+        $this->serviceCategoryId    = $service->service_category_id;
+        $this->price                = $service->price;
+        $this->discount             = $service->discount;
+        $this->discountType         = $service->discount_type;
+        $this->image                = $service->image;
+        $this->thumbnail            = $service->thumbnail;
+        $this->description          = $service->description;
+        $this->inclusion            = str_replace('|', '\n', $service->inclusion);
+        $this->exclusion            = str_replace('|', '\n' ,$service->exclusion);
     }
 
-    public function update($fields) {
-        $this->validateOnly($fields, [
-            'name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255',
-            'tagline' => 'required|string|max:255',
-            'service_category_id' => 'required|integer',
-            'price' => 'required|numeric',
-            'discount' => 'nullable|numeric',
-            'discount_type' => 'nullable|string|max:255',
-            'description' => 'required|string',
-            'inclusion' => 'required|string',
-            'exclusion' => 'required|string',            
-        ]);
-        if($this->newImage) {
-            $this->validateOnly($fields, [
-                'newImage' => 'required|mimes:jpg,jpeg,png',
-            ]);
-        }
-        if($this->newThumbnail) {
-            $this->validateOnly($fields, [
-                'newThumbnail' => 'required|mimes:jpg,png,jpeg',
-            ]);
-        }
-    }
+    public function updateService() 
+    {
+        $data = [
+            'name'                  => $this->name,
+            'slug'                  => $this->serviceHelpers->generateSlug($this->name),
+            'tagline'               => $this->tagline,
+            'service_category_id'   => $this->serviceCategoryId,
+            'price'                 => $this->price,
+            'discount'              => $this->discount,
+            'discount_type'         => $this->discountType,
+            'description'           => $this->description,
+            'image'                 => $this->image,
+            'thumbnail'             => $this->thumbnail,
+            'inclusion'             => str_replace('\n', '|', trim($this->inclusion)),
+            'exclusion'             => str_replace('\n', '|', trim($this->exclusion)),
+            'user_id'               => Auth::id(),
+        ];
 
-    public function updateServiceProvider() {
-        $this->validate([
-            'name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255',
-            'tagline' => 'nullable|string|max:255',
-            'service_category_id' => 'required|integer|exists:service_categories,id',
-            'price' => 'required|numeric',
-            'discount' => 'nullable|numeric',
-            'discount_type' => 'nullable|string|max:255',
-            'description' => 'required|string',
-            'inclusion' => 'required|string',
-            'exclusion' => 'required|string',
-        ]);
-        if($this->newImage) {
-            $this->validate([
-                'newImage' => 'required|mimes:jpg,jpeg,png',
-            ]);
-        }
-        if($this->newThumbnail) {
-            $this->validate([
-                'newThumbnail' => 'required|mimes:jpg,png,jpeg',
-            ]);
-        }
+        $this->validator->validate($data);
 
-        $service = Service::find($this->serviceId);
-        $service->name = $this->name;
-        $service->slug = $this->slug;
-        $service->tagline = $this->tagline;
-        $service->service_category_id = $this->service_category_id;
-        $service->price = $this->price;
-        $service->discount = $this->discount;
-        $service->discount_type = $this->discount_type;
-        $service->description = $this->description;
-        $service->inclusion = str_replace('\n', '|', $this->inclusion);  // Ensure inclusions are correctly formatted for saving
-        $service->exclusion = str_replace('\n', '|', $this->exclusion);  // Ensure exclusions are correctly formatted for saving
+        try {
+            $service = Service::findOrFail($this->id);
 
-        if ($this->newImage) {
-            // Remove old image if it exists
-            if(file_exists('images/services/' . $this->image)) {
-                unlink(('images/services/' . $this->image));
+            // Update service data
+            $service->name                  = $this->name;
+            $service->slug                  = $this->slug;
+            $service->tagline               = $this->tagline;
+            $service->price                 = $this->price;
+            $service->discount              = $this->discount;
+            $service->discount_type         = $this->discountType;
+            $service->service_category_id   = $this->serviceCategoryId;
+            $service->discount_type         = $this->discountType;
+            $service->description           = $this->description;
+            $service->inclusion             = $this->inclusion;
+            $service->exclusion             = $this->exclusion;
+
+            // Handle file uploads
+            if ($this->newImage) {
+                $imageName = $this->imageServices->changeImage($service, $this->newImage);
+                $service->image = $imageName;
             }
-            $imageName = Carbon::now()->timestamp . '.' . $this->newImage->extension();
-            $this->newImage->storeAs('services/', $imageName);
-            $service->image = $imageName;
-        }
-
-        if ($this->newThumbnail) {
-            // Remove old thumbnail if it exists
-            if(file_exists('images/services/thumbnails' . '/' . $this->thumbnail)) {
-                unlink('images/services/thumbnails' . '/' . $this->thumbnail);
+    
+            if ($this->newThumbnail) {
+                $thumbnailName = $this->imageServices->changeThumbnail($service, $this->newThumbnail);
+                $service->thumbnail = $thumbnailName;
             }
-            $thumbnailName = Carbon::now()->timestamp . '.' . $this->newThumbnail->extension();
-            $this->newThumbnail->storeAs('services/thumbnails', $thumbnailName);
-            $service->thumbnail = $thumbnailName;
+
+            // Save updated service
+            $this->serviceRepository->updateService($service, $service->toArray());
+
+            Session::flash('message', 'Service has been updated successfully');
+        } catch(\Exception $e) {
+            \Log::error('Error updating service: ' . $e->getMessage());
+            Session::flash('error', 'An error occurred while updating the Service.');
         }
-
-        $service->save();
-
-        session()->flash('message', 'Service has been updated successfully');
+    }
+    
+    public function generateSlug(): void
+    {       
+        $this->slug = $this->serviceHelpers->generateSlug($this->name);
     }
 
     public function render() {
         $categories = ServiceCategory::all();
         $service = Service::all();
-        return view('livewire.sprovider.edit-sprovider-service-component', ['categories' => $categories, 
-        'service'=>$service])->layout('layout.base');
+        return view('livewire.sprovider.edit-sprovider-service-component', [
+        'categories'    => $categories, 
+        'service'       => $service,
+        ])->layout('layout.base');
     }
 }

@@ -79,12 +79,12 @@
                                                                 No
                                                             @endif
                                                         </td>
-                                                        <td>{{ $service->category->name }}</td>
+                                                        {{-- <td>{{ $service->category->name }}</td> --}}
                                                         <td>{{ $service->created_at }}</td>
                                                         <td>{{ $service->service_status }}</td>
 
                                                         <td>
-                                                            <a href="{{ route('sprovider.editService', ['serviceId' => $service->id])}}"><i class="fa fa-edit fa-2x text-info"></i></a>
+                                                            <a href="{{ route('sprovider.editService', ['id' => $service->id])}}"><i class="fa fa-edit fa-2x text-info"></i></a>
                                                             <a href="" onclick="confirm('Are you sure you want to delete this category?') || event.stopImmediatePropagation()" wire:click.prevent="deleteServiceByProvider({{ $service->id }})" style="margin-left: 10px;"><i class="fa fa-times fa-2x text-danger"></i></a>
                                                             </a>
                                                         </td>

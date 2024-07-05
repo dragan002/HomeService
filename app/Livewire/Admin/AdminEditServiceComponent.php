@@ -53,10 +53,6 @@ class AdminEditServiceComponent extends Component
     {
         $service = Service::findOrFail($id);
 
-        if (!$service) {
-            abort(404); // Handle case where service is not found
-        }
-        
         $this->id = $service->id;
         $this->name = $service->name;
         $this->slug = $service->slug;
@@ -98,13 +94,8 @@ class AdminEditServiceComponent extends Component
 
         \Log::info('setting service id to (UPDATE)' . $this->id);
 
-
         try {
             $service = Service::findOrFail($this->id);
-
-            if (!$service) {
-                abort(404); // Handle case where service is not found
-            }
 
             // Update service data
             $service->name                  = $this->name;
