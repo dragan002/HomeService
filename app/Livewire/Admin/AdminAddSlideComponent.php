@@ -7,7 +7,6 @@ use Livewire\Component;
 use App\Slider\ImageSlider;
 use livewire\WithFileUploads;
 use Illuminate\Support\Carbon;
-use App\Services\ImageServices;
 use App\Validators\ServiceValidator;
 use Illuminate\Support\Facades\Session;
 use App\Repositories\Slider\SliderRepository;
@@ -23,7 +22,6 @@ class AdminAddSlideComponent extends Component
     protected $sliderRepository;
     protected $imageSlider;
     protected $validator;
-
 
     public function __construct()
     {
@@ -45,11 +43,32 @@ class AdminAddSlideComponent extends Component
         try {
             $slider = $this->sliderRepository->createNewSlide($data);
             $imageSliderName = $this->imageSlider->uploadImageSlider($this->image, 'sliderImage');
+            $data['image'] = $imageSliderName;  // Update image path in data
             $this->sliderRepository->saveSlider($slider, $this->title, $this->image, $this->status);
 
             Session::flash('message', 'Slider has been created successfully');
         } catch (\Exception $e) {
-            \Log::error($e->getMessage());
+            \Log::error("Error creating slide: {$e->getMessage()}", [
+                'request_data' => $data,
+                'slider_object' => $slider ?? null,
+                'image_slider_name' => $imageSliderName ?? null,
+                'title' => $this->title ?? null,
+                'image' => $this->image ?? null,
+                'status' => $this->status ?? null,
+            ]);
+        
+            // Get the error code and message
+            $errorCode = $e->getCode();
+            $errorMessage = $e->getMessage();
+        
+            // Log the error code and message separately
+            \Log::error("Error code: $errorCode");
+            \Log::error("Error message: $errorMessage");
+        
+            // Get the stack trace
+            $stackTrace = $e->getTraceAsString();
+            \Log::error("Stack trace: $stackTrace");
+        
             Session::flash('error', 'An error occured while creating the slide');
         }
     }

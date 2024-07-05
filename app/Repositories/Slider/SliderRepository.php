@@ -11,7 +11,7 @@ class SliderRepository
         return Slider::create($data);
     }
 
-    public function saveSlider(Slider $slider, string $name, string $image, string $status)
+    public function saveSlider(Slider $slider, string $title, string $image, string $status)
     {
         $slider->title = $title;
         $slider->image = $image;

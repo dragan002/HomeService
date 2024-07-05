@@ -9,7 +9,7 @@ class ImageSlider {
     public function uploadImageSlider($file, string $type): string
     {
         $imageSliderName = Carbon::now()->timestamp . '.' . $file->getClientOriginalExtension();
-        $file->storeAs('slider', $imageSliderName);
+        $file->storeAs('slider/', $imageSliderName, 'public');
         return $imageSliderName;
     }
 }
