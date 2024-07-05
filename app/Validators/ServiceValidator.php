@@ -21,7 +21,6 @@ class ServiceValidator implements ValidatorInterface
             'inclusion' => 'required',
             'exclusion' => 'required',
         ]);
-
         return $validator->passes();
     }
 }
