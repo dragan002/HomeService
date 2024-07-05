@@ -116,7 +116,10 @@ class AdminEditServiceComponent extends Component
             }
 
             // Save updated service
+            \Log::info('Before updating service:', [$service]);
             $this->serviceRepository->updateService($service, $service->toArray());
+            \Log::info("After updating service", [$service]);
+
 
             session()->flash('message', 'Service has been updated successfully');
         } catch(\Exception $e) {
