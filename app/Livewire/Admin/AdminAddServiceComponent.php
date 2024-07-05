@@ -33,17 +33,17 @@ class AdminAddServiceComponent extends Component
     public $exclusion;
 
     protected $serviceRepository;
+    protected $serviceHelpers;
     protected $imageServices;
     protected $validator;
-    protected $serviceHelpers;
     
 
     public function __construct() 
     {
         $this->serviceRepository = new ServiceRepository;
+        $this->serviceHelpers = new ServiceHelpers;
         $this->imageServices = new ImageServices;
         $this->validator = new ServiceValidator;
-        $this->serviceHelpers = new ServiceHelpers;
     }
 
     public function createService(): void 
@@ -80,6 +80,7 @@ class AdminAddServiceComponent extends Component
             Session::flash('error', 'An error occurred while creating the Service.');
         }
     }
+
     public function generateSlug(): void
     {
         $this->slug = $this->serviceHelpers->generateSlug($this->name);

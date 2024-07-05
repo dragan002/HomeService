@@ -3,6 +3,7 @@
 namespace App\Repositories\Service;
 
 use App\Models\Service;
+use App\Models\ServiceCategory;
 
 class ServiceRepository {
     
@@ -26,5 +27,18 @@ class ServiceRepository {
     public function deleteService(Service $service): void 
     {
         $service->delete();
+    }
+
+    public function createServiceCategory(array $data): ServiceCategory
+    {
+        return ServiceCategory::create($data);
+    }
+
+    public function saveServiceCategory(ServiceCategory $serviceCategory, string $name, string $slug, string $imageName)
+    {
+        $serviceCategory->name = $name;
+        $serviceCategory->slug = $slug;
+        $serviceCategory->image = $imageName;
+        $serviceCategory->save();
     }
 }

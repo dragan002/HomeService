@@ -16,7 +16,7 @@ class ServiceValidator implements ValidatorInterface
             'service_category_id' => 'required',
             'price' => 'required',
             'image' => 'required|mimes:png,jpg',
-            'thumbnail' => 'required|mimes:png,jpg',
+            'thumbnail' => 'required|mimes:png,jpg|max: 1024',
             'description' => 'required',
             'inclusion' => 'required',
             'exclusion' => 'required',

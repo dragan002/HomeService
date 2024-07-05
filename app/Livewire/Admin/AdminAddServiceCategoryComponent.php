@@ -4,9 +4,14 @@ namespace App\Livewire\Admin;
 
 use Livewire\Component;
 use Illuminate\Support\Str;
-use Illuminate\Support\Carbon;
-use App\Models\ServiceCategory;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Carbon;
+use App\Helpers\ServiceHelpers;
+use App\Models\ServiceCategory;
+use App\Services\ImageServices;
+use App\Validators\ServiceValidator;
+use Illuminate\Support\Facades\Session;
+use App\Repositories\Service\ServiceRepository;
 
 class AdminAddServiceCategoryComponent extends Component
 {
@@ -16,55 +21,45 @@ class AdminAddServiceCategoryComponent extends Component
     public $slug;
     public $image;
 
+    protected $serviceRepository;
+    protected $serviceHelpers;
+    protected $imageServices;
+    protected $validator;
+
+    public function __construct()
+    {
+        $this->serviceRepository = new ServiceRepository;
+        $this->serviceHelpers = new ServiceHelpers;
+        $this->imageServices = new ImageServices;
+        $this->validator = new ServiceValidator;
+    }
+
     public function generateSlug(): void
     {
-        $this->slug = Str::slug($this->name, '-');
+        $this->slug = $this->serviceHelpers->generateSlug($this->name);
     }
-
-    public function storeServiceCategory(): void
+    
+    public function createServiceCategory(): void
     {
-        $this->validateInput();
+
+        $data = [
+            'name'  => $this->name,
+            'slug'  => $this->slug,
+            'image' => $this->image,
+        ];
+        
+        $this->validator->validate($data);
 
         try {
-            $serviceCategory = $this->createServiceCategory();
-            $imageName = $this->uploadImage();
-            $this->saveCategory($serviceCategory, $imageName);
+            $category = $this->serviceRepository->createServiceCategory($data);
+            $imageName = $this->imageServices->uploadImageCategory($this->image, 'categoryImage');
+            $this->serviceRepository->saveServiceCategory($category, $this->name, $this->slug, $imageName);
             
-            session()->flash('message', 'Category has been created successfully');
+            Session::flash('message', 'Category has been created successfully');
         } catch (\Exception $e) {
             \Log::error($e->getMessage());
-            session()->flash('error', 'An error occurred while creating the category. Please check AdminAddServiceCategoryComponent');
+            Session::flash('error', 'An error occurred while creating the category. Please check AdminAddServiceCategoryComponent');
         }
-    }
-
-    private function validateInput(): void
-    {
-        $this->validate([
-            'name' => 'required',
-            'slug' => 'required',
-            'image' => 'required|mimes:jpeg,png'
-        ]);
-    }
-
-    private function createServiceCategory(): ServiceCategory
-    {
-        $serviceCategory = new ServiceCategory();
-        $serviceCategory->name = $this->name;
-        $serviceCategory->slug = $this->slug;
-        return $serviceCategory;
-    }
-
-    private function uploadImage(): string
-    {
-        $imageName = Carbon::now()->timestamp . '.' . $this->image->extension();
-        $this->image->storeAs('categories', $imageName);
-        return $imageName;
-    }
-
-    private function saveCategory(ServiceCategory $serviceCategory, string $imageName): void
-    {
-        $serviceCategory->image = $imageName;
-        $serviceCategory->save();
     }
 
     public function render()

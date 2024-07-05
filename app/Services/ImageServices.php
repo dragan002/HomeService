@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class ImageServices {
 
@@ -10,6 +11,13 @@ class ImageServices {
     {
         $imageName = Carbon::now()->timestamp . $type . '.' . $file->getClientOriginalExtension();
         $file->storeAs('services/' . ($type === 'thumbnail' ? 'thumbnails' : ''), $imageName);
+        return $imageName;
+    }
+
+    public function uploadImageCategory($file, string $type): string 
+    {
+        $imageName = Carbon::now()->timestamp . $type . '.' . $file->getClientOriginalExtension();
+        $file->storeAs('categories/' . ($type === 'categoryImage' ? '' : ''), $imageName);
         return $imageName;
     }
     

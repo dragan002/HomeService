@@ -42,7 +42,7 @@
                                         {{ session('error') }}
                                     </div>
                                 @endif
-                                    <form class="form-horizontal" wire:submit.prevent="storeServiceCategory">
+                                    <form class="form-horizontal" wire:submit.prevent="createServiceCategory">
                                         @csrf
                                         <div class="form-group">
                                             <label for="name" class="control-label col-sm-3">Category Name:</label>

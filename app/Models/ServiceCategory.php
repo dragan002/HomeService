@@ -11,6 +11,12 @@ class ServiceCategory extends Model
 
     protected $table = "service_categories";
 
+    protected $fillable = [
+        'name',
+        'slug',
+        'image',
+    ];
+
     public function services() {
         return $this->hasMany(Service::class);
     }
