@@ -5,7 +5,7 @@ namespace App\Services;
 use Illuminate\Support\Carbon;
 
 class ImageServices {
-    
+
     public function uploadImage($file, string $type): string
     {
         $imageName = Carbon::now()->timestamp . $type . '.' . $file->getClientOriginalExtension();
@@ -14,23 +14,23 @@ class ImageServices {
     }
     
     // ====== FOR AdminEditServiceComponent ====
-    public function changeImage($image)
+    public function changeImage($service, $image)
     {
-        if(file_exists('images/services' . '/' . $service->image)) {
+        if (file_exists('images/services' . '/' . $service->image)) {
             unlink('images/services' . '/' . $service->image);
         }
-        $imageName = Carbon::now()->timestamp . "." . $this->newImage->extension();
-        $this->newImage->storeAs('services/', $imageName);
-        $service->image = $imageName;
+        $imageName = Carbon::now()->timestamp . "." . $image->extension();
+        $image->storeAs('services/', $imageName);
+        return $imageName;
     }
     
-    public function changeThumbnail($thumbnail)
+    public function changeThumbnail($service, $thumbnail)
     {
-        if(file_exists('images/services/thumbnails' . '/' . $service->thumbnail)) {
+        if (file_exists('images/services/thumbnails' . '/' . $service->thumbnail)) {
             unlink('images/services/thumbnails' . '/' . $service->thumbnail);
         }
-        $thumbnailName = Carbon::now()->timestamp . "." . $this->newThumbnail->extension();
-        $this->newThumbnail->storeAs('services/thumbnails', $thumbnailName);
-        $service->thumbnail = $thumbnailName;
+        $thumbnailName = Carbon::now()->timestamp . "." . $thumbnail->extension();
+        $thumbnail->storeAs('services/thumbnails', $thumbnailName);
+        return $thumbnailName;
     }
 }

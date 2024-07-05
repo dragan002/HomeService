@@ -11,6 +11,7 @@ use App\Services\ImageServices;
 use Illuminate\Support\Facades\Log;
 use App\Validators\ServiceValidator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use App\Repositories\Service\ServiceRepository;
 
 class AdminEditServiceComponent extends Component
@@ -55,9 +56,7 @@ class AdminEditServiceComponent extends Component
         if (!$service) {
             abort(404); // Handle case where service is not found
         }
-
-        \Log::info('setting service id to (MOUTH)' . $this->id);
-
+        
         $this->id = $service->id;
         $this->name = $service->name;
         $this->slug = $service->slug;
@@ -124,26 +123,22 @@ class AdminEditServiceComponent extends Component
 
             // Handle file uploads
             if ($this->newImage) {
-                $imageName = $this->imageServices->changeImage($this->newImage);
+                $imageName = $this->imageServices->changeImage($service, $this->newImage);
                 $service->image = $imageName;
             }
-
+    
             if ($this->newThumbnail) {
-                $thumbnailName = $this->imageServices->changeThumbnail($this->newThumbnail);
+                $thumbnailName = $this->imageServices->changeThumbnail($service, $this->newThumbnail);
                 $service->thumbnail = $thumbnailName;
             }
 
             // Save updated service
-            \Log::info('Before updating service:', [$service]);
             $this->serviceRepository->updateService($service, $service->toArray());
-            \Log::info("After updating service", [$service]);
 
-            
-
-            session()->flash('message', 'Service has been updated successfully');
+            Session::flash('message', 'Service has been updated successfully');
         } catch(\Exception $e) {
             \Log::error('Error updating service: ' . $e->getMessage());
-            session()->flash('error', 'An error occurred while updating the Service.');
+            Session::flash('error', 'An error occurred while updating the Service.');
         }
     }
  
