@@ -13,9 +13,9 @@ abstract class BaseRepository
         $this->model = $model;
     }
 
-    public function create(array $data): Model 
+    public function create(array $data): bool 
     {
-        $this->model->create($data);
+        return $this->model->create($data);
     }
 
     public function update(Model $model, array $data): bool

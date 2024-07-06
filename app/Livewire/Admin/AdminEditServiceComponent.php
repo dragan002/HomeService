@@ -44,7 +44,7 @@ class AdminEditServiceComponent extends Component
 
     public function __construct() 
     {
-        $this->serviceRepository = new ServiceRepository(new Service());
+        $this->serviceRepository = new ServiceRepository();
         $this->imageServices = new ImageServices;
         $this->validator = new ServiceValidator;
         $this->serviceHelpers = new ServiceHelpers;
@@ -125,7 +125,7 @@ class AdminEditServiceComponent extends Component
             }
 
             // Save updated service
-            $this->serviceRepository->update($service, $service->toArray());
+            $this->serviceRepository->updateService($service, $service->toArray());
 
             Session::flash('message', 'Service has been updated successfully');
         } catch(\Exception $e) {

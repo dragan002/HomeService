@@ -4,16 +4,9 @@ namespace App\Repositories\Service;
 
 use App\Models\Service;
 use App\Models\ServiceCategory;
-use App\Repositories\BaseRepository;
 
+class ServiceRepository {
 
-class ServiceRepository extends BaseRepository {
-
-    public function __construct(Service $service)
-    {
-        parent::__construct($service);
-    }
-    
     public function createService(array $data): Service
     {
         return Service::create($data);
