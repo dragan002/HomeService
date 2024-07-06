@@ -70,7 +70,7 @@
                                                     <td>{{ $slide->created_at }}</td>
 
                                                     <td>
-                                                        <a href="{{ route('admin.editSlide', ['slideId' => $slide->id])}}"><i class="fa fa-edit fa-2x text-info"></i></a>
+                                                        <a href="{{ route('admin.editSlide', ['id' => $slide->id])}}"><i class="fa fa-edit fa-2x text-info"></i></a>
                                                         <a href="#" style="margin-left: 10px;" onclick="if (!confirm('Are you sure you want to delete this slide?')) { event.preventDefault(); event.stopPropagation(); } else { @this.deleteSlide({{ $slide->id }}) }">
                                                             <i class="fa fa-times fa-2x text-danger"></i>
                                                         </a>

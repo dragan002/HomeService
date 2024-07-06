@@ -151,7 +151,7 @@ Route::middleware([
     //Sliders
     Route::get('/slider', AdminSliderComponent::class)->name('slider');
     Route::get('/slider/add', AdminAddSlideComponent::class)->name('addSlide');
-    Route::get('/slider/edit/{slideId}', AdminEditSlideComponent::class)->name('editSlide');
+    Route::get('/slider/edit/{id}', AdminEditSlideComponent::class)->name('editSlide');
     //Contact
     Route::get('/contacts', AdminContactComponent::class)->name('contacts');
     //Service Providers

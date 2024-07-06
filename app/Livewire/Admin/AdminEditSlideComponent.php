@@ -4,68 +4,78 @@ namespace App\Livewire\Admin;
 
 use App\Models\Slider;
 use Livewire\Component;
-use Illuminate\Support\Carbon;
+use App\Slider\ImageSlider;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Log;
+use App\Validators\ServiceValidator;
+use Illuminate\Support\Facades\Session;
+use App\Repositories\Slider\SliderRepository;
 
 class AdminEditSlideComponent extends Component
 {
     use WithFileUploads;
 
-    public $slideId;
+    public $id;
     public $title;
     public $image;  
     public $status;
     public $newImage;
 
-    public function mount($slideId) {
-        $slide = Slider::find($slideId);
-        $this->slideId = $slide->id;
-        $this->title = $slide->title;
-        $this->image = $slide->image;
-        $this->status = $slide->status;
+    protected $sliderRepository;
+    protected $imageSlider;
+    protected $validator;
+
+    public function __construct()
+    {
+        $this->sliderRepository = new SliderRepository;
+        $this->imageSlider = new ImageSlider;
+        $this->validator = new ServiceValidator;
     }
 
-    public function update($fields) {
-        $this->validateOnly($fields, [
-            "title"=> 'required',
-            "status" => 'required',
-        ]);
-        if($this->newImage) {
-            $this->validateOnly($fields, [
-                'newImage' => 'required|mimes:jpg,png,jpeg'
-            ]);
-        }
+    public function mount($id)
+    {
+        $slider = Slider::findOrFail($id);
+
+        $this->id = $slider->id;
+        $this->title = $slider->title;
+        $this->image = $slider->image;
+        $this->status = $slider->status;
     }
 
-    public function updateSlider() {
-        $this->validate([
-            'title'=> 'required',
-            'status'=> 'required'
-        ]);
-        if($this->newImage) {
-            $this->validate([
-                'newImage' => 'required|mimes:jpg,png,jpeg'
-            ]);
-        }
+    public function updateSlide()
+    {
+        $data = [
+            'title'     => $this->title,
+            'image'     => $this->image,
+            'status'    => $this->status,
+        ];
 
-        $slide = Slider::find($this->slideId);
-        $slide->title = $this->title;
-        $slide->status = $this->status;
+        $this->validator->validate($data);
 
-        if($this->newImage) {
-            if (file_exists(public_path('images/slider/' . $slide->image))) {
-                unlink(public_path('images/slider/' . $slide->image));
+        try {
+            $slider = Slider::findOrFail($this->id);
+
+            $slider->title = $this->title;
+            $slider->image = $this->image;
+            $slider->status = $this->status;
+
+            if($this->newImage) {
+                $imageSlideName = $this->imageSlider->changeSlideImage($slider, $this->newImage);
+                $slider->image = $imageSlideName;
             }
-            $imageName = Carbon::now()->timestamp . "." . $this->newImage->extension();
-            $this->newImage->storeAs('slider', $imageName);
-            $slide->image = $imageName;
-        }
-        $slide->save();
-        session()->flash('message', 'Slide has been updated successfully');
+
+            $this->sliderRepository->updateSlider($slider, $slider->toArray());
+
+            Session::flash('message', 'Slider has been updated successfully');
+        } catch(\Exception $e) {
+        \Log::error('Error updating service: ' . $e->getMessage());
+        Session::flash('error', 'An error occurred while updating the Service.');
     }
+}
 
     public function render()
     {
-        return view('livewire.admin.admin-edit-slide-component')->layout('layout.base');
+        return view('livewire.admin.admin-edit-slide-component' )->layout('layout.base');
     }
 }

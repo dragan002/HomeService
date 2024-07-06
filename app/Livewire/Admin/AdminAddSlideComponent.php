@@ -49,27 +49,7 @@ class AdminAddSlideComponent extends Component
 
             Session::flash('message', 'Slider has been created successfully');
         } catch (\Exception $e) {
-            \Log::error("Error creating slide: {$e->getMessage()}", [
-                'request_data' => $data,
-                'slider_object' => $slider ?? null,
-                'image_slider_name' => $imageSliderName ?? null,
-                'title' => $this->title ?? null,
-                'image' => $this->image ?? null,
-                'status' => $this->status ?? null,
-            ]);
-        
-            // Get the error code and message
-            $errorCode = $e->getCode();
-            $errorMessage = $e->getMessage();
-        
-            // Log the error code and message separately
-            \Log::error("Error code: $errorCode");
-            \Log::error("Error message: $errorMessage");
-        
-            // Get the stack trace
-            $stackTrace = $e->getTraceAsString();
-            \Log::error("Stack trace: $stackTrace");
-        
+            \Log::error("Error creating slide: " . $e->getMessage());
             Session::flash('error', 'An error occured while creating the slide');
         }
     }
