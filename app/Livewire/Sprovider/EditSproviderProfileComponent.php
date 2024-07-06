@@ -8,6 +8,7 @@ use Illuminate\Support\Carbon;
 use App\Models\ServiceCategory;
 use App\Models\ServiceProvider;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use App\Validators\ServiceProviderValidator;
 use App\Repositories\ServiceProviderProfile\ProviderProfileRepository;
 
@@ -33,7 +34,14 @@ class EditSproviderProfileComponent extends Component
     }
 
     public function mount($id) {
-        $serviceProvider = ServiceProvider::where('user_id',Auth::user()->id)->first();
+        \Log::info('Mounting EditSproviderProfileComponent with ID: ' . $id);
+        \Log::debug('Received ID: ' . $id);
+
+        $serviceProvider = ServiceProvider::where('user_id', Auth::user()->id)->first();
+
+        if (!isset($id)) {
+            \Log::error('No ID parameter passed to mount method');
+        }
 
         $this->id                   = $serviceProvider->id;
         $this->image                = $serviceProvider->image;
@@ -78,7 +86,12 @@ class EditSproviderProfileComponent extends Component
 
     public function render()
     {
+        \Log::info('Rendering EditSproviderProfileComponent');
+
         $scategories = ServiceCategory::all();
-        return view('livewire.sprovider.edit-sprovider-profile-component', ['scategories' => $scategories])->layout('layout.base');
+        return view('livewire.sprovider.edit-sprovider-profile-component', [
+            'scategories' => $scategories,
+            
+            ])->layout('layout.base');
     }
 }
