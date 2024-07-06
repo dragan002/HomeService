@@ -8,11 +8,13 @@ use Livewire\WithFileUploads;
 use Illuminate\Support\Carbon;
 use App\Helpers\ServiceHelpers;
 use App\Models\ServiceCategory;
-use App\Services\ImageServices;
+use Illuminate\Support\Facades\Log;
 use App\Validators\ServiceValidator;
 use Illuminate\Support\Facades\Auth;
+use App\Services\Service\ImageServices;
 use Illuminate\Support\Facades\Session;
 use App\Repositories\Service\ServiceRepository;
+
 
 class EditSproviderServiceComponent extends Component
 {

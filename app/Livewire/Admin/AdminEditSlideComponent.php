@@ -4,13 +4,14 @@ namespace App\Livewire\Admin;
 
 use App\Models\Slider;
 use Livewire\Component;
-use App\Slider\ImageSlider;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
+use App\Services\Slider\ImageSlider;
 use App\Validators\ServiceValidator;
 use Illuminate\Support\Facades\Session;
 use App\Repositories\Slider\SliderRepository;
+
 
 class AdminEditSlideComponent extends Component
 {

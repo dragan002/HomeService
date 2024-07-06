@@ -7,12 +7,11 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Helpers\ServiceHelpers;
 use App\Models\ServiceCategory;
-use App\Services\ImageServices;
 use Illuminate\Support\Facades\Log;
 use App\Validators\ServiceValidator;
 use Illuminate\Support\Facades\Auth;
+use App\Services\Service\ImageServices;
 use Illuminate\Support\Facades\Session;
-use App\Processor\Services\ServiceProcessor;
 use App\Repositories\Service\ServiceRepository;
 
 class AddSproviderServiceComponent extends Component
@@ -49,19 +48,19 @@ class AddSproviderServiceComponent extends Component
     public function createService(): void 
     {
         $data = [
-            'name' => $this->name,
-            'slug' => $this->serviceHelpers->generateSlug($this->name),
-            'tagline' => $this->tagline,
-            'service_category_id' => $this->service_category_id,
-            'price' => $this->price,
-            'discount' => $this->discount,
-            'discount_type' => $this->discount_type,
-            'description' => $this->description,
-            'image' => $this->image,
-            'thumbnail' => $this->thumbnail,
-            'inclusion' => str_replace('\n', '|', trim($this->inclusion)),
-            'exclusion' => str_replace('\n', '|', trim($this->exclusion)),
-            'user_id' => Auth::id(),
+            'name'                  => $this->name,
+            'slug'                  => $this->serviceHelpers->generateSlug($this->name),
+            'tagline'               => $this->tagline,
+            'service_category_id'   => $this->service_category_id,
+            'price'                 => $this->price,
+            'discount'              => $this->discount,
+            'discount_type'         => $this->discount_type,
+            'description'           => $this->description,
+            'image'                 => $this->image,
+            'thumbnail'             => $this->thumbnail,
+            'inclusion'             => str_replace('\n', '|', trim($this->inclusion)),
+            'exclusion'             => str_replace('\n', '|', trim($this->exclusion)),
+            'user_id'               => Auth::id(),
         ];
 
         $this->validator->validate($data);

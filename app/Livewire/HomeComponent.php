@@ -27,9 +27,9 @@ class HomeComponent extends Component
         return view('livewire.home-component',[
              'scategories'  => $scategories,
             'fservices'     => $fservices,
-            'fscategories'  =>$fscategories,
-            'aservices'     =>$aservices,
-            'slides'        =>$slides
+            'fscategories'  => $fscategories,
+            'aservices'     => $aservices,
+            'slides'        => $slides
             ])
             ->layout('layout.base');
     }

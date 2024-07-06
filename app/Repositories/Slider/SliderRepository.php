@@ -24,5 +24,4 @@ class SliderRepository
         $slider->status = $status;
         $slider->save();
     }
-
 }

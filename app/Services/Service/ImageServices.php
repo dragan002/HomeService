@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Service;
 
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;

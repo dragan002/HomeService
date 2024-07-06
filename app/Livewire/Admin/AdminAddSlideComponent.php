@@ -4,12 +4,10 @@ namespace App\Livewire\Admin;
 
 use App\Models\Slider;
 use Livewire\Component;
-use App\Slider\ImageSlider;
 use livewire\WithFileUploads;
 use Illuminate\Support\Carbon;
-use App\Validators\ServiceValidator;
 use Illuminate\Support\Facades\Session;
-use App\Repositories\Slider\SliderRepository;
+
 
 class AdminAddSlideComponent extends Component
 {

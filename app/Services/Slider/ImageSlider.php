@@ -1,5 +1,5 @@
 <?php
-namespace App\Slider;
+namespace App\Services\Slider;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Carbon;
