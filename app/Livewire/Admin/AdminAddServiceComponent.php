@@ -74,7 +74,7 @@ class AdminAddServiceComponent extends Component
             $imageName = $this->imageServices->uploadImage($this->image, 'image');
             $thumbnailName = $this->imageServices->uploadImage($this->thumbnail, 'thumbnail');
 
-            $this->serviceRepository->setServiceImagesNamesAndSave($service, $imageName, $thumbnailName);
+            $this->serviceRepository->saveService($service, $imageName, $thumbnailName);
             
             Session::flash('message', 'Service has been created successfully');
         } catch(\Exception $e) {

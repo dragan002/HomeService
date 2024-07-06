@@ -8,69 +8,72 @@ use Illuminate\Support\Carbon;
 use App\Models\ServiceCategory;
 use App\Models\ServiceProvider;
 use Illuminate\Support\Facades\Auth;
+use App\Validators\ServiceProviderValidator;
+use App\Repositories\ServiceProviderProfile\ProviderProfileRepository;
 
 class EditSproviderProfileComponent extends Component
 {
     use WithFileUploads;
-    public $service_provider_id;
+
+    public $id;
     public $image;
     public $about;
     public $city;
-    public $service_category_id;
-    public $service_locations;
+    public $serviceCategoryId;
+    public $serviceLocations;
     public $newImage;
 
-    public function mount() {
-        $sprovider = ServiceProvider::where('user_id',Auth::user()->id)->first();
-        $this->service_provider_id = $sprovider->id;
-        $this->image = $sprovider->image;
-        $this->about = $sprovider->about;
-        $this->city = $sprovider->city;
-        $this->service_category_id = $sprovider->service_category_id;
-        $this->service_locations = $sprovider->service_locations;
+    protected $providerProfileRepository;
+    protected $validator;
+
+    public function __construct()
+    {
+        $this->providerProfileRepository = new ProviderProfileRepository;
+        $this->validator = new ServiceProviderValidator;
     }
 
-    public function updated($fields) {
-        $this->validateOnly($fields, [
-            'about' => 'required',
-            'city' => 'required',
-            'service_category_id' => 'required',
-            'service_locations' => 'required',
-        ]);
-        if($this->newImage) {
-            $this->validateOnly($fields, [
-                'newImage' => 'required|mimes:jpeg,jpg,png|max:1024',
-            ]);
-        }
+    public function mount($id) {
+        $serviceProvider = ServiceProvider::where('user_id',Auth::user()->id)->first();
+
+        $this->id                   = $serviceProvider->id;
+        $this->image                = $serviceProvider->image;
+        $this->about                = $serviceProvider->about;
+        $this->city                 = $serviceProvider->city;
+        $this->serviceCategoryId    = $serviceProvider->service_category_id;
+        $this->serviceLocations     = $serviceProvider->service_locations;
     }
 
-    public function updateProfile() {
-        $this->validate([
-            'about' => 'required',
-            'city' => 'required',
-            'service_category_id' => 'required',
-            'service_locations' => 'required',
-        ]);
-        if($this->newImage) {
-            $this->validate([
-                'newImage' => 'required|mimes:jpeg,jpg,png|max:1024',
-            ]);
-        }
+    public function updateProfile()
+    {
+        $data = [
+            'image'                => $this->image,
+            'about'                => $this->about,
+            'city'                 => $this->city,
+            'service_category_id'  => $this->serviceCategoryId,
+            'service_locations'    => $this->serviceLocations,
+        ];
         
-        $sprovider = ServiceProvider::where('user_id',Auth::user()->id)->first();
-        $sprovider->about = $this->about;
-        $sprovider->city = $this->city;
-        $sprovider->service_category_id = $this->service_category_id;
-        $sprovider->service_locations = $this->service_locations;
-        
-        if($this->newImage) {
-            $imageName = Carbon::now()->timestamp . '.' . $this->newImage->extension();
-            $this->newImage->storeAs('sproviders', $imageName);
-            $sprovider->image = $imageName;          
-        }
+        $this->validator->validate($data);
 
-        $sprovider->save();
-        session()->flash('message', 'Profile has been updated');
+        try {
+            $serviceProvider = ServiceProvider::where('user_id',Auth::user()->id)->first();
+
+            $serviceProvider->about = $this->about;
+            $serviceProvider->city = $this->city;
+            $serviceProvider->service_category_id = $this->serviceCategoryId;
+            $serviceProvider->service_locations = $this->serviceLocations;
+
+            if ($this->newImage) {
+                $imageName = $this->providerProfileRepository->changeProviderProfile($serviceProvider, $this->newImage);
+                $serviceProvider->image = $imageName;
+            }
+            
+            $this->providerProfileRepository->updateProfile($serviceProvider, $service->toArray());
+            Session::flash('message', 'Service has been updated successfully');
+        } catch(\Exception $e) {
+            \Log::error('Error updating service: ' . $e->getMessage());
+            Session::flash('error', 'An error occurred while updating the Service.');
+        }
     }
 
     public function render()

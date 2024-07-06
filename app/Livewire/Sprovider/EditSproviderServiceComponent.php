@@ -9,7 +9,7 @@ use Illuminate\Support\Carbon;
 use App\Helpers\ServiceHelpers;
 use App\Models\ServiceCategory;
 use Illuminate\Support\Facades\Log;
-use App\Validators\ServiceValidator;
+use App\Validators\ServiceProviderValidator;
 use Illuminate\Support\Facades\Auth;
 use App\Services\Service\ImageServices;
 use Illuminate\Support\Facades\Session;

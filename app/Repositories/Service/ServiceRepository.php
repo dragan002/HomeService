@@ -12,7 +12,7 @@ class ServiceRepository {
         return Service::create($data);
     }
 
-    public function setServiceImagesNamesAndSave(Service $service, string $imageName, string $thumbnailName) 
+    public function saveService(Service $service, string $imageName, string $thumbnailName) 
     {
         $service->image = $imageName;
         $service->thumbnail = $thumbnailName;

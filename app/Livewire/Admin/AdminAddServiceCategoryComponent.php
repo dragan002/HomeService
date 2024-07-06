@@ -43,7 +43,6 @@ class AdminAddServiceCategoryComponent extends Component
     
     public function createServiceCategory(): void
     {
-
         $data = [
             'name'  => $this->name,
             'slug'  => $this->slug,
