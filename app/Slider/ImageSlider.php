@@ -6,10 +6,10 @@ use Illuminate\Support\Carbon;
 
 class ImageSlider {
 
-    public function uploadImageSlider($file, string $type): string
+    public function uploadImageSlider($image): string
     {
-        $imageSliderName = Carbon::now()->timestamp . '.' . $file->getClientOriginalExtension();
-        $file->storeAs('slider/', $imageSliderName, 'public');
-        return $imageSliderName;
+        $imageSliderName = Carbon::now()->timestamp . '.' . $image->getClientOriginalExtension();
+        $image->storeAs('slider/', $imageSliderName, 'public');
+        return $image;
     }
 }

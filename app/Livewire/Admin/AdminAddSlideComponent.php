@@ -18,6 +18,7 @@ class AdminAddSlideComponent extends Component
     public $title;
     public $image;
     public $status = 0;
+    public $imageSliderName;
 
     protected $sliderRepository;
     protected $imageSlider;
@@ -42,9 +43,10 @@ class AdminAddSlideComponent extends Component
 
         try {
             $slider = $this->sliderRepository->createNewSlide($data);
-            $imageSliderName = $this->imageSlider->uploadImageSlider($this->image, 'sliderImage');
-            $data['image'] = $imageSliderName;  // Update image path in data
+            $imageSliderName = $this->imageSlider->uploadImageSlider($this->image);
+            // $this->image = $imageSliderName;
             $this->sliderRepository->saveSlider($slider, $this->title, $this->image, $this->status);
+            // dd($this->image);
 
             Session::flash('message', 'Slider has been created successfully');
         } catch (\Exception $e) {
