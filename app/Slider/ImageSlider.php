@@ -10,6 +10,6 @@ class ImageSlider {
     {
         $imageSliderName = Carbon::now()->timestamp . '.' . $image->getClientOriginalExtension();
         $image->storeAs('slider/', $imageSliderName, 'public');
-        return $image;
+        return $imageSliderName;
     }
 }

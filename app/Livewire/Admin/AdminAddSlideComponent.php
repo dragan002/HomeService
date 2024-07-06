@@ -44,7 +44,6 @@ class AdminAddSlideComponent extends Component
         try {
             $slider = $this->sliderRepository->createNewSlide($data);
             $imageSliderName = $this->imageSlider->uploadImageSlider($this->image);
-            // $this->image = $imageSliderName;
             $this->sliderRepository->saveSlider($slider, $this->title, $this->image, $this->status);
             // dd($this->image);
 
