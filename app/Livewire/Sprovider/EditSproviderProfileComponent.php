@@ -27,21 +27,12 @@ class EditSproviderProfileComponent extends Component
     protected $providerProfileRepository;
     protected $validator;
 
-    public function __construct()
-    {
-        $this->providerProfileRepository = new ProviderProfileRepository;
-        $this->validator = new ServiceProviderValidator;
-    }
-
-    public function mount($id) {
-        \Log::info('Mounting EditSproviderProfileComponent with ID: ' . $id);
-        \Log::debug('Received ID: ' . $id);
+    public function mount($id, ProviderProfileRepository $providerProfileRepository, ServiceProviderValidator $validator) {
+        
+        $this->providerProfileRepository = $providerProfileRepository;
+        $this->validator = $validator;
 
         $serviceProvider = ServiceProvider::where('user_id', Auth::user()->id)->first();
-
-        if (!isset($id)) {
-            \Log::error('No ID parameter passed to mount method');
-        }
 
         $this->id                   = $serviceProvider->id;
         $this->image                = $serviceProvider->image;
@@ -51,8 +42,11 @@ class EditSproviderProfileComponent extends Component
         $this->serviceLocations     = $serviceProvider->service_locations;
     }
 
-    public function updateProfile()
+    public function updateProfile(ProviderProfileRepository $providerProfileRepository, ServiceProviderValidator $validator)
     {
+        $this->providerProfileRepository = $providerProfileRepository;
+        $this->validator = $validator;
+
         $data = [
             'image'                => $this->image,
             'about'                => $this->about,
@@ -72,11 +66,13 @@ class EditSproviderProfileComponent extends Component
             $serviceProvider->service_locations = $this->serviceLocations;
 
             if ($this->newImage) {
-                $imageName = $this->providerProfileRepository->changeProviderProfile($serviceProvider, $this->newImage);
+                $imageName = $this->providerProfileRepository->changeProviderImage($serviceProvider, $this->newImage);
                 $serviceProvider->image = $imageName;
             }
+
             
-            $this->providerProfileRepository->updateProfile($serviceProvider, $service->toArray());
+            $this->providerProfileRepository->updateProviderProfile($serviceProvider, $data);
+            dd($data);
             Session::flash('message', 'Service has been updated successfully');
         } catch(\Exception $e) {
             \Log::error('Error updating service: ' . $e->getMessage());
