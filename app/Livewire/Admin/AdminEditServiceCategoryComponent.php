@@ -70,7 +70,7 @@ class AdminEditServiceCategoryComponent extends Component
             $serviceCategory->featured  = $this->featured;
 
             if ($this->newImage) {
-                $imageName      = $this->imageServices->changeCategoryImage($serviceCategory, $this->newImage);
+                $imageName              = $this->imageServices->changeCategoryImage($serviceCategory, $this->newImage);
                 $serviceCategory->image = $imageName;
             }
 
@@ -90,7 +90,6 @@ class AdminEditServiceCategoryComponent extends Component
 
     public function render()
     {
-        
         return view('livewire.admin.admin-edit-service-category-component')->layout('layout.base');
     }
 }

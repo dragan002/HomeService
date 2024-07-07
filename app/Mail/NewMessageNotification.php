@@ -27,14 +27,6 @@ class NewMessageNotification extends Mailable
         $this->messageContent = $message;
         $this->sender = $sender;
     }
-
-    // public function build() {
-    //     return $this->subject('New Message Notification')
-    //     ->view('emails.message_sent_notification')
-    //     ->with([
-    //         'messageContent' => $this->message->message,
-    //         'senderName' => $this->sender->name,
-    //     ]);
     
     /**
      * Get the message envelope.

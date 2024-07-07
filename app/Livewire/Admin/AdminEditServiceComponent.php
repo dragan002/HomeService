@@ -98,7 +98,6 @@ class AdminEditServiceComponent extends Component
         try {
             $service = Service::findOrFail($this->id);
 
-            // Update service data
             $service->name                  = $this->name;
             $service->slug                  = $this->slug;
             $service->tagline               = $this->tagline;
@@ -113,7 +112,6 @@ class AdminEditServiceComponent extends Component
             $service->inclusion             = $this->inclusion;
             $service->exclusion             = $this->exclusion;
 
-            // Handle file uploads
             if ($this->newImage) {
                 $imageName      = $this->imageServices->changeImage($service, $this->newImage);
                 $service->image = $imageName;
