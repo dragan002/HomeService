@@ -25,23 +25,23 @@ class AdminAddSlideComponent extends Component
     public function __construct()
     {
         $this->sliderRepository = new SliderRepository;
-        $this->imageSlider = new ImageSlider;
-        $this->validator = new ServiceValidator;
+        $this->imageSlider      = new ImageSlider;
+        $this->validator        = new ServiceValidator;
     }
 
     public function addNewSlide(): void 
     {
         $data = [
-            'title' => $this->title,
-            'image' => $this->image,
-            'status' => $this->status,
+            'title'     => $this->title,
+            'image'     => $this->image,
+            'status'    => $this->status,
         ];
 
         $this->validator->validate($data);
 
         try {
-            $slider = $this->sliderRepository->createNewSlide($data);
-            $imageSliderName = $this->imageSlider->uploadImageSlider($this->image);
+            $slider             = $this->sliderRepository->createNewSlide($data);
+            $imageSliderName    = $this->imageSlider->uploadImageSlider($this->image);
             $this->sliderRepository->saveSlider($slider, $this->title, $this->image, $this->status, $imageSliderName);
             // dd($this->image);
 

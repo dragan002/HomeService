@@ -38,37 +38,37 @@ class AdminEditServiceComponent extends Component
     public $serviceStatus;
 
     protected $serviceRepository;
+    protected $serviceHelpers;
     protected $imageServices;
     protected $validator;
-    protected $serviceHelpers;
 
     public function __construct() 
     {
-        $this->serviceRepository = new ServiceRepository();
-        $this->imageServices = new ImageServices;
-        $this->validator = new ServiceValidator;
-        $this->serviceHelpers = new ServiceHelpers;
+        $this->serviceRepository    = new ServiceRepository();
+        $this->serviceHelpers       = new ServiceHelpers;
+        $this->imageServices        = new ImageServices;
+        $this->validator            = new ServiceValidator;
     }
 
     public function mount($id)
     {
         $service = Service::findOrFail($id);
 
-        $this->id = $service->id;
-        $this->name = $service->name;
-        $this->slug = $service->slug;
-        $this->tagline = $service->tagline;
-        $this->serviceCategoryId = $service->service_category_id;
-        $this->price = $service->price;
-        $this->discount = $service->discount;
-        $this->discountType = $service->discount_type;
-        $this->featured = $service->featured;
-        $this->serviceStatus = $service->service_status;
-        $this->image = $service->image;
-        $this->thumbnail = $service->thumbnail;
-        $this->description = $service->description;
-        $this->inclusion = str_replace('|', '\n', $service->inclusion);
-        $this->exclusion = str_replace('|', '\n', $service->exclusion);
+        $this->id                   = $service->id;
+        $this->name                 = $service->name;
+        $this->slug                 = $service->slug;
+        $this->tagline              = $service->tagline;
+        $this->serviceCategoryId    = $service->service_category_id;
+        $this->price                = $service->price;
+        $this->discount             = $service->discount;
+        $this->discountType         = $service->discount_type;
+        $this->featured             = $service->featured;
+        $this->serviceStatus        = $service->service_status;
+        $this->image                = $service->image;
+        $this->thumbnail            = $service->thumbnail;
+        $this->description          = $service->description;
+        $this->inclusion            = str_replace('|', '\n', $service->inclusion);
+        $this->exclusion            = str_replace('|', '\n', $service->exclusion);
     }
 
     public function updateService()
@@ -115,12 +115,12 @@ class AdminEditServiceComponent extends Component
 
             // Handle file uploads
             if ($this->newImage) {
-                $imageName = $this->imageServices->changeImage($service, $this->newImage);
+                $imageName      = $this->imageServices->changeImage($service, $this->newImage);
                 $service->image = $imageName;
             }
     
             if ($this->newThumbnail) {
-                $thumbnailName = $this->imageServices->changeThumbnail($service, $this->newThumbnail);
+                $thumbnailName      = $this->imageServices->changeThumbnail($service, $this->newThumbnail);
                 $service->thumbnail = $thumbnailName;
             }
 

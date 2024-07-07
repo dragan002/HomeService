@@ -30,10 +30,10 @@ class AdminAddServiceCategoryComponent extends Component
 
     public function __construct()
     {
-        $this->serviceRepository = new ServiceRepository;
-        $this->serviceHelpers = new ServiceHelpers;
-        $this->imageServices = new ImageServices;
-        $this->validator = new ServiceValidator;
+        $this->serviceRepository    = new ServiceRepository;
+        $this->serviceHelpers       = new ServiceHelpers;
+        $this->imageServices        = new ImageServices;
+        $this->validator            = new ServiceValidator;
     }
 
     public function generateSlug(): void
@@ -52,8 +52,8 @@ class AdminAddServiceCategoryComponent extends Component
         $this->validator->validate($data);
 
         try {
-            $category = $this->serviceRepository->createServiceCategory($data);
-            $imageName = $this->imageServices->uploadImageCategory($this->image, 'categoryImage');
+            $category   = $this->serviceRepository->createServiceCategory($data);
+            $imageName  = $this->imageServices->uploadImageCategory($this->image, 'categoryImage');
             $this->serviceRepository->saveServiceCategory($category, $this->name, $this->slug, $imageName);
             
             Session::flash('message', 'Category has been created successfully');

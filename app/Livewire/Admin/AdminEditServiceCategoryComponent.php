@@ -19,12 +19,14 @@ class AdminEditServiceCategoryComponent extends Component
     public $newImage;
 
     public function mount($categoryId) {
-        $scategory = ServiceCategory::find($categoryId);
-        $this->categoryId = $scategory->id;
-        $this->name = $scategory->name;
-        $this->slug = $scategory->slug;
-        $this->image = $scategory->image;
-        $this->featured = $scategory->featured;
+
+        $scategory          = ServiceCategory::find($categoryId);
+
+        $this->categoryId   = $scategory->id;
+        $this->name         = $scategory->name;
+        $this->slug         = $scategory->slug;
+        $this->image        = $scategory->image;
+        $this->featured     = $scategory->featured;
     }
 
     public function generateSlug() {
@@ -33,9 +35,10 @@ class AdminEditServiceCategoryComponent extends Component
 
     public function update($fields) {
         $this->validateOnly($fields,[
-            'name' => 'required',
-            'slug' => 'required',
-            'featured' => 'required'
+
+            'name'      => 'required',
+            'slug'      => 'required',
+            'featured'  => 'required'
         ]);
 
         if($this->newImage) {
@@ -56,13 +59,15 @@ class AdminEditServiceCategoryComponent extends Component
         }
 
         $scategory = ServiceCategory::find($this->categoryId);
-        $scategory->name = $this->name;
-        $scategory->slug = $this->slug;
-        $scategory->featured = $this->featured;
+
+        $scategory->name        = $this->name;
+        $scategory->slug        = $this->slug;
+        $scategory->featured    = $this->featured;
+
         if($this->newImage) {
-            $imageName = Carbon::now()->timestamp . '.' . $this->newImage->extension();
+            $imageName          = Carbon::now()->timestamp . '.' . $this->newImage->extension();
             $this->newImage->storeAs('categories', $imageName);
-            $scategory->image = $imageName;
+            $scategory->image   = $imageName;
         }
         $scategory->save();
         session()->flash('message', 'Category has been updated successfully');

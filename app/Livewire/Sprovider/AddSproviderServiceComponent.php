@@ -39,10 +39,10 @@ class AddSproviderServiceComponent extends Component
 
     public function __construct() 
     {
-        $this->serviceRepository = new ServiceRepository;
-        $this->imageServices = new ImageServices;
-        $this->validator = new ServiceValidator;
-        $this->serviceHelpers = new ServiceHelpers;
+        $this->serviceRepository    = new ServiceRepository;
+        $this->serviceHelpers       = new ServiceHelpers;
+        $this->imageServices        = new ImageServices;
+        $this->validator            = new ServiceValidator;
     }
 
     public function createService(): void 
@@ -68,12 +68,11 @@ class AddSproviderServiceComponent extends Component
         try {
             $service = $this->serviceRepository->createService($data);
 
-            $imageName = $this->imageServices->uploadImage($this->image, 'image');
-            $thumbnailName = $this->imageServices->uploadImage($this->thumbnail, 'thumbnail');
+            $imageName      = $this->imageServices->uploadImage($this->image, 'image');
+            $thumbnailName  = $this->imageServices->uploadImage($this->thumbnail, 'thumbnail');
 
             $this->serviceRepository->saveService($service, $imageName, $thumbnailName);
             
-            Session::start();
             Session::flash('message', 'Service has been created successfully');
         } catch(\Exception $e) {
             \Log::error('Error creating service: ' . $e->getMessage());

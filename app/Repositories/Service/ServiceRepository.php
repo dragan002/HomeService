@@ -14,7 +14,7 @@ class ServiceRepository {
 
     public function saveService(Service $service, string $imageName, string $thumbnailName) 
     {
-        $service->image = $imageName;
+        $service->image     = $imageName;
         $service->thumbnail = $thumbnailName;
         $service->save();
     }
@@ -36,8 +36,8 @@ class ServiceRepository {
 
     public function saveServiceCategory(ServiceCategory $serviceCategory, string $name, string $slug, string $imageName)
     {
-        $serviceCategory->name = $name;
-        $serviceCategory->slug = $slug;
+        $serviceCategory->name  = $name;
+        $serviceCategory->slug  = $slug;
         $serviceCategory->image = $imageName;
         $serviceCategory->save();
     }

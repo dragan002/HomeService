@@ -43,10 +43,10 @@ class EditSproviderServiceComponent extends Component
 
     public function __construct() 
     {
-        $this->serviceRepository = new ServiceRepository;
-        $this->imageServices = new ImageServices;
-        $this->validator = new ServiceValidator;
-        $this->serviceHelpers = new ServiceHelpers;
+        $this->serviceRepository    = new ServiceRepository;
+        $this->serviceHelpers       = new ServiceHelpers;
+        $this->imageServices        = new ImageServices;
+        $this->validator            = new ServiceValidator;
     }
 
     public function mount($id) {
@@ -105,12 +105,12 @@ class EditSproviderServiceComponent extends Component
 
             // Handle file uploads
             if ($this->newImage) {
-                $imageName = $this->imageServices->changeImage($service, $this->newImage);
+                $imageName      = $this->imageServices->changeImage($service, $this->newImage);
                 $service->image = $imageName;
             }
     
             if ($this->newThumbnail) {
-                $thumbnailName = $this->imageServices->changeThumbnail($service, $this->newThumbnail);
+                $thumbnailName      = $this->imageServices->changeThumbnail($service, $this->newThumbnail);
                 $service->thumbnail = $thumbnailName;
             }
 

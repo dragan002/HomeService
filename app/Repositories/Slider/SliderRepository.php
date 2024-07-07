@@ -18,9 +18,9 @@ class SliderRepository
 
     public function saveSlider(Slider $slider, string $title, string $image, string $status, $imageSliderName)
     {
-        $slider->title = $title;
-        $slider->image = $image;
-        $slider->image = $imageSliderName;
+        $slider->title  = $title;
+        $slider->image  = $image;
+        $slider->image  = $imageSliderName;
         $slider->status = $status;
         $slider->save();
     }

@@ -29,8 +29,8 @@ class EditSproviderProfileComponent extends Component
 
     public function mount($id, ProviderProfileRepository $providerProfileRepository, ServiceProviderValidator $validator) {
         
-        $this->providerProfileRepository = $providerProfileRepository;
-        $this->validator = $validator;
+        $this->providerProfileRepository    = $providerProfileRepository;
+        $this->validator                    = $validator;
 
         $serviceProvider = ServiceProvider::where('user_id', Auth::user()->id)->first();
 
@@ -44,8 +44,8 @@ class EditSproviderProfileComponent extends Component
 
     public function updateProfile(ProviderProfileRepository $providerProfileRepository, ServiceProviderValidator $validator)
     {
-        $this->providerProfileRepository = $providerProfileRepository;
-        $this->validator = $validator;
+        $this->providerProfileRepository    = $providerProfileRepository;
+        $this->validator                    = $validator;
 
         \Log::info("updating profile for user ID" . Auth::user()->id);
 

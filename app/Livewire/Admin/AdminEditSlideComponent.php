@@ -30,18 +30,18 @@ class AdminEditSlideComponent extends Component
     public function __construct()
     {
         $this->sliderRepository = new SliderRepository;
-        $this->imageSlider = new ImageSlider;
-        $this->validator = new ServiceValidator;
+        $this->imageSlider      = new ImageSlider;
+        $this->validator        = new ServiceValidator;
     }
 
     public function mount($id)
     {
         $slider = Slider::findOrFail($id);
 
-        $this->id = $slider->id;
-        $this->title = $slider->title;
-        $this->image = $slider->image;
-        $this->status = $slider->status;
+        $this->id       = $slider->id;
+        $this->title    = $slider->title;
+        $this->image    = $slider->image;
+        $this->status   = $slider->status;
     }
 
     public function updateSlide()
@@ -57,13 +57,13 @@ class AdminEditSlideComponent extends Component
         try {
             $slider = Slider::findOrFail($this->id);
 
-            $slider->title = $this->title;
-            $slider->image = $this->image;
+            $slider->title  = $this->title;
+            $slider->image  = $this->image;
             $slider->status = $this->status;
 
             if($this->newImage) {
                 $imageSlideName = $this->imageSlider->changeSlideImage($slider, $this->newImage);
-                $slider->image = $imageSlideName;
+                $slider->image  = $imageSlideName;
             }
 
             $this->sliderRepository->updateSlider($slider, $slider->toArray());
