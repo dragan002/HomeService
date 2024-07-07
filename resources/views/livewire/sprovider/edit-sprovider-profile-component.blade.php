@@ -54,7 +54,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="service_category_id" class="control-label col-md-3">Service Category:</label>
-                                                    <select type="text" class="form-control-file" name="service_category_id" wire:model="service_category_id">
+                                                    <select type="text" class="form-control-file" name="service_category_id" wire:model="serviceCategoryId">
                                                         @foreach($scategories as $scategory)
                                                             <option value="{{ $scategory->id }}">{{ $scategory->name }}</option>
                                                         @endforeach
@@ -62,7 +62,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="service_locations" class="control-label col-md-3">Service Location Zipcode</label>
-                                                    <input type="text" class="form-control-file" name="service_locations" wire:model="service_locations" >
+                                                    <input type="text" class="form-control-file" name="service_locations" wire:model="serviceLocations" >
                                                 </div>
                                                 <button type="submit" class="btn btn-success">Update Profile</button>
                                             </form>

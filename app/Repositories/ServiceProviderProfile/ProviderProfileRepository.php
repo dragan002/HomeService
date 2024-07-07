@@ -4,23 +4,23 @@ namespace App\Repositories\ServiceProviderProfile;
 
 use Illuminate\Support\Carbon;
 use App\Models\ServiceProvider;
+use Illuminate\Support\Facades\Storage;
 
 class ProviderProfileRepository
 {
     public function updateProviderProfile(ServiceProvider $serviceProvider, array $data)
     {
-        $serviceProvider->about                 = $data['about'];
-        $serviceProvider->city                  = $data['city'];
-        $serviceProvider->service_category_id   = $data['service_category_id'];
-        $serviceProvider->service_locations     = $data['service_locations'];
-        $serviceProvider->image                 = $data['image'];
-        $serviceProvider->save();
+     $serviceProvider->update($data);
     }
 
     public function changeProviderImage($serviceProvider, $newImage)
     {
-        $imageName = Carbon::now()->timestamp . '.' . $newImage->extension();
-        $newImage->storeAs('sproviders', $imageName);
-        $serviceProvider->image = $imageName;  
+        if (Storage::exists('sproviders/' . $serviceProvider->image)) {
+            Storage::delete('sproviders/' . $serviceProvider->image);
+        }
+
+        $imageName = Carbon::now()->timestamp . "." . $newImage->extension();
+        Storage::putFileAs('sproviders/', $newImage, $imageName);
+        return $imageName;
     }
 }

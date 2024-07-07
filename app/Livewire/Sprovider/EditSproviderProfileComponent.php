@@ -47,6 +47,8 @@ class EditSproviderProfileComponent extends Component
         $this->providerProfileRepository = $providerProfileRepository;
         $this->validator = $validator;
 
+        \Log::info("updating profile for user ID" . Auth::user()->id);
+
         $data = [
             'image'                => $this->image,
             'about'                => $this->about,
@@ -54,25 +56,29 @@ class EditSproviderProfileComponent extends Component
             'service_category_id'  => $this->serviceCategoryId,
             'service_locations'    => $this->serviceLocations,
         ];
+
+        \Log::info('data to be validated' , $data);
         
         $this->validator->validate($data);
 
         try {
             $serviceProvider = ServiceProvider::where('user_id',Auth::user()->id)->first();
 
-            $serviceProvider->about = $this->about;
-            $serviceProvider->city = $this->city;
-            $serviceProvider->service_category_id = $this->serviceCategoryId;
-            $serviceProvider->service_locations = $this->serviceLocations;
+            \Log::info('Service provider found', $serviceProvider->toArray());
+
+            $serviceProvider->about                 = $this->about;
+            $serviceProvider->city                  = $this->city;
+            $serviceProvider->service_category_id   = $this->serviceCategoryId;
+            $serviceProvider->service_locations     = $this->serviceLocations;
 
             if ($this->newImage) {
+                \Log::info('New image uploaded.');
                 $imageName = $this->providerProfileRepository->changeProviderImage($serviceProvider, $this->newImage);
                 $serviceProvider->image = $imageName;
             }
 
-            
-            $this->providerProfileRepository->updateProviderProfile($serviceProvider, $data);
-            dd($data);
+            $this->providerProfileRepository->updateProviderProfile($serviceProvider, $serviceProvider->toArray());
+
             Session::flash('message', 'Service has been updated successfully');
         } catch(\Exception $e) {
             \Log::error('Error updating service: ' . $e->getMessage());
