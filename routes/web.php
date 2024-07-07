@@ -139,7 +139,7 @@ Route::middleware([
     //Admin Categories
     Route::get('/serviceCategories', AdminServiceCategoryComponent::class)->name('serviceCategories');
     Route::get('/serviceCategory/add', AdminAddServiceCategoryComponent::class)->name('addServiceCategory');
-    Route::get('/serviceCategory/edit/{categoryId}', AdminEditServiceCategoryComponent::class)->name('editServiceCategory');
+    Route::get('/serviceCategory/edit/{id}', AdminEditServiceCategoryComponent::class)->name('editServiceCategory');
     //Admin Services
     Route::get('/allServices', AdminServicesComponent::class)->name('allServices');
     Route::get('/service/add', AdminAddServiceComponent::class)->name('addService');

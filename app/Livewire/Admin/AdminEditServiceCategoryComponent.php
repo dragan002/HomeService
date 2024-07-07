@@ -6,74 +6,91 @@ use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Carbon;
+use App\Helpers\ServiceHelpers;
 use App\Models\ServiceCategory;
+use App\Validators\ServiceValidator;
+use App\Services\Service\ImageServices;
+use Illuminate\Support\Facades\Session;
+use App\Repositories\Service\ServiceRepository;
 
 class AdminEditServiceCategoryComponent extends Component
 {
     use WithFileUploads;
-    public $categoryId;
+
+    public $id;
     public $name;
     public $slug;
     public $image;
     public $featured;
     public $newImage;
 
-    public function mount($categoryId) {
+    protected $serviceRepository;
+    protected $serviceHelpers;
+    protected $imageServices;
+    protected $validator;
 
-        $scategory          = ServiceCategory::find($categoryId);
-
-        $this->categoryId   = $scategory->id;
-        $this->name         = $scategory->name;
-        $this->slug         = $scategory->slug;
-        $this->image        = $scategory->image;
-        $this->featured     = $scategory->featured;
+    public function __construct() 
+    {
+        $this->serviceRepository    = new ServiceRepository();
+        $this->serviceHelpers       = new ServiceHelpers;
+        $this->imageServices        = new ImageServices;
+        $this->validator            = new ServiceValidator;
     }
 
-    public function generateSlug() {
-        $this->slug = Str::slug($this->name, '-');
+    public function mount($id) {
+
+        $serviceCategory    = ServiceCategory::findOrFail($id);
+
+        $this->id           = $serviceCategory->id;
+        $this->name         = $serviceCategory->name;
+        $this->slug         = $serviceCategory->slug;
+        $this->image        = $serviceCategory->image;
+        $this->featured     = $serviceCategory->featured;
     }
 
-    public function update($fields) {
-        $this->validateOnly($fields,[
+    public function updateServiceCategory() 
+    {
+        $data = [
+            'name'         => $this->name,
+            'slug'         => $this->serviceHelpers->generateSlug($this->name),
+            'image'        => $this->image,
+            'featured'     => $this->featured,
+        ];
 
-            'name'      => 'required',
-            'slug'      => 'required',
-            'featured'  => 'required'
-        ]);
+        $this->validator->validate($data);
 
-        if($this->newImage) {
-            $this->validateOnly($fields, [
-                'newImage' => 'required|mimes:jpeg,png'
-            ]);
+        \Log::info('setting service id to (UPDATE)' . $this->id);
+
+        try {
+            $serviceCategory    = ServiceCategory::findOrFail($this->id);
+
+            $serviceCategory->name      = $this->name;
+            $serviceCategory->slug      = $this->slug;
+            $serviceCategory->image     = $this->image;
+            $serviceCategory->featured  = $this->featured;
+
+            if ($this->newImage) {
+                $imageName      = $this->imageServices->changeCategoryImage($serviceCategory, $this->newImage);
+                $serviceCategory->image = $imageName;
+            }
+
+            $this->serviceRepository->updateServiceCategory($serviceCategory, $serviceCategory->toArray());
+            
+            Session::flash('message', 'Category has been updated successfully');
+        } catch(\Exception $e) {
+            \Log::error('Error updating service: ' . $e->getMessage());
+            Session::flash('error', 'An error occurred while updating the Category.');
         }
     }
-    public function updateServiceCategory() {
-        $this->validate([
-            'name' => 'required',
-            'slug' => 'required',
-        ]);
-        if($this->newImage) {
-            $this->validate([
-                'newImage' => 'required|mimes:jpeg,png'
-            ]);
-        }
 
-        $scategory = ServiceCategory::find($this->categoryId);
-
-        $scategory->name        = $this->name;
-        $scategory->slug        = $this->slug;
-        $scategory->featured    = $this->featured;
-
-        if($this->newImage) {
-            $imageName          = Carbon::now()->timestamp . '.' . $this->newImage->extension();
-            $this->newImage->storeAs('categories', $imageName);
-            $scategory->image   = $imageName;
-        }
-        $scategory->save();
-        session()->flash('message', 'Category has been updated successfully');
+    public function generateSlug(): void
+    {       
+        $this->slug = $this->serviceHelpers->generateSlug($this->name);
     }
+
     public function render()
     {
+        
         return view('livewire.admin.admin-edit-service-category-component')->layout('layout.base');
     }
 }

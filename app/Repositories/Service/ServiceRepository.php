@@ -34,6 +34,11 @@ class ServiceRepository {
         return ServiceCategory::create($data);
     }
 
+    public function updateServiceCategory(ServiceCategory $serviceCategory, array $data): void
+    {
+        $serviceCategory->update($data);
+    }
+
     public function saveServiceCategory(ServiceCategory $serviceCategory, string $name, string $slug, string $imageName)
     {
         $serviceCategory->name  = $name;

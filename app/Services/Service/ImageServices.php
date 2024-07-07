@@ -20,6 +20,17 @@ class ImageServices {
         Storage::putFileAs('categories/' . ($type === 'categoryImage' ? '' : ''), $file, $imageName);
         return $imageName;
     }
+
+    public function changeCategoryImage($serviceCategory, $image)
+    {
+        if (Storage::exists('categories/' . $serviceCategory->image)) {
+            Storage::delete('categories/' . $serviceCategory->image);
+        }
+
+        $imageName = Carbon::now()->timestamp . "." . $image->extension();
+        Storage::putFileAs('categories/', $image, $imageName);
+        return $imageName;
+    }
     
     // ====== FOR AdminEditServiceComponent ====
     public function changeImage($service, $image)
