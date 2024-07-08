@@ -4,6 +4,7 @@ namespace App\Repositories\Service;
 
 use App\Models\Service;
 use App\Models\ServiceCategory;
+use Illuminate\Support\Facades\Storage;
 
 class ServiceRepository {
 
@@ -24,26 +25,24 @@ class ServiceRepository {
         $service->update($data);
     }
 
-    public function deleteService(Service $service): void 
+    public function deleteServiceById($id): bool
     {
+        $service = Service::find($id);
+        if(!$service) {
+            return false;
+        }
+        if($service->image) {
+            Storage::delete('images/services/' . $service->image);
+        }
+        if($service->thumbnail) {
+            Storage::delete('images/services/thumbnails' . $service->thumbnail);
+        }
         $service->delete();
+        return true;
     }
-
-    public function createServiceCategory(array $data): ServiceCategory
+    
+    public function paginateService($perPage = 10) 
     {
-        return ServiceCategory::create($data);
-    }
-
-    public function updateServiceCategory(ServiceCategory $serviceCategory, array $data): void
-    {
-        $serviceCategory->update($data);
-    }
-
-    public function saveServiceCategory(ServiceCategory $serviceCategory, string $name, string $slug, string $imageName)
-    {
-        $serviceCategory->name  = $name;
-        $serviceCategory->slug  = $slug;
-        $serviceCategory->image = $imageName;
-        $serviceCategory->save();
+        return Service::paginate($perPage);
     }
 }

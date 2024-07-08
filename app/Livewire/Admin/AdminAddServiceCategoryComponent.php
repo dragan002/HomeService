@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Log;
 use App\Validators\ServiceValidator;
 use App\Services\Service\ImageServices;
 use Illuminate\Support\Facades\Session;
-use App\Repositories\Service\ServiceRepository;
+use App\Repositories\ServiceCategories\ServiceCategoryRepository;
 
 
 class AdminAddServiceCategoryComponent extends Component
@@ -23,17 +23,17 @@ class AdminAddServiceCategoryComponent extends Component
     public $slug;
     public $image;
 
-    protected $serviceRepository;
+    protected $serviceCategoryRepository;
     protected $serviceHelpers;
     protected $imageServices;
     protected $validator;
 
     public function __construct()
     {
-        $this->serviceRepository    = new ServiceRepository;
-        $this->serviceHelpers       = new ServiceHelpers;
-        $this->imageServices        = new ImageServices;
-        $this->validator            = new ServiceValidator;
+        $this->serviceCategoryRepository    = new ServiceCategoryRepository;
+        $this->serviceHelpers               = new ServiceHelpers;
+        $this->imageServices                = new ImageServices;
+        $this->validator                    = new ServiceValidator;
     }
 
     public function generateSlug(): void
@@ -52,9 +52,9 @@ class AdminAddServiceCategoryComponent extends Component
         $this->validator->validate($data);
 
         try {
-            $category   = $this->serviceRepository->createServiceCategory($data);
+            $category   = $this->serviceCategoryRepository->createServiceCategory($data);
             $imageName  = $this->imageServices->uploadImageCategory($this->image, 'categoryImage');
-            $this->serviceRepository->saveServiceCategory($category, $this->name, $this->slug, $imageName);
+            $this->serviceCategoryRepository->saveServiceCategory($category, $this->name, $this->slug, $imageName);
             
             Session::flash('message', 'Category has been created successfully');
         } catch (\Exception $e) {

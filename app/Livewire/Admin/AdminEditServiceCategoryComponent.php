@@ -11,7 +11,7 @@ use App\Models\ServiceCategory;
 use App\Validators\ServiceValidator;
 use App\Services\Service\ImageServices;
 use Illuminate\Support\Facades\Session;
-use App\Repositories\Service\ServiceRepository;
+use App\Repositories\ServiceCategories\ServiceCategoryRepository;
 
 class AdminEditServiceCategoryComponent extends Component
 {
@@ -24,17 +24,17 @@ class AdminEditServiceCategoryComponent extends Component
     public $featured;
     public $newImage;
 
-    protected $serviceRepository;
+    protected $serviceCategoryRepository;
     protected $serviceHelpers;
     protected $imageServices;
     protected $validator;
 
     public function __construct() 
     {
-        $this->serviceRepository    = new ServiceRepository();
-        $this->serviceHelpers       = new ServiceHelpers;
-        $this->imageServices        = new ImageServices;
-        $this->validator            = new ServiceValidator;
+        $this->serviceCategoryRepository    = new ServiceCategoryRepository();
+        $this->serviceHelpers               = new ServiceHelpers;
+        $this->imageServices                = new ImageServices;
+        $this->validator                    = new ServiceValidator;
     }
 
     public function mount($id) {
@@ -74,7 +74,7 @@ class AdminEditServiceCategoryComponent extends Component
                 $serviceCategory->image = $imageName;
             }
 
-            $this->serviceRepository->updateServiceCategory($serviceCategory, $serviceCategory->toArray());
+            $this->serviceCategoryRepository->updateServiceCategory($serviceCategory, $serviceCategory->toArray());
             
             Session::flash('message', 'Category has been updated successfully');
         } catch(\Exception $e) {

@@ -3,24 +3,35 @@
 namespace App\Livewire\Admin;
 
 use Livewire\Component;
-use App\Models\ServiceCategory;
 use Livewire\WithPagination;
+use App\Models\ServiceCategory;
+use Illuminate\Support\Facades\Session;
+use App\Repositories\ServiceCategories\ServiceCategoryRepository;
 
 class AdminServiceCategoryComponent extends Component
 {
     use WithPagination;
 
-    public function deleteServiceCategory($id) {
-        $scategory = ServiceCategory::find($id);
-        if($scategory->image) {
-            unlink('images/categories' . '/' . $scategory->image);
-        }
-        $scategory->delete();
-        session()->flash('message', 'Service Category has been deleted successfully!');
+    protected $serviceCategoryRepository;
+
+    public function __construct()
+    {
+        $this->serviceCategoryRepository = new ServiceCategoryRepository();
     }
+
+    public function deleteServiceCategory($id)
+    {
+        if(!$this->serviceCategoryRepository->deleteServiceCategoryById($id)) {
+            Session::flash('error', 'Something went wrong');
+        }
+        
+        $this->serviceCategoryRepository->deleteServiceCategoryById($id);
+            Session::flash('message', 'Service Category deleted successfully');
+    }
+
     public function render()
     {
-        $scategories = ServiceCategory::paginate(10);
+        $scategories = $this->serviceCategoryRepository->paginateServiceCategory();
         return view('livewire.admin.admin-service-category-component',['scategories'=>$scategories])->layout('layout.base');
     }
 }

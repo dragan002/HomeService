@@ -5,26 +5,34 @@ namespace App\Livewire\Admin;
 use App\Models\Service;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Session;
+use App\Repositories\Service\ServiceRepository;
 
 class AdminServicesComponent extends Component
 {
     use WithPagination;
 
-    public function deleteService($id){
-        $service = Service::find($id);
-        if($service->image) {
-            unlink('images/services' . '/' . $service->image);
+    protected $serviceRepository;
+
+    public function __construct()
+    {
+        $this->serviceRepository = new ServiceRepository;
+    }
+
+    public function deleteService($id)
+    {
+        if(!$this->serviceRepository->deleteServiceById($id))
+        {
+            Session::flash('error', 'Something went wrong');
         }
-        if($service->thumbnail) {
-            unlink('images/services/thumbnails' . '/' . $service->thumbnail);
-        }
-        $service->delete();
-        session()->flash('message', 'Service has been deleted successfully');
+        
+        $this->serviceRepository->deleteServiceById($id);
+            Session::flash('message', 'Service deleted successfully');
     }
 
     public function render()
     {
-        $services = Service::paginate(10);
+        $services = $this->serviceRepository->paginateService();
         return view('livewire.admin.admin-services-component',['services'=> $services])->layout('layout.base');
     }
 }
