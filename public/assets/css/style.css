@@ -549,6 +549,7 @@ hr.tall{
 .header-v1.is-sticky{
 	border-bottom: 1px solid #dedede !important;
 	max-height: 61px;
+	font-size: 20px;
 }
 .header-v3{	
 	background: #000000;	
@@ -582,12 +583,13 @@ hr.tall{
 .header-v4.is-sticky .flat-mega-menu > ul > .title{
 	margin-bottom: 10px;
 }
-.header-v3 .flat-mega-menu > ul > li,
+/* .header-v3 .flat-mega-menu > ul > li,
 .header-v3 .flat-mega-menu > ul > li > a,
 .header-v4 .flat-mega-menu > ul > li,
 .header-v4 .flat-mega-menu > ul > li > a{	
-	color: #fff;	
-}
+	color: #f00;
+  font-weight: 400;
+} */
 .header-v4  .flat-mega-menu > ul{
 	text-align: center;
 }
@@ -4026,3 +4028,4 @@ i.fa-truck {
 .action_icons {
 	display: flex;
 }
+

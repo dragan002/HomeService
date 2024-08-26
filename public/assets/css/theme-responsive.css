@@ -28,6 +28,8 @@
 		padding-left: 8px;
 		padding-right: 8px;
 		font-size: 0.78rem;
+		color: red;
+		font-weight: 600;
 	}
 	.flat-mega-menu > ul > .title i{
 		right: 20%;
@@ -310,3 +312,4 @@
 		width: 50%;
 	}
 }
+

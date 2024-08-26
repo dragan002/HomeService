@@ -65,7 +65,7 @@
 /* a tag layout */
 .flat-mega-menu > ul > li > a {
 	line-height: 60px;
-	color: #FFFFFF;
+	color: #ffffff;
 	text-align: center;
 	width: 100%;
 	padding-left: 12px;
@@ -543,7 +543,7 @@
 	width: 210px;
 	padding: 10px;
 	position: absolute;
-	background-color: #FFFFFF;
+	background-color: #ffffff;
 	border-bottom: 3px solid;
 	right: 0;
 }
@@ -613,7 +613,7 @@
 .flat-mega-menu > ul > li:hover > a,
 .flat-mega-menu > ul > .login-form:hover,
 .flat-mega-menu > ul > .search-bar:hover{
-    color: #ffffff !important;
+    color: #141414 !important;
 }
 
 /* .title class layout */

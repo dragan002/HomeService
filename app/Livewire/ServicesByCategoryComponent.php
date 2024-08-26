@@ -7,11 +7,11 @@ use App\Models\ServiceCategory;
 
 class ServicesByCategoryComponent extends Component
 {
-    // public $categorySlug;
+    public $categorySlug;
 
-    // public function mount($categorySlug) {
-    //     $this->categorySlug = $categorySlug;
-    // }
+    public function mount($categorySlug) {
+        $this->categorySlug = $categorySlug;
+    }
     public function render()
     {
         $scategory = ServiceCategory::where('slug', $this->categorySlug)->first();
